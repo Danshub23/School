@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>成語</title>
+    <!-- CodeMirror 核心样式及主题 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/dracula.min.css">
+    <!-- 提示框样式 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/hint/show-hint.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            background: #1e1f2c;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .toolbar {
+            background: #2d2e3a;
+            padding: 10px 16px;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            border-bottom: 1px solid #3e4050;
+            flex-shrink: 0;
+        }
+        .toolbar button {
+            background: #3e4050;
+            border: none;
+            color: #f0f0f0;
+            padding: 6px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+            border: 1px solid #55576a;
+        }
+        .toolbar button:hover {
+            background: #565a70;
+        }
+        .toolbar .spacer {
+            flex: 1;
+        }
+        .toolbar label {
+            color: #bbb;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .toolbar input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+        .editor-container {
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+        }
+        /* CodeMirror 铺满容器 */
+        .CodeMirror {
+            height: 100%;
+            font-size: 15px;
+        }
+        /* 底部状态栏 */
+        .status-bar {
+            background: #2d2e3a;
+            color: #aaa;
+            padding: 6px 16px;
+            font-size: 13px;
+            border-top: 1px solid #3e4050;
+            display: flex;
+            gap: 24px;
+            flex-shrink: 0;
+        }
+        .status-bar span:first-child {
+            color: #9cdcfe;
+        }
+    </style>
+</head>
+<body>
+    <div class="toolbar">
+        <button id="saveBtn">💾 保存为 .html</button>
+        <button id="clearBtn">🗑️ 清空编辑器</button>
+        <div class="spacer"></div>
+        <label>
+            <input type="checkbox" id="themeToggle" checked> 暗色主题 (Dracula)
+        </label>
+    </div>
+
+    <div class="editor-container">
+        <!-- 原始文本域会被 CodeMirror 替换 -->
+        <textarea id="codeArea" placeholder="在此编写 HTML ..."><!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>我的页面</title>
+</head>
+<body>
+    <h1>你好，世界！</h1>
+    <p>试着输入 &lt;div class="container"&gt; 然后按 Ctrl+空格 查看补全</p>
+    <!-- 支持 Emmet 展开：输入 div>ul>li*3 后按 Ctrl+E (需自行扩展，此处仅演示补全) -->
+</body>
+</html></textarea>
+    </div>
+
+    <div class="status-bar">
+        <span>⚡ HTML 混合模式</span>
+        <span>⌨️ 自动补全: Ctrl + 空格</span>
+        <span>📐 括号自动闭合</span>
+    </div>
+
+    <!-- 加载 CodeMirror 核心库 (顺序重要) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+
+    <!-- 模式：必须按依赖顺序引入 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/xml/xml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/javascript/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/css/css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/htmlmixed/htmlmixed.min.js"></script>
+
+    <!-- 补全相关插件 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/hint/show-hint.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/hint/xml-hint.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/hint/html-hint.min.js"></script>
+
+    <!-- 辅助插件：自动闭合标签、高亮匹配标签 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/edit/closetag.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/edit/matchtags.min.js"></script>
+
+    <script>
+        (function() {
+            // 获取文本域
+            const textarea = document.getElementById('codeArea');
+            
+            // 初始化 CodeMirror 编辑器
+            const editor = CodeMirror.fromTextArea(textarea, {
+                mode: 'htmlmixed',                 // HTML 混合模式 (支持CSS/JS)
+                theme: 'dracula',                   // 默认暗色主题
+                lineNumbers: true,                   // 显示行号
+                autoCloseTags: true,                  // 自动闭合HTML标签
+                matchTags: {bothTags: true},          // 高亮匹配的标签
+                indentUnit: 4,                         // 缩进空格数
+                tabSize: 4,
+                lineWrapping: true,                    // 自动换行
+                extraKeys: {
+                    'Ctrl-Space': 'autocomplete',      // 手动触发补全
+                    'Ctrl-/': 'toggleComment'           // 注释/取消注释
+                },
+                hint: 'html',                           // 使用HTML补全
+                hintOptions: {
+                    completeSingle: false,               // 即使只有一个选项也不自动插入，等待用户选择
+                    closeOnUnfocus: false
+                }
+            });
+
+            // 保存按钮：将编辑器内容下载为 .html 文件
+            document.getElementById('saveBtn').addEventListener('click', function() {
+                const content = editor.getValue();
+                const blob = new Blob([content], { type: 'text/html' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'my_page.html';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            });
+
+            // 清空按钮：清空编辑器内容（可选确认）
+            document.getElementById('clearBtn').addEventListener('click', function() {
+                if (confirm('确定要清空所有代码吗？')) {
+                    editor.setValue('');
+                }
+            });
+
+            // 主题切换 (亮色/暗色)
+            const themeToggle = document.getElementById('themeToggle');
+            themeToggle.addEventListener('change', function(e) {
+                if (e.target.checked) {
+                    editor.setOption('theme', 'dracula');
+                } else {
+                    editor.setOption('theme', 'default'); // 亮色主题
+                }
+            });
+
+            // 可选：编辑器内容变化时更新状态栏（这里略）
+            // 设置一个简短延迟以确保初始大小正确
+            setTimeout(() => editor.refresh(), 10);
+        })();
+    </script>
+
+    <!-- 注：补全功能依赖 html-hint，输入标签名或属性名时按 Ctrl+空格 即会弹出智能建议 -->
+    <!-- 例如在标签内输入 "cla" 然后按 Ctrl+空格，会提示 class, id 等属性 -->
+</body>
+</html>
