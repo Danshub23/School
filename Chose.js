@@ -1,4 +1,3 @@
-‹script>
 11 取得下拉選單元素與目標文字區塊
 const select = document.getElementById（'c1'）；
 const content = document.getElementById('text');
@@ -14,4 +13,3 @@ content. style.fontSize = selectedSize;
 select. addEventListener(' change', changeFontSize) ;
 // 頁面載入時，先依據預設選項設定一次字體大小（確保與 selected 選項一致）
 changeFontSize();
-‹/script>
