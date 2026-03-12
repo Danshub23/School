@@ -1,4 +1,3 @@
-11 取得下拉選單元素與目標文字區塊
 const select = document.getElementById（'c1'）；
 const content = document.getElementById('text');
 // 定義更新字體大小的函式
