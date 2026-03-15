@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML 表格知识总结</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+      max-width: 1000px;
+      margin: 20px auto;
+      padding: 0 20px;
+      background: #f9f9f9;
+    }
+    h1 {
+      color: #333;
+      text-align: center;
+    }
+    section {
+      margin-bottom: 30px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      padding: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 15px 0;
+      font-size: 15px;
+    }
+    caption {
+      font-size: 1.2em;
+      font-weight: 600;
+      margin-bottom: 10px;
+      text-align: left;
+      color: #2c3e50;
+    }
+    th {
+      background-color: #3498db;
+      color: white;
+      font-weight: 600;
+      padding: 10px 8px;
+      text-align: center;
+      border: 1px solid #2980b9;
+    }
+    td {
+      padding: 10px 8px;
+      border: 1px solid #bdc3c7;
+      vertical-align: top;
+    }
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+    .note {
+      background-color: #fff9e0;
+      padding: 8px 12px;
+      border-left: 4px solid #f1c40f;
+      margin: 15px 0;
+      font-size: 0.95em;
+    }
+    code {
+      background: #ecf0f1;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9em;
+    }
+    .demo-merge {
+      background-color: #e8f4fd;
+    }
+    .responsive-demo {
+      overflow-x: auto;
+      border: 1px dashed #95a5a6;
+      padding: 10px;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      color: #7f8c8d;
+      margin: 40px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>📊 HTML 表格知识点总结</h1>
+
+  <!-- 1. 基础标签概览 -->
+  <section>
+    <h2>① 基础标签与结构</h2>
+    <table>
+      <caption>表格核心标签</caption>
+      <thead>
+        <tr>
+          <th>标签</th>
+          <th>描述</th>
+          <th>示例用法</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><code>&lt;table&gt;</code></td><td>定义表格容器</td><td><code>&lt;table&gt; ... &lt;/table&gt;</code></td></tr>
+        <tr><td><code>&lt;tr&gt;</code></td><td>定义行</td><td><code>&lt;tr&gt;&lt;td&gt;...&lt;/td&gt;&lt;/tr&gt;</code></td></tr>
+        <tr><td><code>&lt;th&gt;</code></td><td>表头单元格（加粗居中）</td><td><code>&lt;th&gt;姓名&lt;/th&gt;</code></td></tr>
+        <tr><td><code>&lt;td&gt;</code></td><td>标准数据单元格</td><td><code>&lt;td&gt;张三&lt;/td&gt;</code></td></tr>
+        <tr><td><code>&lt;caption&gt;</code></td><td>表格标题（显示在表格上方）</td><td><code>&lt;caption&gt;销售记录&lt;/caption&gt;</code></td></tr>
+        <tr><td><code>&lt;thead&gt;</code></td><td>表头组（可包含多行）</td><td>包裹标题行</td></tr>
+        <tr><td><code>&lt;tbody&gt;</code></td><td>表格主体组</td><td>包裹数据行</td></tr>
+        <tr><td><code>&lt;tfoot&gt;</code></td><td>表尾组（如汇总）</td><td>包裹统计行</td></tr>
+      </tbody>
+    </table>
+    <div class="note">
+      💡 提示：<code>&lt;thead&gt;</code> / <code>&lt;tbody&gt;</code> / <code>&lt;tfoot&gt;</code> 仅用于语义分组，不影响实际渲染，但有助于样式和屏幕阅读器。
+    </div>
+  </section>
+
+  <!-- 2. 结构标签实际演示 -->
+  <section>
+    <h2>② 结构标签示例（thead / tbody / tfoot）</h2>
+    <table>
+      <caption>📈 季度销售额（单位：万元）</caption>
+      <thead>
+        <tr>
+          <th>区域</th>
+          <th>Q1</th>
+          <th>Q2</th>
+          <th>Q3</th>
+          <th>Q4</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>华北</td><td>120</td><td>135</td><td>140</td><td>160</td></tr>
+        <tr><td>华东</td><td>200</td><td>220</td><td>245</td><td>270</td></tr>
+        <tr><td>华南</td><td>180</td><td>195</td><td>210</td><td>230</td></tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <th>总计</th>
+          <td>500</td>
+          <td>550</td>
+          <td>595</td>
+          <td>660</td>
+        </tr>
+      </tfoot>
+    </table>
+    <p>✔ 上方表格中，<code>&lt;thead&gt;</code> 包含列标题，<code>&lt;tbody&gt;</code> 包含数据，<code>&lt;tfoot&gt;</code> 包含汇总行。</p>
+  </section>
+
+  <!-- 3. 合并单元格演示 (colspan / rowspan) -->
+  <section>
+    <h2>③ 合并单元格（colspan / rowspan）</h2>
+    <table class="demo-merge">
+      <caption>🎓 课程表示例（合并演示）</caption>
+      <thead>
+        <tr>
+          <th>时间</th>
+          <th>星期一</th>
+          <th>星期二</th>
+          <th>星期三</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td rowspan="2">上午</td>        <!-- 跨两行 -->
+          <td>数学</td>
+          <td>语文</td>
+          <td>英语</td>
+        </tr>
+        <tr>
+          <td>物理</td>
+          <td>化学</td>
+          <td>生物</td>
+        </tr>
+        <tr>
+          <td>下午</td>
+          <td colspan="2">体育（两节连上）</td>  <!-- 跨两列 -->
+          <td>音乐</td>
+        </tr>
+        <tr>
+          <td>晚上</td>
+          <td>自习</td>
+          <td>自习</td>
+          <td>社团活动</td>
+        </tr>
+      </tbody>
+    </table>
+    <ul>
+      <li><code>rowspan="2"</code> 让“上午”单元格占据两行</li>
+      <li><code>colspan="2"</code> 让“体育”单元格合并两列</li>
+    </ul>
+  </section>
+
+  <!-- 4. 常用属性与CSS替代 -->
+  <section>
+    <h2>④ 传统属性 vs 现代 CSS</h2>
+    <table>
+      <caption>属性对照表（推荐使用 CSS）</caption>
+      <thead>
+        <tr><th>属性</th><th>作用</th><th>CSS 替代方案</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>border="1"</code></td><td>设置边框</td><td><code>border: 1px solid #999;</code></td></tr>
+        <tr><td><code>cellpadding="10"</code></td><td>单元格内边距</td><td><code>padding: 10px;</code> (在 <code>th</code>/<code>td</code> 上)</td></tr>
+        <tr><td><code>cellspacing="0"</code></td><td>单元格间距</td><td><code>border-collapse: collapse;</code> 或 <code>border-spacing: 0;</code></td></tr>
+        <tr><td><code>align="center"</code></td><td>表格水平对齐</td><td><code>margin: 0 auto;</code> (对表格本身) / <code>text-align</code> (对内容)</td></tr>
+        <tr><td><code>width="500"</code></td><td>表格宽度</td><td><code>width: 500px;</code> 或百分比</td></tr>
+      </tbody>
+    </table>
+    <div class="note">
+      ⚠️ 大多数早期属性（如 <code>bgcolor</code>、<code>align</code>）在 HTML5 中已不推荐，应优先使用 CSS 控制样式。
+    </div>
+  </section>
+
+  <!-- 5. 响应式表格技巧 -->
+  <section>
+    <h2>⑤ 响应式表格（横向滚动）</h2>
+    <div class="responsive-demo">
+      <p>当表格过宽时，在外层包裹 <code>&lt;div style="overflow-x: auto;"&gt;</code> 即可产生滚动条：</p>
+      <div style="overflow-x: auto;">
+        <table style="min-width: 800px; background: white;">
+          <caption>宽表示例（模拟窄屏滚动）</caption>
+          <thead>
+            <tr><th>#</th><th>产品</th><th>属性1</th><th>属性2</th><th>属性3</th><th>属性4</th><th>属性5</th><th>属性6</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>笔记本</td><td>i7</td><td>16G</td><td>512G</td><td>14"</td><td>2024款</td><td>￥8999</td></tr>
+            <tr><td>2</td><td>手机</td><td>骁龙8</td><td>12G</td><td>256G</td><td>6.7"</td><td>5G</td><td>￥4999</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="margin-top: 8px;">📱 尝试缩小浏览器窗口，下方会出现水平滚动条。</p>
+    </div>
+  </section>
+
+  <!-- 6. 综合示例：一个自描述的“表格总结表” -->
+  <section>
+    <h2>⑥ 知识点快速对照</h2>
+    <table>
+      <caption>📋 HTML 表格速查</caption>
+      <thead>
+        <tr><th>分类</th><th>内容</th><th>示例/说明</th></tr>
+      </thead>
+      <tbody>
+        <tr><td rowspan="4">基本标签</td><td>table</td><td>根元素</td></tr>
+        <tr><td>tr</td><td>行容器</td></tr>
+        <tr><td>th / td</td><td>表头单元格 / 数据单元格</td></tr>
+        <tr><td>caption</td><td>表格标题</td></tr>
+        <tr><td rowspan="3">结构分组</td><td>thead</td><td>标题行组</td></tr>
+        <tr><td>tbody</td><td>数据行组</td></tr>
+        <tr><td>tfoot</td><td>表尾行组</td></tr>
+        <tr><td>合并</td><td>colspan / rowspan</td><td>跨列 / 跨行合并</td></tr>
+        <tr><td>样式替代</td><td>CSS</td><td>使用 padding, border, background 等</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <footer>
+    ⭐ 以上所有表格均使用 HTML 的 <code>&lt;table&gt;</code> 及相关标签构建，并辅以简单 CSS 美化。
+  </footer>
+</body>
+</html>
