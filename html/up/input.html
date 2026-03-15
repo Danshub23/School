@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>HTML Input 所有类型</title>
+    <style>
+        body { font-family: sans-serif; margin: 20px; }
+        table { border-collapse: collapse; width: 100%; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        th, td { border: 1px solid #ccc; padding: 12px; vertical-align: middle; }
+        th { background-color: #f5f5f5; text-align: left; }
+        code { background-color: #f0f0f0; padding: 2px 6px; border-radius: 4px; font-family: monospace; }
+        .note { margin-top: 20px; color: #555; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <h1>HTML &lt;input&gt; 所有类型一览</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>类型</th>
+                <th>代码示例</th>
+                <th>渲染效果</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- button -->
+            <tr>
+                <td>button</td>
+                <td><code>&lt;input type="button" value="按钮"&gt;</code></td>
+                <td><input type="button" value="按钮"></td>
+            </tr>
+            <!-- checkbox -->
+            <tr>
+                <td>checkbox</td>
+                <td><code>&lt;input type="checkbox"&gt; 选项</code></td>
+                <td><input type="checkbox"> 选项</td>
+            </tr>
+            <!-- color -->
+            <tr>
+                <td>color</td>
+                <td><code>&lt;input type="color"&gt;</code></td>
+                <td><input type="color"></td>
+            </tr>
+            <!-- date -->
+            <tr>
+                <td>date</td>
+                <td><code>&lt;input type="date"&gt;</code></td>
+                <td><input type="date"></td>
+            </tr>
+            <!-- datetime-local -->
+            <tr>
+                <td>datetime-local</td>
+                <td><code>&lt;input type="datetime-local"&gt;</code></td>
+                <td><input type="datetime-local"></td>
+            </tr>
+            <!-- email -->
+            <tr>
+                <td>email</td>
+                <td><code>&lt;input type="email" placeholder="name@example.com"&gt;</code></td>
+                <td><input type="email" placeholder="name@example.com"></td>
+            </tr>
+            <!-- file -->
+            <tr>
+                <td>file</td>
+                <td><code>&lt;input type="file"&gt;</code></td>
+                <td><input type="file"></td>
+            </tr>
+            <!-- hidden -->
+            <tr>
+                <td>hidden</td>
+                <td><code>&lt;input type="hidden" value="隐藏数据"&gt;</code></td>
+                <td><span style="color: #999;">（隐藏元素，不可见）</span></td>
+            </tr>
+            <!-- image -->
+            <tr>
+                <td>image</td>
+                <td><code>&lt;input type="image" src="图标.svg" alt="图片按钮" width="32"&gt;</code></td>
+                <td><input type="image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%234285F4'/%3E%3C/svg%3E" alt="图片按钮" width="32"></td>
+            </tr>
+            <!-- month -->
+            <tr>
+                <td>month</td>
+                <td><code>&lt;input type="month"&gt;</code></td>
+                <td><input type="month"></td>
+            </tr>
+            <!-- number -->
+            <tr>
+                <td>number</td>
+                <td><code>&lt;input type="number" value="5"&gt;</code></td>
+                <td><input type="number" value="5"></td>
+            </tr>
+            <!-- password -->
+            <tr>
+                <td>password</td>
+                <td><code>&lt;input type="password" placeholder="输入密码"&gt;</code></td>
+                <td><input type="password" placeholder="输入密码"></td>
+            </tr>
+            <!-- radio -->
+            <tr>
+                <td>radio</td>
+                <td><code>&lt;input type="radio" name="group"&gt; 男 &lt;input type="radio" name="group"&gt; 女</code></td>
+                <td><input type="radio" name="group"> 男 <input type="radio" name="group"> 女</td>
+            </tr>
+            <!-- range -->
+            <tr>
+                <td>range</td>
+                <td><code>&lt;input type="range" min="0" max="10"&gt;</code></td>
+                <td><input type="range" min="0" max="10"></td>
+            </tr>
+            <!-- reset -->
+            <tr>
+                <td>reset</td>
+                <td><code>&lt;input type="reset" value="重置"&gt;</code></td>
+                <td><input type="reset" value="重置"></td>
+            </tr>
+            <!-- search -->
+            <tr>
+                <td>search</td>
+                <td><code>&lt;input type="search" placeholder="搜索..."&gt;</code></td>
+                <td><input type="search" placeholder="搜索..."></td>
+            </tr>
+            <!-- submit -->
+            <tr>
+                <td>submit</td>
+                <td><code>&lt;input type="submit" value="提交"&gt;</code></td>
+                <td><input type="submit" value="提交"></td>
+            </tr>
+            <!-- tel -->
+            <tr>
+                <td>tel</td>
+                <td><code>&lt;input type="tel" placeholder="123-456-7890"&gt;</code></td>
+                <td><input type="tel" placeholder="123-456-7890"></td>
+            </tr>
+            <!-- text -->
+            <tr>
+                <td>text</td>
+                <td><code>&lt;input type="text" placeholder="普通文本"&gt;</code></td>
+                <td><input type="text" placeholder="普通文本"></td>
+            </tr>
+            <!-- time -->
+            <tr>
+                <td>time</td>
+                <td><code>&lt;input type="time"&gt;</code></td>
+                <td><input type="time"></td>
+            </tr>
+            <!-- url -->
+            <tr>
+                <td>url</td>
+                <td><code>&lt;input type="url" placeholder="https://example.com"&gt;</code></td>
+                <td><input type="url" placeholder="https://example.com"></td>
+            </tr>
+            <!-- week -->
+            <tr>
+                <td>week</td>
+                <td><code>&lt;input type="week"&gt;</code></td>
+                <td><input type="week"></td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="note">
+        <p>📌 说明：</p>
+        <ul>
+            <li><code>hidden</code> 类型在页面中不可见，此处用文字说明。</li>
+            <li><code>image</code> 类型使用内联 SVG 作为示例，实际使用时请替换为有效图片路径。</li>
+            <li>部分类型（如日期、颜色等）的显示效果取决于浏览器支持，不支持时会降级为普通文本输入框。</li>
+            <li>复选框（checkbox）和单选按钮（radio）的 <code>name</code> 属性用于分组，此处仅展示基本外观。</li>
+            <li><code>reset</code> 按钮需要位于 <code>&lt;form&gt;</code> 内并配合其他输入才能体现重置效果，此处仅展示按钮样式。</li>
+        </ul>
+    </div>
+</body>
+</html>
