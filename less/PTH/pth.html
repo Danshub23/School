@@ -8,16 +8,47 @@
         }
         p {
             font-size: 18px;
-            margin: 0, 0, 0.5em, 0;
+            margin: 0 0 0.5em 0;
             color: black;
-            text-shadow: 2px, 2px, 7px, rgba(0, 0, 0, 0.5);
-            border-bottom: 3px, solid, black;
-            border-right: 3px, solid, black;
+            text-shadow: 2px 2px 7px rgba(0, 0, 0, 0.5);
+            border-bottom: 3px solid black;
+            border-right: 3px solid black;
+        }
+        #c {
+            justify-content: center;
+            /* 水平居中 */
+            align-items: center;
         }
     </style>
 </head>
 
 <body>
+        <div id="c">
+            <label for="c1">選擇字體大小：</label>
+            <select id="c1" name="c1">
+                <option value="10px">10</option>
+                <option value="14px">14</option>
+                <option value="18px">18</option>
+                <option value="24px" selected="">24</option>
+                <option value="32px">32</option>
+                <option value="36px">36</option>
+                <option value="40px">40</option>
+            </select>
+        </div>
+    <br>
+        <script>
+            const select = document.getElementById('c1');
+            const content = document.getElementById('text');
+
+            function changeFontSize() {
+                const selectedSize = select.value;
+                content.style.fontSize = selectedSize;
+            }
+
+            select.addEventListener('change', changeFontSize);
+            changeFontSize();
+        </script>
+    <div id="text" style="font-size: 24px;">
     <h2>第一幕時間：1839年6月 地點：廣州，欽差大臣行館</h2>
     <p id="p0">（2（旁白）走到中央，神情凝重）19世紀初，鴉片如幽靈般籠罩著清朝大地。無數人因它傾家蕩產，國庫白銀大量外流。國家危難之際，道光皇帝任命林則徐為欽差大臣，前往廣東主持禁煙！</p>
     <p id="p1">（2（林則徐）正襟危坐，義律被帶到堂前，態度輕蔑。）</p>
@@ -54,6 +85,7 @@
             i++
         }
     </script>
+    </div>
 
 
 </body></html>
