@@ -104,54 +104,52 @@
             <button id="re" class="n">r</button>
 
         </div>
-    <p id="p0">（2（旁白）走到中央，神情凝重）19世紀初，鴉片如幽靈般籠罩著清朝大地。無數人因它傾家蕩產，國庫白銀大量外流。國家危難之際，道光皇帝任命林則徐為欽差大臣，前往廣東主持禁煙！</p>
-    <p id="p1">（2（林則徐）正襟危坐，義律被帶到堂前，態度輕蔑。）</p>
-    <p id="p2">2（林則徐）：（拍案而起，聲如洪鐘）2（義律）！你等英商，為一己私利，用鴉片毒害我大清國民，民不聊生，國力日衰！此等禍國殃民之舉，天理不容！</p>
-    <p id="p3">2（義律）：（冷笑一聲）林大人，我們是自由貿易。你們的人自己要買，與我們何干？這是你們大清自己的問題。</p>
-    <p id="p4">2（林則徐）：（怒目而視）一派胡言！若鴉片無害，何不讓爾等國王吸食？本官奉皇上聖旨，限你等三目内交出所有鴉片，不許私藏！否則，休怪本官不講情面！</p>
-    <p id="p5">2（義律）：（態度強硬）絕無可能！這是我們的財產！</p>
-    <p id="p6">2（林則徐）：（眼神凌厲）這不是財產，是毒藥！來人，封鎖商館，斷其水糧！我看他交，還是不交！</p>
-    <p id="p7">（2（義律）臉色大變，被官兵带下。）</p>
+    <p id="p0"></p>
+    <p id="p1"></p>
+    <p id="p2"></p>
+    <p id="p3"></p>
+    <p id="p4"></p>
+    <p id="p5"></p>
+    <p id="p6"></p>
+    <p id="p7"></p>
     <p id="p8"></p>
     <p id="p9"></p>
     </div>
     <script>
-        var a = document.getElementById('n1').value + '（林則徐）';
-        var b = document.getElementById('n2').value + '（義律）';
-        var c = '（阿明）';
-        var d = document.getElementById('n3').value + '（旁白）';
-        var e = document.getElementById('n4').value + '（官員）';
-        const list = [
-            '（' + d + '走到中央，神情凝重）19世紀初，鴉片如幽靈般籠罩著清朝大地。無數人因它傾家蕩產，國庫白銀大量外流。國家危難之際，道光皇帝任命林則徐為欽差大臣，前往廣東主持禁煙！',
-            '（' + a + '正襟危坐，義律被帶到堂前，態度輕蔑。）',
-            a + '：（拍案而起，聲如洪鐘）' + b + '！你等英商，為一己私利，用鴉片毒害我大清國民，民不聊生，國力日衰！此等禍國殃民之舉，天理不容！',
-            b + '：（冷笑一聲）林大人，我們是自由貿易。你們的人自己要買，與我們何干？這是你們大清自己的問題。',
-            a + '：（怒目而視）一派胡言！若鴉片無害，何不讓爾等國王吸食？本官奉皇上聖旨，限你等三目内交出所有鴉片，不許私藏！否則，休怪本官不講情面！',
-            b + '：（態度強硬）絕無可能！這是我們的財產！',
-            a + '：（眼神凌厲）這不是財產，是毒藥！來人，封鎖商館，斷其水糧！我看他交，還是不交！',
-            '（' + b + '臉色大變，被官兵带下。）'
+        function updateScript() {
+            // 动态获取当前下拉菜单的值
+            const a = document.getElementById('n1').value + '（林則徐）';
+            const b = document.getElementById('n2').value + '（義律）';
+            const d = document.getElementById('n3').value + '（旁白）';
+            const e = document.getElementById('n4').value + '（官員）';
 
+            // 每次点击时重新生成台词数组（共10句，对应p0~p9）
+            const list = [
+                '（' + d + '走到中央，神情凝重）19世紀初，鴉片如幽靈般籠罩著清朝大地。無數人因它傾家蕩產，國庫白銀大量外流。國家危難之際，道光皇帝任命林則徐為欽差大臣，前往廣東主持禁煙！',
+                '（' + a + '正襟危坐，義律被帶到堂前，態度輕蔑。）',
+                a + '：（拍案而起，聲如洪鐘）' + b + '！你等英商，為一己私利，用鴉片毒害我大清國民，民不聊生，國力日衰！此等禍國殃民之舉，天理不容！',
+                b + '：（冷笑一聲）林大人，我們是自由貿易。你們的人自己要買，與我們何干？這是你們大清自己的問題。',
+                a + '：（怒目而視）一派胡言！若鴉片無害，何不讓爾等國王吸食？本官奉皇上聖旨，限你等三日內交出所有鴉片，不許私藏！否則，休怪本官不講情面！',
+                b + '：（態度強硬）絕無可能！這是我們的財產！',
+                a + '：（眼神凌厲）這不是財產，是毒藥！來人，封鎖商館，斷其水糧！我看他交，還是不交！',
+                '（' + b + '臉色大變，被官兵带下。）',
+                '（幕後音）' + e + '：欽差大人有令，即日起嚴禁鴉片貿易！',
+                '（全體肅靜，燈光漸暗）'
+            ];
 
-        ];
-        var i = 0
-        function ch() {
-            a = document.getElementById('n1').value + '（林則徐）';
-            b = document.getElementById('n2').value + '（義律）';
-            c = '（阿明）';
-            d = document.getElementById('n3').value + '（旁白）';
-            e = document.getElementById('n4').value + '（官員）';
-    
-            while (i < list.length) {
-                document.getElementById('p' + String(i)).innerText = list[i];
-           
-                i++
+            // 更新所有段落
+            for (let i = 0; i < list.length; i++) {
+                const p = document.getElementById('p' + i);
+                if (p) p.innerText = list[i];
+            }
         }
-            i = 0
-        }
+
+        // 页面加载时先执行一次
+        updateScript();
+
+        // 绑定按钮事件
         const reloadBtn = document.getElementById('re');
-        reloadBtn.addEventListener('click', ch);
+        reloadBtn.addEventListener('click', updateScript);
     </script>
-    
-
-
-</body></html>
+</body>
+</html>
