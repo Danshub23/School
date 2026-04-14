@@ -133,11 +133,16 @@
 
         ];
         var i = 0
-        while (i < list.length) {
-            document.getElementById('p' + String(i)).innerText = list[i];
+        function ch() {
+            while (i < list.length) {
+                document.getElementById('p' + String(i)).innerText = list[i];
            
-            i++
+                i++
         }
+            i = 0
+        }
+        document.getElementById('n1').addEventListener('change', ch);
+            ch();
     </script>
     
 
