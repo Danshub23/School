@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>字符表格</title>
+</head>
+
+<body>
+    <table border="1">   <!-- 添加边框便于观察 -->
+        <tbody>
+            <tr id="row1">   <!-- 给第一行一个ID，便于脚本添加单元格 -->
+                <script>
+                    var a = 'abcbabcccbac';
+                    var i = 0;
+                    var tr = document.getElementById('row1');  // 获取当前行
+                    while (i < a.length) {                     // 修正条件：小于长度
+                        var y = document.createElement('td');   // 创建单元格
+                        var t = document.createTextNode(a[i]);  // 修正：取字符串中第i个字符
+                        y.appendChild(t);                       // 文本放入单元格
+                        tr.appendChild(y);                      // 单元格添加到行中
+                        i++;
+                    }
+                </script>
+            </tr>
+            <tr>
+                <td>2</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>
