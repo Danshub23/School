@@ -1,4 +1,4 @@
-<html lang="zh">
+检查但不修改：<html lang="zh">
 
 <head>
     <meta charset="UTF-8">
@@ -17,6 +17,7 @@
     <table border="1" id="tab">
         <thead>
             <tr>
+                <th>Day</th>
                 <th>2</th>
                 <th>3</th>
                 <th>5</th>
@@ -33,6 +34,11 @@
                 <th>29</th>
                 <th>32</th>
                 <th>34</th>
+                <th>A</th>
+                <th>B</th>
+                <th>C</th>
+                <th>D</th>
+                <th>E</th>
             </tr>
         </thead>
         <tbody id="th0">
@@ -47,14 +53,26 @@
             }
             container.appendChild(m);
         }
-        var rice = ['BCBCACCDAAAACABC','PABBACCCABAACCCB','PBCBBCCCAACABABA','PCBBACCAAACCCBCC']
+        var r = ['BCBCACCDAAAACABC', 'PABBACCCABAACCCB', 'PBCBBCCCAACABABA', 'PCBBACCAAACCCBCC']
         const table = document.getElementById('tab')
-        for (let i = 0; i < 5; i++) {
-            const tr = table.insertRow();      // 创建行
+        for (let i = 0; i < r.length; i++) {
+            const tr = table.insertRow();
+            const td = tr.insertCell();
+            td.textContent = 'Day' + String(i + 1);
             for (let j = 0; j < 16; j++) {
-                const td = tr.insertCell();    // 创建单元格
-                td.textContent = rice[i][j];
+                const td = tr.insertCell();
+                td.textContent = r[i][j];
             }
+            td=tr.insertCell();
+            td=textContent = r[i].match(/A/g);
+            td=tr.insertCell();
+            td=textContent = r[i].match(/B/g);
+            td=tr.insertCell();
+            td=textContent = r[i].match(/C/g);
+            td=tr.insertCell();
+            td=textContent = r[i].match(/D/g);
+            td=tr.insertCell();
+            td=textContent = r[i].match(/E/g);
         }
     </script>
 </body>
