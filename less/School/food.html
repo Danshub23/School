@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="zh">
 
 <head>
@@ -15,7 +14,7 @@
 </head>
 
 <body>
-    <table border="1">
+    <table border="1" id="tab">
         <thead>
             <tr>
                 <th>2</th>
@@ -36,29 +35,26 @@
                 <th>34</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="th0">
             <tr id="row0"> <!-- 给第一行一个ID，便于脚本添加单元格 -->
-            </tr>
         </tbody>
     </table>
-    <!-- <script>
-        // var c = 0;
-        // while (c<15){
-        //     var m = document.createElement('td')
-        //     document.element.id
-        // }
-    </script> -->
     <script>
-        var a = '无ABBACCCABAACCCB';
-        var i = 0;
-        var i2 = 1;
-        var tr = document.getElementById('row0');  // 获取当前行
-        while (i < a.length) {                     // 修正条件：小于长度
-            var y = document.createElement('td');   // 创建单元格
-            var t = document.createTextNode(a[i]);  // 修正：取字符串中第i个字符
-            y.appendChild(t);                       // 文本放入单元格
-            tr.appendChild(y);                      // 单元格添加到行中
-            i++;
+        function add(create, container, id) {
+            var m = document.createElement(create);
+            if (id != undefined) {
+                m.id = id
+            }
+            container.appendChild(m);
+        }
+        var rice = ['BCBCACCDAAAACABC','PABBACCCABAACCCB','PBCBBCCCAACABABA','PCBBACCAAACCCBCC']
+        const table = document.getElementById('tab')
+        for (let i = 0; i < 3; i++) {
+            const tr = table.insertRow();      // 创建行
+            for (let j = 0; j < 16; j++) {
+                const td = tr.insertCell();    // 创建单元格
+                td.textContent = rice[i][j];
+            }
         }
     </script>
 </body>
