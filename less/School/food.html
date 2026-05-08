@@ -42,7 +42,7 @@
             </tr>
         </thead>
         <tbody id="th0">
-            <tr id="row0"> <!-- 给第一行一个ID，便于脚本添加单元格 -->
+            <tr id="row0">
         </tbody>
     </table>
     <script>
@@ -62,7 +62,10 @@
             }
             return num
         }
-        var r = ['BCBCACCDAAAACABC', 'PABBACCCABAACCCB', 'PBCBBCCCAACABABA', 'PCBBACCAAACCCBCC']
+        var r = ['BCBCACCDAAAACABC', ' ABBACCCABAACCCB', ' BCBBCCCAACABABA', ' CBBACCAAACCCBCC', ' BCADCAEBAEACBCB',
+            ' ACBACCCAAAACCCA', ' CBBBCCCBCCBCACC', ' ABBACCCAAABCAAA', ' CCBBCCBBCBBCCBC', ' CDCACCBAACACECC', ' BBBACCBBACBCBBB',
+            ' CBADCCABCAACCCA', ' CABBCCDABAACCCC', ' CCCACCBACBBCCCC', ' ACCDCCBAECACCBC', ' CCCBCCAACACCCCC', ' BCABCBAABBBCBCB',
+            ' CBCBCCAABBACBCC']
         var table = document.getElementById('tab')
         for (let i = 0; i < r.length; i++) {
             var tr = table.insertRow();
@@ -73,15 +76,15 @@
                 td.textContent = r[i][j];
             }
             td = tr.insertCell();
-            td.textContent = found(r[i],'A');
+            td.textContent = found(r[i], 'A');
             td = tr.insertCell();
-            td.textContent = found(r[i],'B');
+            td.textContent = found(r[i], 'B');
             td = tr.insertCell();
-            td.textContent = found(r[i],'C');
+            td.textContent = found(r[i], 'C');
             td = tr.insertCell();
-            td.textContent = found(r[i],'D');
+            td.textContent = found(r[i], 'D');
             td = tr.insertCell();
-            td.textContent = found(r[i],'E');
+            td.textContent = found(r[i], 'E');
         }
     </script>
 </body>
