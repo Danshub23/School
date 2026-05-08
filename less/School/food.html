@@ -1,4 +1,4 @@
-检查但不修改：<html lang="zh">
+<html lang="zh">
 
 <head>
     <meta charset="UTF-8">
@@ -53,26 +53,35 @@
             }
             container.appendChild(m);
         }
+        function found(sen, str) {
+            var num = 0;
+            for (i = 0; i < sen.length; i++) {
+                if (sen[i] == str) {
+                    num += 1;
+                }
+            }
+            return num
+        }
         var r = ['BCBCACCDAAAACABC', 'PABBACCCABAACCCB', 'PBCBBCCCAACABABA', 'PCBBACCAAACCCBCC']
-        const table = document.getElementById('tab')
+        var table = document.getElementById('tab')
         for (let i = 0; i < r.length; i++) {
-            const tr = table.insertRow();
-            const td = tr.insertCell();
+            var tr = table.insertRow();
+            var td = tr.insertCell();
             td.textContent = 'Day' + String(i + 1);
             for (let j = 0; j < 16; j++) {
-                const td = tr.insertCell();
+                var td = tr.insertCell();
                 td.textContent = r[i][j];
             }
-            td=tr.insertCell();
-            td=textContent = r[i].match(/A/g);
-            td=tr.insertCell();
-            td=textContent = r[i].match(/B/g);
-            td=tr.insertCell();
-            td=textContent = r[i].match(/C/g);
-            td=tr.insertCell();
-            td=textContent = r[i].match(/D/g);
-            td=tr.insertCell();
-            td=textContent = r[i].match(/E/g);
+            td = tr.insertCell();
+            td.textContent = found(r[i],'A');
+            td = tr.insertCell();
+            td.textContent = found(r[i],'B');
+            td = tr.insertCell();
+            td.textContent = found(r[i],'C');
+            td = tr.insertCell();
+            td.textContent = found(r[i],'D');
+            td = tr.insertCell();
+            td.textContent = found(r[i],'E');
         }
     </script>
 </body>
