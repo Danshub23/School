@@ -17,7 +17,7 @@
     <table border="1" id="tab">
         <thead>
             <tr>
-                <th>Day</th>
+                <th id='d'>Day</th>
                 <th>2</th>
                 <th>3</th>
                 <th>5</th>
@@ -61,11 +61,14 @@
                 }
             }
             return num
+        var d = new Date();
+        document.getElementById("d").innerHTML = (d.getDate() + '号');
         }
-        var r = ['BCBCACCDAAAACABC', ' ABBACCCABAACCCB', ' BCBBCCCAACABABA', ' CBBACCAAACCCBCC', ' BCADCAEBAEACBCB',
-            ' ACBACCCAAAACCCA', ' CBBBCCCBCCBCACC', ' ABBACCCAAABCAAA', ' CCBBCCBBCBBCCBC', ' CDCACCBAACACECC', ' BBBACCBBACBCBBB',
-            ' CBADCCABCAACCCA', ' CABBCCDABAACCCC', ' CCCACCBACBBCCCC', ' ACCDCCBAECACCBC', ' CCCBCCAACACCCCC', ' BCABCBAABBBCBCB',
-            ' CBCBCCAABBACBCC']
+        var r = ['BCBCACCDAAAACABC', ' ABBACCCABAACCCB', ' BCBBCCCAACABABA', ' CBBACCAAACCCBCC',
+                 ' BCADCAEBAEACBCB', ' ACBACCCAAAACCCA', ' CBBBCCCBCCBCACC', ' ABBACCCAAABCAAA',
+                 ' CCBBCCBBCBBCCBC', ' CDCACCBAACACECC', ' BBBACCBBACBCBBB', ' CBADCCABCAACCCA',
+                 ' CABBCCDABAACCCC', ' CCCACCBACBBCCCC', ' ACCDCCBAECACCBC', ' CCCBCCAACACCCCC',
+                 ' BCABCBAABBBCBCB', ' CBCBCCAABBACBCC']
         var table = document.getElementById('tab')
         for (let i = 0; i < r.length; i++) {
             var tr = table.insertRow();
