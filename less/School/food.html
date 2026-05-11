@@ -10,6 +10,9 @@
             text-align: center;
 
         }
+        .h {
+            background-color: #ff9 !important;
+        }
     </style>
 </head>
 
@@ -77,7 +80,7 @@
             td.textContent = day[i] + '/5';
             if (day[i] == d.getDate()) {
                 row = td.parentNode;
-                row.
+                row.classList.add('h');
             }
             for (let j = 0; j < 16; j++) {
                 var td = tr.insertCell();
