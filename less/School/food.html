@@ -58,7 +58,7 @@
         }
         function found(sen, str) {
             var num = 0;
-            for (i = 0; i < sen.length; i++) {
+            for (let i = 0; i < sen.length; i++) {
                 if (sen[i] == str) {
                     num += 1;
                 }
@@ -79,7 +79,7 @@
             var td = tr.insertCell();
             td.textContent = day[i] + '/5';
             if (day[i] == d.getDate()) {
-                row = td.parentNode;
+                let row = td.parentNode;
                 row.classList.add('h');
             }
             for (let j = 0; j < 16; j++) {
