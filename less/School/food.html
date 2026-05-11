@@ -69,11 +69,12 @@
                  ' CCBBCCBBCBBCCBC', ' CDCACCBAACACECC', ' BBBACCBBACBCBBB', ' CBADCCABCAACCCA',
                  ' CABBCCDABAACCCC', ' CCCACCBACBBCCCC', ' ACCDCCBAECACCBC', ' CCCBCCAACACCCCC',
                  ' BCABCBAABBBCBCB', ' CBCBCCAABBACBCC']
+        var day = [4,5,6,7,8,11,12,13,14,15,18,19,20,21,22,26,27,28,]
         var table = document.getElementById('tab')
         for (let i = 0; i < r.length; i++) {
             var tr = table.insertRow();
             var td = tr.insertCell();
-            td.textContent = 'Day' + String(i + 1);
+            td.textContent = day[i] + '/5';
             for (let j = 0; j < 16; j++) {
                 var td = tr.insertCell();
                 td.textContent = r[i][j];
