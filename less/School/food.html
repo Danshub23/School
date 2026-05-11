@@ -75,6 +75,10 @@
             var tr = table.insertRow();
             var td = tr.insertCell();
             td.textContent = day[i] + '/5';
+            if (day[i] == d.getDate()) {
+                row = td.parentNode;
+                row.
+            }
             for (let j = 0; j < 16; j++) {
                 var td = tr.insertCell();
                 td.textContent = r[i][j];
