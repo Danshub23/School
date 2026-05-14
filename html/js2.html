@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript DOM 操作速查表（分类整理）</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: #f5f7fa;
+      padding: 2rem;
+      color: #333;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      color: #1a1a2e;
+    }
+    .table-wrapper {
+      overflow-x: auto;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      background: white;
+      margin: 0 auto;
+      max-width: 1200px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 800px;
+      white-space: nowrap;
+    }
+    thead th {
+      background: #16213e;
+      color: white;
+      padding: 12px 16px;
+      font-weight: 600;
+      text-align: left;
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      font-size: 0.95rem;
+      letter-spacing: 0.02em;
+    }
+    thead th:first-child {
+      width: 10%;
+    }
+    thead th:nth-child(2) {
+      width: 24%;
+    }
+    thead th:nth-child(3) {
+      width: 24%;
+    }
+    thead th:last-child {
+      width: 42%;
+    }
+    tbody td {
+      padding: 10px 16px;
+      border-bottom: 1px solid #e2e8f0;
+      font-size: 0.92rem;
+      vertical-align: middle;
+      background: white;
+      transition: background 0.2s;
+    }
+    tbody tr:hover td {
+      background: #f1f5f9;
+    }
+    /* 分类单元格样式 */
+    td.category {
+      background: #e8eef7;
+      font-weight: 700;
+      color: #0f2b62;
+      text-align: center;
+      vertical-align: middle;
+      border-right: 2px solid #d0d9e8;
+      letter-spacing: 0.04em;
+    }
+    tbody tr:hover td.category {
+      background: #dce4f5;
+    }
+    /* 方法/属性名样式 */
+    td.method {
+      font-family: "Cascadia Code", "Fira Code", "JetBrains Mono", "Consolas", monospace;
+      font-weight: 600;
+      color: #b91c1c;
+      background: #fef9f9;
+      white-space: nowrap;
+    }
+    tbody tr:hover td.method {
+      background: #fff0f0;
+    }
+    td.code-example {
+      font-family: "Cascadia Code", "Fira Code", "Consolas", monospace;
+      color: #0f5132;
+      background: #f0faf4;
+      white-space: pre-wrap;
+      word-break: break-all;
+      font-size: 0.89rem;
+    }
+    tbody tr:hover td.code-example {
+      background: #e6f7ec;
+    }
+    /* 针对较小屏幕稍微优化 */
+    @media (max-width: 900px) {
+      body {
+        padding: 1rem;
+      }
+      table {
+        white-space: normal;
+      }
+      td.code-example {
+        white-space: normal;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h2>📋 JavaScript 常用 DOM 操作分类速查</h2>
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>操作类别</th>
+          <th>方法 / 属性</th>
+          <th>说明</th>
+          <th>示例</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- ========== 选取元素 (6) ========== -->
+        <tr>
+          <td class="category" rowspan="6">选取元素</td>
+          <td class="method">document.getElementById(id)</td>
+          <td>通过 id 获取单个元素</td>
+          <td class="code-example">const el = document.getElementById('box');</td>
+        </tr>
+        <tr>
+          <td class="method">document.querySelector(selector)</td>
+          <td>CSS 选择器，返回第一个匹配元素</td>
+          <td class="code-example">const el = document.querySelector('.active');</td>
+        </tr>
+        <tr>
+          <td class="method">document.querySelectorAll(selector)</td>
+          <td>CSS 选择器，返回所有匹配的 NodeList</td>
+          <td class="code-example">const list = document.querySelectorAll('li');</td>
+        </tr>
+        <tr>
+          <td class="method">document.getElementsByClassName(class)</td>
+          <td>通过类名获取 HTMLCollection</td>
+          <td class="code-example">const items = document.getElementsByClassName('item');</td>
+        </tr>
+        <tr>
+          <td class="method">document.getElementsByTagName(tag)</td>
+          <td>通过标签名获取 HTMLCollection</td>
+          <td class="code-example">const divs = document.getElementsByTagName('div');</td>
+        </tr>
+        <tr>
+          <td class="method">element.closest(selector)</td>
+          <td>查找匹配的最近祖先元素（选取相关）</td>
+          <td class="code-example">const card = el.closest('.card');</td>
+        </tr>
+
+        <!-- ========== 创建元素 (3) ========== -->
+        <tr>
+          <td class="category" rowspan="3">创建元素</td>
+          <td class="method">document.createElement(tag)</td>
+          <td>创建新元素节点</td>
+          <td class="code-example">const div = document.createElement('div');</td>
+        </tr>
+        <tr>
+          <td class="method">document.createTextNode(text)</td>
+          <td>创建文本节点</td>
+          <td class="code-example">const text = document.createTextNode('Hello');</td>
+        </tr>
+        <tr>
+          <td class="method">element.cloneNode(deep)</td>
+          <td>克隆节点，deep 为 true 时包含子节点</td>
+          <td class="code-example">const clone = el.cloneNode(true);</td>
+        </tr>
+
+        <!-- ========== 添加/插入 (8) ========== -->
+        <tr>
+          <td class="category" rowspan="8">添加/插入</td>
+          <td class="method">parent.appendChild(child)</td>
+          <td>在父元素末尾添加子节点</td>
+          <td class="code-example">parent.appendChild(newEl);</td>
+        </tr>
+        <tr>
+          <td class="method">parent.insertBefore(newNode, refNode)</td>
+          <td>在参考节点前插入新节点</td>
+          <td class="code-example">parent.insertBefore(newEl, existingEl);</td>
+        </tr>
+        <tr>
+          <td class="method">parent.append(...nodes)</td>
+          <td>在父元素末尾添加多个节点或文本</td>
+          <td class="code-example">parent.append('文本', newEl);</td>
+        </tr>
+        <tr>
+          <td class="method">parent.prepend(...nodes)</td>
+          <td>在父元素开头添加多个节点或文本</td>
+          <td class="code-example">parent.prepend(newEl);</td>
+        </tr>
+        <tr>
+          <td class="method">element.before(...nodes)</td>
+          <td>在当前元素之前插入兄弟节点</td>
+          <td class="code-example">el.before(newEl, '文本');</td>
+        </tr>
+        <tr>
+          <td class="method">element.after(...nodes)</td>
+          <td>在当前元素之后插入兄弟节点</td>
+          <td class="code-example">el.after(newEl);</td>
+        </tr>
+        <tr>
+          <td class="method">element.insertAdjacentHTML(pos, html)</td>
+          <td>在指定位置插入 HTML 字符串</td>
+          <td class="code-example">el.insertAdjacentHTML('beforeend', '&lt;p&gt;Hi&lt;/p&gt;');</td>
+        </tr>
+        <tr>
+          <td class="method">element.insertAdjacentElement(pos, newEl)</td>
+          <td>在指定位置插入元素节点</td>
+          <td class="code-example">el.insertAdjacentElement('afterbegin', newEl);</td>
+        </tr>
+
+        <!-- ========== 删除元素 (4) ========== -->
+        <tr>
+          <td class="category" rowspan="4">删除元素</td>
+          <td class="method">parent.removeChild(child)</td>
+          <td>从父元素中移除子节点</td>
+          <td class="code-example">parent.removeChild(el);</td>
+        </tr>
+        <tr>
+          <td class="method">element.remove()</td>
+          <td>直接从 DOM 中移除自身</td>
+          <td class="code-example">el.remove();</td>
+        </tr>
+        <tr>
+          <td class="method">element.innerHTML = ''</td>
+          <td>清空元素所有子内容（HTML）</td>
+          <td class="code-example">el.innerHTML = '';</td>
+        </tr>
+        <tr>
+          <td class="method">element.textContent = ''</td>
+          <td>清空文本内容</td>
+          <td class="code-example">el.textContent = '';</td>
+        </tr>
+
+        <!-- ========== 替换元素 (2) ========== -->
+        <tr>
+          <td class="category" rowspan="2">替换元素</td>
+          <td class="method">parent.replaceChild(newChild, oldChild)</td>
+          <td>用新节点替换旧的子节点</td>
+          <td class="code-example">parent.replaceChild(newEl, oldEl);</td>
+        </tr>
+        <tr>
+          <td class="method">element.replaceWith(...nodes)</td>
+          <td>将自身替换为新节点或文本</td>
+          <td class="code-example">el.replaceWith(newEl, '文本');</td>
+        </tr>
+
+        <!-- ========== 修改内容 (3) ========== -->
+        <tr>
+          <td class="category" rowspan="3">修改内容</td>
+          <td class="method">element.textContent</td>
+          <td>获取/设置纯文本内容</td>
+          <td class="code-example">el.textContent = 'Hello';</td>
+        </tr>
+        <tr>
+          <td class="method">element.innerText</td>
+          <td>获取/设置可见文本（受 CSS 影响）</td>
+          <td class="code-example">el.innerText = 'Hello';</td>
+        </tr>
+        <tr>
+          <td class="method">element.innerHTML</td>
+          <td>获取/设置 HTML 内容</td>
+          <td class="code-example">el.innerHTML = '&lt;span&gt;Hi&lt;/span&gt;';</td>
+        </tr>
+
+        <!-- ========== 属性操作 (10) ========== -->
+        <tr>
+          <td class="category" rowspan="10">属性操作</td>
+          <td class="method">element.setAttribute(name, value)</td>
+          <td>设置属性</td>
+          <td class="code-example">el.setAttribute('data-id', '1');</td>
+        </tr>
+        <tr>
+          <td class="method">element.getAttribute(name)</td>
+          <td>获取属性值</td>
+          <td class="code-example">el.getAttribute('href');</td>
+        </tr>
+        <tr>
+          <td class="method">element.removeAttribute(name)</td>
+          <td>移除属性</td>
+          <td class="code-example">el.removeAttribute('disabled');</td>
+        </tr>
+        <tr>
+          <td class="method">element.hasAttribute(name)</td>
+          <td>检查属性是否存在</td>
+          <td class="code-example">el.hasAttribute('checked');</td>
+        </tr>
+        <tr>
+          <td class="method">element.id / className / href …</td>
+          <td>直接访问标准属性</td>
+          <td class="code-example">el.id = 'main';</td>
+        </tr>
+        <tr>
+          <td class="method">element.classList.add(className)</td>
+          <td>添加类</td>
+          <td class="code-example">el.classList.add('active');</td>
+        </tr>
+        <tr>
+          <td class="method">element.classList.remove(className)</td>
+          <td>移除类</td>
+          <td class="code-example">el.classList.remove('hidden');</td>
+        </tr>
+        <tr>
+          <td class="method">element.classList.toggle(className)</td>
+          <td>切换类</td>
+          <td class="code-example">el.classList.toggle('open');</td>
+        </tr>
+        <tr>
+          <td class="method">element.classList.contains(className)</td>
+          <td>检查是否包含类</td>
+          <td class="code-example">if (el.classList.contains('on'))</td>
+        </tr>
+        <tr>
+          <td class="method">element.dataset.key</td>
+          <td>访问 data-* 属性</td>
+          <td class="code-example">el.dataset.userId = '123';</td>
+        </tr>
+
+        <!-- ========== 样式操作 (4) ========== -->
+        <tr>
+          <td class="category" rowspan="4">样式操作</td>
+          <td class="method">element.style.propertyName = value</td>
+          <td>设置行内样式</td>
+          <td class="code-example">el.style.backgroundColor = 'red';</td>
+        </tr>
+        <tr>
+          <td class="method">element.style.setProperty(prop, value)</td>
+          <td>设置 CSS 属性（支持自定义属性）</td>
+          <td class="code-example">el.style.setProperty('--color', 'blue');</td>
+        </tr>
+        <tr>
+          <td class="method">getComputedStyle(element)</td>
+          <td>获取最终计算样式</td>
+          <td class="code-example">const styles = getComputedStyle(el);</td>
+        </tr>
+        <tr>
+          <td class="method">element.style.cssText</td>
+          <td>批量设置行内样式</td>
+          <td class="code-example">el.style.cssText = 'color: red; font-size: 16px;';</td>
+        </tr>
+
+        <!-- ========== 事件处理 (4) ========== -->
+        <tr>
+          <td class="category" rowspan="4">事件处理</td>
+          <td class="method">element.addEventListener(type, listener)</td>
+          <td>绑定事件</td>
+          <td class="code-example">el.addEventListener('click', handleClick);</td>
+        </tr>
+        <tr>
+          <td class="method">element.removeEventListener(type, listener)</td>
+          <td>移除事件监听</td>
+          <td class="code-example">el.removeEventListener('click', handleClick);</td>
+        </tr>
+        <tr>
+          <td class="method">事件对象 (e) 常用属性/方法</td>
+          <td>e.target, e.preventDefault(), e.stopPropagation()</td>
+          <td class="code-example">e.preventDefault();</td>
+        </tr>
+        <tr>
+          <td class="method">{ once: true } 一次性事件</td>
+          <td>配置项，监听一次后自动移除</td>
+          <td class="code-example">el.addEventListener('click', fn, { once: true });</td>
+        </tr>
+
+        <!-- ========== 遍历节点 (5) ========== -->
+        <tr>
+          <td class="category" rowspan="5">遍历节点</td>
+          <td class="method">element.parentNode / parentElement</td>
+          <td>获取父节点</td>
+          <td class="code-example">const parent = el.parentElement;</td>
+        </tr>
+        <tr>
+          <td class="method">element.children</td>
+          <td>获取子元素集合（HTMLCollection）</td>
+          <td class="code-example">const children = el.children;</td>
+        </tr>
+        <tr>
+          <td class="method">element.firstElementChild / lastElementChild</td>
+          <td>第一个/最后一个子元素</td>
+          <td class="code-example">const first = el.firstElementChild;</td>
+        </tr>
+        <tr>
+          <td class="method">element.nextElementSibling / previousElementSibling</td>
+          <td>下一个/上一个兄弟元素</td>
+          <td class="code-example">const next = el.nextElementSibling;</td>
+        </tr>
+        <tr>
+          <td class="method">element.childElementCount</td>
+          <td>子元素的数量</td>
+          <td class="code-example">const count = el.childElementCount;</td>
+        </tr>
+
+        <!-- ========== 其他常用 (4) ========== -->
+        <tr>
+          <td class="category" rowspan="4">其他常用</td>
+          <td class="method">element.matches(selector)</td>
+          <td>判断元素是否匹配选择器</td>
+          <td class="code-example">el.matches('.active');</td>
+        </tr>
+        <tr>
+          <td class="method">element.contains(otherElement)</td>
+          <td>是否包含指定节点</td>
+          <td class="code-example">el.contains(childEl);</td>
+        </tr>
+        <tr>
+          <td class="method">element.getBoundingClientRect()</td>
+          <td>获取尺寸和相对视口位置</td>
+          <td class="code-example">const rect = el.getBoundingClientRect();</td>
+        </tr>
+        <tr>
+          <td class="method">element.scrollIntoView()</td>
+          <td>滚动元素到可见区域</td>
+          <td class="code-example">el.scrollIntoView({ behavior: 'smooth' });</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
