@@ -1,126 +1,206 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
     <title>Time Table</title>
     <style>
-        table {
-            width: 100%;
-            text-align: center;
+      table {
+        width: 100%;
+        text-align: center;
+      }
 
-        }
-
-        th,
-        td {
-            border: 2px black solid;
-            margin: 0px;
-        }
+      th,
+      td {
+        border: 2px black solid;
+        margin: 0px;
+      }
+      .H {
+        background-color: #ff9;
+      }
     </style>
-</head>
+  </head>
 
-<body>
-    <table>
-        <thead>
-            <tr>
-                <th></th>
-                <th>Monday</th>
-                <th>Tuesday</th>
-                <th>Wednesday</th>
-                <th>Thursday</th>
-                <th>Friday</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>08:10-08:25</td>
-                <td colspan="3">morning reading</td>
-                <td>exercise</td>
-                <td>morning reading</td>
-            </tr>
-            <tr>
-                <td>08:25-09:00</td>
-                <td rowspan="2">VA</td>
-                <td rowspan="2">Chinese</td>
-                <td>Music</td>
-                <td rowspan="2">Geography</td>
-                <td rowspan="2">Chinese History</td>
-            </tr>
-            <tr>
-                <td>09:00-09:40</td>
-                <td>Math</td>
-            </tr>
-            <tr>
-                <td>09:40-09:55</td>
-                <td colspan="5">RECESS</td>
-            </tr>
-            <tr>
-                <td>09:55-10:30</td>
-                <td rowspan="2">C&T</td>
-                <td>Math</td>
-                <td rowspan="2">CES</td>
-                <td>Chinese</td>
-                <td rowspan="2">English</td>
-            </tr>
-            <tr>
-                <td>10:30-11:10</td>
-                <td>PTH</td>
-                <td>English</td>
-            </tr>
-            <tr>
-                <td>11:10-11:30</td>
-                <td colspan="5">RECESS</td>
-            </tr>
-            <tr>
-                <td>11:30-12:05</td>
-                <td>Music</td>
-                <td rowspan="2">IS</td>
-                <td rowspan="2">English</td>
-                <td rowspan="2">IS</td>
-                <td rowspan="2">Chinese</td>
-            </tr>
-            <tr>
-                <td>12:05-12:45</td>
-                <td>Math</td>
-            </tr>
-            <tr>
-                <td>12:45-13:10</td>
-                <td colspan="5">LUNCH</td>
-            </tr>
-            <tr>
-                <td>13:10-14:00</td>
-                <td colspan="5">RECESS</td>
-            </tr>
-            <tr>
-                <td>14:00-14:35</td>
-                <td>English</td>
-                <td rowspan="2">English</td>
-                <td rowspan="2">PE</td>
-                <td rowspan="2">Math</td>
-                <td>C&T</td>
-            </tr>
-            <tr>
-                <td>14:35-15:10</td>
-                <td rowspan="2">Chinese</td>
-                <td>Math</td>
-            </tr>
-            <tr>
-                <td>15:10-15:45</td>
-                <td rowspan="2">Life ED</td>
-                <td>AA</td>
-                <td>CTP</td>
-                <td>AA</td>
-            </tr>
-            <tr>
-                <td>15:45-16:15</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-        </tbody>
+  <body>
+    <table id="table">
+      <thead>
+        <tr>
+          <th id="test"></th>
+          <th>Monday</th>
+          <th>Tuesday</th>
+          <th>Wednesday</th>
+          <th>Thursday</th>
+          <th>Friday</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td id="t1">08:10-08:25</td>
+          <td colspan="3">morning reading</td>
+          <td>exercise</td>
+          <td>morning reading</td>
+        </tr>
+        <tr>
+          <td id="t2">08:25-09:00</td>
+          <td>VA</td>
+          <td>Chinese</td>
+          <td>Music</td>
+          <td>Geography</td>
+          <td>Chinese History</td>
+        </tr>
+        <tr>
+          <td id="t3">09:00-09:40</td>
+          <td>VA</td>
+          <td>Chinese</td>
+          <td>Math</td>
+          <td>Geography</td>
+          <td>Chinese History</td>
+        </tr>
+        <tr>
+          <td id="t4">09:40-09:55</td>
+          <td colspan="5">RECESS</td>
+        </tr>
+        <tr>
+          <td id="t5">09:55-10:30</td>
+          <td>C&T</td>
+          <td>Math</td>
+          <td>CES</td>
+          <td>Chinese</td>
+          <td>English</td>
+        </tr>
+        <tr>
+          <td id="t6">10:30-11:10</td>
+          <td>C&T</td>
+          <td>PTH</td>
+          <td>CES</td>
+          <td>English</td>
+          <td>Endlish</td>
+        </tr>
+        <tr>
+          <td id="t7">11:10-11:30</td>
+          <td colspan="5">RECESS</td>
+        </tr>
+        <tr>
+          <td id="t8">11:30-12:05</td>
+          <td>Music</td>
+          <td>IS</td>
+          <td>English</td>
+          <td>IS</td>
+          <td>Chinese</td>
+        </tr>
+        <tr>
+          <td id="t9">12:05-12:45</td>
+          <td>Math</td>
+          <td>IS</td>
+          <td>English</td>
+          <td>IS</td>
+          <td>Chinese</td>
+        </tr>
+        <tr>
+          <td id="t10">12:45-13:10</td>
+          <td colspan="5">LUNCH</td>
+        </tr>
+        <tr>
+          <td id="t11">13:10-14:00</td>
+          <td colspan="5">RECESS</td>
+        </tr>
+        <tr>
+          <td id="t12">14:00-14:35</td>
+          <td>English</td>
+          <td>English</td>
+          <td>PE</td>
+          <td>Math</td>
+          <td>C&T</td>
+        </tr>
+        <tr>
+          <td id="t13">14:35-15:10</td>
+          <td>Chinese</td>
+          <td>English</td>
+          <td>PE</td>
+          <td>Math</td>
+          <td>Math</td>
+        </tr>
+        <tr>
+          <td id="t14">15:10-15:45</td>
+          <td>Chinese</td>
+          <td>Life ED</td>
+          <td>AA</td>
+          <td>CTP</td>
+          <td>AA</td>
+        </tr>
+        <tr>
+          <td id="t15">15:45-16:15</td>
+          <td></td>
+          <td>Life ED</td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td id="t16">16:15-23:39</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
     </table>
-</body>
-
+    <script>
+      var now = new Date();
+      d = now.getHours() * 60 + now.getMinutes();
+      // d = 795;
+      /**
+       * @param {string} time
+       */
+      function ti(time, w) {
+        var where_d = time.indexOf("-");
+        var f = time.slice(0, where_d);
+        var l = time.slice(where_d + 1);
+        f = parseInt(f.slice(0, 2)) * 60 + parseInt(f.slice(3));
+        l = parseInt(l.slice(0, 2)) * 60 + parseInt(l.slice(3));
+        if (w == 1) {
+          return f;
+        } else if (w == 2) {
+          return l;
+        } else {
+          return "NaN";
+        }
+      }
+      /**
+       * @param {string} time
+       */
+      /**
+       * @param {number} row
+       */
+      function ch(time, row, inr) {
+        if (ti(time, 1) <= d && d < ti(time, 2)) {
+          inr.rows[row].classList.add("H");
+        }
+      }
+      function set() {
+        r = document.getElementById("table");
+        ch("08:10-08:25", 1, r);
+        ch("08:25-09:00", 2, r);
+        ch("09:00-09:40", 3, r);
+        ch("09:40-09:55", 4, r);
+        ch("09:55-10:30", 5, r);
+        ch("10:30-11:10", 6, r);
+        ch("11:10-11:30", 7, r);
+        ch("11:30-12:05", 8, r);
+        ch("12:05-12:45", 9, r);
+        ch("12:45-13:10", 10, r);
+        ch("13:10-14:00", 11, r);
+        ch("14:00-14:35", 12, r);
+        ch("14:35-15:10", 13, r);
+        ch("15:10-15:45", 14, r);
+        ch("15:45-16:15", 16, r);
+        ch("16:15-23:39", 16, r);
+      }
+      set();
+    </script>
+  </body>
 </html>
