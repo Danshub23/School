@@ -1,79 +1,101 @@
-<!DOCTYPE html>
 <html lang="zh">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
     <title>jsg1</title>
     <style>
-        canvas {
-            border: 1px solid black;
-        }
+      canvas {
+        border: 1px solid black;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <canvas id="game" width="1000" height="500"></canvas>
     <script>
-        // 玩家对象：位置、大小、移动速度、方向（角度制）
-        let player = {
-            x: 400,
-            y: 300,
-            width: 50,
-            height: 50,
-            speed: 5,
-            angleDeg: 15      // 方向角度（0°=向右，90°=向下）
-        };
+      // 玩家对象：位置、大小、移动速度、方向（角度制）
+      let player = {
+        x: 400,
+        y: 300,
+        width: 50,
+        height: 50,
+        speed: 5,
+        angleDeg: 315, // 方向角度（0°=向右，90°=向下）
+      };
 
-        // 获取 canvas 和绘图上下文（只获取一次，提高性能）
-        const canvas = document.getElementById("game");
-        const ctx = canvas.getContext("2d");
-
-        // 角度转弧度工具函数
-        function degToRad(degrees) {
-            return degrees * Math.PI / 180;
-        }
-
-        // 更新位置（基于角度和速度）
-        function update() {
-            // 将角度转换为弧度
-            const rad = degToRad(player.angleDeg);
-            // 计算移动距离
-            const dx = Math.cos(rad) * player.speed;
-            const dy = Math.sin(rad) * player.speed;
-            player.x += dx;
-            player.y += dy;
-
-            // 边界环绕（从对面出现）
-            if (player.x + player.width < 0) {               // 完全超出左边界
-                player.x = canvas.width;
-            } else if (player.x > canvas.width) {            // 超出右边界
-                player.x = -player.width;
+      // 获取 canvas 和绘图上下文（只获取一次，提高性能）
+      const canvas = document.getElementById("game");
+      const ctx = canvas.getContext("2d");
+      let keys = {
+        ArrowUp: false,
+        ArrowDown: false,
+        ArrowLeft: false,
+        ArrowRight: false,
+      };
+      // 角度转弧度工具函数
+      function degToRad(degrees) {
+        return (degrees * Math.PI) / 180;
+      }
+      function update() {
+        window.addEventListener("keydown", function (e) {
+          if (keys[e.key] !== undefined) {
+            console.log(e.key);
+            keys[e.key] = true
+          }
+          window.addEventListener("keyup", function (e) {
+            if (keys[e.key] !== undefined) {
+              console.log(e.key);
+              keys[e.key] = true
             }
+          });
+        });
+        const rad = degToRad(player.angleDeg);
+        player.x += Math.cos(rad) * player.speed;
+        player.y += Math.sin(rad) * player.speed;
 
-            if (player.y + player.height < 0) {              // 超出上边界
-                player.y = canvas.height;
-            } else if (player.y > canvas.height) {           // 超出下边界
-                player.y = -player.height;
-            }
+        // 边界环绕（从对面出现）
+        if (player.x + player.width < 0) {
+          player.x = canvas.width;
+        } else if (player.x > canvas.width) {
+          player.x = -player.width;
         }
 
-        // 绘制画面
-        function draw() {
-            // 清空整个画布
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            // 绘制红色方块（注意参数顺序：x, y, width, height）
-            ctx.fillStyle = "red";
-            ctx.fillRect(player.x, player.y, player.width, player.height);
+        if (player.y + player.height < 0) {
+          player.y = canvas.height;
+        } else if (player.y > canvas.height) {
+          player.y = -player.height;
         }
+      }
 
-        // 游戏循环
-        function gameLoop() {
-            update();
-            draw();
-            requestAnimationFrame(gameLoop);
+      // 绘制画面
+      function draw() {
+        // 清空整个画布
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "red";
+        ctx.fillRect(player.x, player.y, player.width, player.height);
+      }
+      let lastUpdateTime = 0;
+      const FIXED_UPDATE_INTERVAL = 1000 / 60; // 16.67ms
+      // 游戏循环
+      function gameLoop(now) {
+        requestAnimationFrame(gameLoop);
+        if (!lastUpdateTime) {
+          lastUpdateTime = now;
+
+          return;
         }
+        if (now - lastUpdateTime >= FIXED_UPDATE_INTERVAL) {
+          update();
+          draw();
+          lastUpdateTime =
+            now - ((now - lastUpdateTime) % FIXED_UPDATE_INTERVAL);
+        }
+      }
 
-        // 启动循环
-        gameLoop();
+      // 启动循环
+      requestAnimationFrame(gameLoop);
     </script>
-</body>
+  </body>
 </html>
