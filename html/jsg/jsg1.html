@@ -9,47 +9,30 @@
         canvas { box-shadow: 0 0 10px rgba(0,0,0,0.5); }
     </style>
     <!-- 引入 Phaser 3 核心库 -->
-    <script src="https://cdn.jsdelivr.net/npm/phaser@3.87.0/dist/phaser.js"></script>
+    <script src="phaser3/phaser.js"></script>
 </head>
 <body>
 <script>
     
     const config = {
         type: Phaser.AUTO, 
-        
         width: 800,
-        // 游戏画布高度 (像素)
         height: 600,
-        // 物理引擎配置，这里启用 Arcade 物理系统
-        physics: {
-            default: 'arcade',
-            arcade: {
-                gravity: { y: 300 }, // 设置全局重力
-                debug: false          // 是否开启物理调试模式
-            }
         },
-        // 游戏场景，这里是场景的定义，也可以是一个场景类的数组
         scene: {
-            // 预加载资源，在游戏开始前执行一次
             preload: function () {
                 // 加载一个示例图片资源
                 this.load.image('sky', 'https://labs.phaser.io/assets/skies/space3.png');
                 this.load.image('logo', 'https://labs.phaser.io/assets/sprites/phaser3-logo.png');
             },
-            // 创建游戏元素，在 preload 完成后执行一次
             create: function () {
-                // 添加背景图，并居中显示
                 this.add.image(400, 300, 'sky');
-                // 添加 Logo 并使其支持物理效果
                 const logo = this.physics.add.image(400, 100, 'logo');
-                // 设置 Logo 的弹性和碰撞范围
                 logo.setBounce(0.8);
                 logo.setCollideWorldBounds(true);
             },
-            // 每帧更新，游戏的核心逻辑循环
             update: function () {
-                // 这里可以添加每帧需要执行的游戏逻辑，例如：
-                // 更新分数、检测碰撞、控制角色移动等。
+        
             }
         }
     };
