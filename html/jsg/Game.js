@@ -11,6 +11,9 @@ const config = {
                 fill: '#fff'
             }).setOrigin(0.5); // 设置文字中心点
         }
+        function preload ()
+{
+    this.load.image('cyp', 'img/cyp.png');
     }
 };
 
