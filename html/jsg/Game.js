@@ -6,7 +6,7 @@ const config = {
     scene: {
         preload: function() {
             // 修正图片扩展名（原为 .jepg，现改为常见 .jpeg 或 .jpg）
-            this.load.image('cyp', 'img/IMG_0856.jpeg');
+            this.load.image('cyp', 'img/IMG_0856.jpeg')setScale(0.2).refreshBody();
         },
         create: function() {
             // 在画面中央 (400, 300) 添加文字
