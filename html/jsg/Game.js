@@ -10,15 +10,8 @@ const config = {
             
         },
         create: function() {
-            // 在画面中央 (400, 300) 添加文字
-            this.add.text(400, 300, 'Hello Phaser!', {
-                fontSize: '48px',
-                fill: '#fff'
-            }).setOrigin(0.5);
-
-            // 在画面中央添加图片 cyp
-            const image = this.add.image(400, 300, 'cyp');
-            image.setScale(0.1);
+            this.add.image(400, 300, 'cyp');
+            
         }
     }
 };
