@@ -3,6 +3,12 @@ const config = {
     width: 1600,
     height: 1200,
     scene: {
+        preload: preload,
+        create: create,
+
+    }
+};
+const game = new Phaser.Game(config);
         preload: function() {
             this.load.image('cyp', 'img/IMG_0876.jpeg');
             
@@ -11,6 +17,3 @@ const config = {
             this.add.image(800, 600, 'cyp');
             
         }
-    }
-};
-const game = new Phaser.Game(config);
