@@ -3,17 +3,14 @@ const config = {
     width: 1600,
     height: 1200,
     scene: {
-        preload: preload,
-        create: create
+        preload: function() {
+            this.load.image('cyp', 'img/IMG_0876.jpeg');
+        },
+        create: function() {
+            let image = this.add.image(800, 600, 'cyp');
+            image.setScale(0.25);   // 缩小为原来的1/4
+        }
     }
 };
-
-function preload() {
-    this.load.image('cyp', 'img/IMG_0876.jpeg');
-}
-
-function create() {
-    this.add.image(800, 600, 'cyp');
-}
 
 const game = new Phaser.Game(config);
