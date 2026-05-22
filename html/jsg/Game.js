@@ -1,7 +1,7 @@
 const config = {
     type: Phaser.AUTO,      
-    width: 800,
-    height: 600,
+    width: 1600,
+    height: 1200,
     scene: {
         preload: function() {
             // 修正图片扩展名（原为 .jepg，现改为常见 .jpeg 或 .jpg）
@@ -9,7 +9,7 @@ const config = {
             
         },
         create: function() {
-            this.add.image(1000, 800, 'cyp').setScale(0.10).refreshBody();
+            this.add.image(800, 600, 'cyp');
             
         }
     }
