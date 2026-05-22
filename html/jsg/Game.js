@@ -9,7 +9,7 @@ const config = {
             
         },
         create: function() {
-            this.add.image(800, 600, 'cyp').setScale(0.5).refreshBody();;
+            this.add.image(800, 600, 'cyp').setScale(0.25).refreshBody();;
             
         }
     }
