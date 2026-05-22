@@ -4,7 +4,7 @@ const config = {
     height: 600,
     scene: {
         preload: function() {
-            this.load.image('cyp', 'img/IMG_0876.jpeg');
+            this.load.image('cyp', 'img/IMG_0856.jpeg');
         },
         create: function() {
             let image = this.add.image(400, 300, 'cyp');
