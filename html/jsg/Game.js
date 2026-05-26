@@ -13,7 +13,7 @@ var game = new Phaser.Game(config);
 
 function preload ()
 {
-    this.load.image('logo', 'assets/logo.png');
+    this.load.image('img', 'img/IMG_0856.jpeg');
 }
 
 function create ()
