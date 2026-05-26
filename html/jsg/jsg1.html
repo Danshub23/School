@@ -4,66 +4,60 @@
     <style>
         canvas { border: 1px solid black; }
     </style>
+    <title>成语</title>
 </head>
 <body>
-    <canvas id="gameCanvas" width="800" height="600"></canvas>
+    <script src="https://unpkg.com/phaser@3.9.0/dist/phaser.min.js"></script>
     <script>
-        let canvas = document.getElementById('gameCanvas');
-        let ctx = canvas.getContext('2d');
-
-        let player = {
-            x: 400,
-            y: 300,
-            width: 50,
-            height: 50,
-            speedPerFrame: 5   
+        var config = {
+            type: Phaser.AUTO,
+            width: 800,
+            height: 600,
+            scene: {
+                preload: preload,
+                create: create,
+                update: update
+            }
         };
 
-        let keys = {
-            ArrowUp: false, ArrowDown: false,
-            ArrowLeft: false, ArrowRight: false
-        };
-        window.addEventListener('keydown', (e) => { if (keys[e.key] !== undefined) keys[e.key] = true; });
-        window.addEventListener('keyup', (e) => { if (keys[e.key] !== undefined) keys[e.key] = false; });
+        var game = new Phaser.Game(config);
 
-        let lastUpdateTime = 0;
-        const FIXED_UPDATE_INTERVAL = 1000 / 60;   // 16.67ms → 每秒固定60次更新
+        function preload() {
+            // 无需加载资源
+        }
 
-        function update() {
-            
-            if (keys.ArrowUp)    player.y -= player.speedPerFrame;
-            if (keys.ArrowDown)  player.y += player.speedPerFrame;
-            if (keys.ArrowLeft)  player.x -= player.speedPerFrame;
-            if (keys.ArrowRight) player.x += player.speedPerFrame;
+        function create() {
+            // 红色方块，大小 50x50，初始位置 (400,300)
+            this.player = this.add.rectangle(400, 300, 50, 50, 0xff0000);
+            this.player.setOrigin(0, 0);
 
-            // 边界限制
+            // 速度：300 像素/秒（相当于原 60帧×5像素 的手感）
+            this.playerSpeed = 300;
+
+            // 绑定方向键
+            this.keys = this.input.keyboard.addKeys({
+                up: Phaser.Input.Keyboard.KeyCodes.UP,
+                down: Phaser.Input.Keyboard.KeyCodes.DOWN,
+                left: Phaser.Input.Keyboard.KeyCodes.LEFT,
+                right: Phaser.Input.Keyboard.KeyCodes.RIGHT
+            });
+
+            // 设置白色背景（与原来 Canvas 默认一致）
+            this.cameras.main.setBackgroundColor('#ffffff');
+        }
+
+        function update(time, delta) {
+            var player = this.player;
+            // 根据本帧时间差计算移动距离
+            var moveAmount = this.playerSpeed * (delta / 1000);
+
+            // 边界限制 (800x600 的游戏区域)
+            var gameW = 800, gameH = 600, pw = 50, ph = 50;
             if (player.x < 0) player.x = 0;
-            if (player.x + player.width > 800) player.x = 800 - player.width;
+            if (player.x + pw > gameW) player.x = gameW - pw;
             if (player.y < 0) player.y = 0;
-            if (player.y + player.height > 600) player.y = 600 - player.height;
+            if (player.y + ph > gameH) player.y = gameH - ph;
         }
-
-        function draw() {
-            ctx.clearRect(0, 0, 800, 600);
-            ctx.fillStyle = 'red';
-            ctx.fillRect(player.x, player.y, player.width, player.height);
-        }
-
-       
-        function gameLoop(now) {
-            requestAnimationFrame(gameLoop);
-            if (!lastUpdateTime) {
-                lastUpdateTime = now;
-                return;
-            }
-            if (now - lastUpdateTime >= FIXED_UPDATE_INTERVAL) {
-                update();   // 每秒固定执行约60次，每次移动5像素
-                draw();
-                lastUpdateTime = now - ((now - lastUpdateTime) % FIXED_UPDATE_INTERVAL);
-            }
-        }
-
-        requestAnimationFrame(gameLoop);
     </script>
 </body>
 </html>
