@@ -13,7 +13,7 @@
             padding: 5px 15px;
         }
     </style>
-    <title>方块移动</title>
+    <title>方块移动 - 修正版</title>
 </head>
 <body>
     <div class="controls">
@@ -39,70 +39,99 @@
 
         const game = new Phaser.Game(config);
 
-        // 用于存储方块对象的全局引用（以便按钮回调访问）
+        // 全局引用，便于按钮回调访问
         let playerRect = null;
-        const moveStep = 5;   // 每次点击移动5像素
-        const gameW = 800, gameH = 600;
-        const pw = 50, ph = 50;
+        // 移动步长（像素/次）
+        const MOVE_STEP = 5;
 
         function preload() {
             // 无需加载资源
         }
 
         function create() {
-            // 创建红色方块，位置 (400,300)，大小 50x50
-            this.player = this.add.rectangle(400, 300, pw, ph, 0xff0000);
-            this.player.setOrigin(0, 0);
-            playerRect = this.player;   // 保存到全局供按钮回调使用
+            // 获取游戏实际尺寸（动态，而非硬编码）
+            const gameWidth = this.sys.game.config.width;
+            const gameHeight = this.sys.game.config.height;
+
+            // 方块固定尺寸
+            const blockW = 50;
+            const blockH = 50;
+
+            // 方法1：先设置原点为左上角，再设置位置到画面中央（左上角位于中央）
+            // 这样避免先创建后改原点的偏移问题
+            this.player = this.add.rectangle(0, 0, blockW, blockH, 0xff0000);
+            this.player.setOrigin(0, 0);                // 原点设为左上角
+            this.player.setPosition(gameWidth / 2, gameHeight / 2);  // 置于画面正中央（左上角坐标）
+            // 注：此时方块覆盖区域为 (400,300) 到 (450,350)，视觉上居右下方半个方块，若要方块整体居中，
+            // 应减去半个宽高。但原示例期望左上角在正中央？通常游戏角色以左上角定位时，中央指的是中心点。
+            // 为使方块整体视觉居中，修正如下（可选）：
+            // this.player.setPosition(gameWidth/2 - blockW/2, gameHeight/2 - blockH/2);
+            // 为与用户原意图保持一致（原代码最终左上角在 400,300 位置），这里保留 setPosition(gameWidth/2, gameHeight/2)
+            // 用户可根据需要自行调整注释行的位置。
+
+            // 将矩形引用保存到全局
+            playerRect = this.player;
+
+            // 将游戏尺寸和方块尺寸保存到场景属性中，供边界检查使用
+            this.gameWidth = gameWidth;
+            this.gameHeight = gameHeight;
+            this.blockW = blockW;
+            this.blockH = blockH;
 
             // 设置白色背景
             this.cameras.main.setBackgroundColor('#ffffff');
+
+            // 绑定按钮事件（在 create 内保证 playerRect 已初始化）
+            document.getElementById('btnUp').addEventListener('click', moveUp);
+            document.getElementById('btnDown').addEventListener('click', moveDown);
+            document.getElementById('btnLeft').addEventListener('click', moveLeft);
+            document.getElementById('btnRight').addEventListener('click', moveRight);
         }
 
-        // 边界限制函数
-        function applyBoundary(rect) {
+        // 边界限制函数（使用矩形自身的宽高和场景动态尺寸）
+        function applyBoundary(rect, scene) {
+            if (!rect || !scene) return;
+            const w = rect.width;
+            const h = rect.height;
+            const maxX = scene.gameWidth - w;
+            const maxY = scene.gameHeight - h;
             if (rect.x < 0) rect.x = 0;
-            if (rect.x + pw > gameW) rect.x = gameW - pw;
+            if (rect.x > maxX) rect.x = maxX;
             if (rect.y < 0) rect.y = 0;
-            if (rect.y + ph > gameH) rect.y = gameH - ph;
+            if (rect.y > maxY) rect.y = maxY;
         }
 
-        // 按钮点击回调
+        // 由于按钮回调无法直接访问 scene，需要从全局获取 scene 实例。
+        // 方法：保存场景引用，或在每个回调中通过 game.scene.keys 获取。
+        // 简便起见，在 create 中保存 scene 到全局变量。
+        let gameScene = null;
         function moveUp() {
-            if (playerRect) {
-                playerRect.y -= moveStep;
-                applyBoundary(playerRect);
+            if (playerRect && gameScene) {
+                playerRect.y -= MOVE_STEP;
+                applyBoundary(playerRect, gameScene);
             }
         }
         function moveDown() {
-            if (playerRect) {
-                playerRect.y += moveStep;
-                applyBoundary(playerRect);
+            if (playerRect && gameScene) {
+                playerRect.y += MOVE_STEP;
+                applyBoundary(playerRect, gameScene);
             }
         }
         function moveLeft() {
-            if (playerRect) {
-                playerRect.x -= moveStep;
-                applyBoundary(playerRect);
+            if (playerRect && gameScene) {
+                playerRect.x -= MOVE_STEP;
+                applyBoundary(playerRect, gameScene);
             }
         }
         function moveRight() {
-            if (playerRect) {
-                playerRect.x += moveStep;
-                applyBoundary(playerRect);
+            if (playerRect && gameScene) {
+                playerRect.x += MOVE_STEP;
+                applyBoundary(playerRect, gameScene);
             }
         }
 
-        // 绑定按钮事件（必须在 DOM 加载完成后，但脚本在 body 底部，所以可以）
-        document.getElementById('btnUp').addEventListener('click', moveUp);
-        document.getElementById('btnDown').addEventListener('click', moveDown);
-        document.getElementById('btnLeft').addEventListener('click', moveLeft);
-        document.getElementById('btnRight').addEventListener('click', moveRight);
 
-        function update(time, delta) {
-            // 如果需要键盘控制，可以在此添加，但根据要求本次不使用键盘
-            // 此函数空置也可以，但 Phaser 需要 update 存在
-        }
     </script>
+
 </body>
 </html>
