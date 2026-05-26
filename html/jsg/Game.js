@@ -1,16 +1,27 @@
-const config = {
+var config = {
     type: Phaser.AUTO,
     width: 800,
     height: 600,
     scene: {
-        preload: function() {
-            this.load.image('cyp', 'img/IMG_0856.jpeg');
-        },
-        create: function() {
-            let image = this.add.image(400, 300, 'cyp');
-            image.setScale(0.25);   // 缩小为原来的1/4
-        }
+        preload: preload,
+        create: create,
+        update: update
     }
 };
 
-const game = new Phaser.Game(config);
+var game = new Phaser.Game(config);
+
+function preload ()
+{
+    // 加载资源
+}
+
+function create ()
+{
+    // 创建游戏对象
+}
+
+function update ()
+{
+    // 更新游戏逻辑
+}
