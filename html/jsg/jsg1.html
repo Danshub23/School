@@ -8,7 +8,7 @@
 </head>
 <body>
     <button id="btn0">上</button>
-    <button id="btn1">下</button>
+    <button id="btn1">下</button
     <script src="https://unpkg.com/phaser@3.9.0/dist/phaser.min.js"></script>
     <script>
         var config = {
@@ -49,6 +49,9 @@
         }
 
         function update(time, delta) {
+            document.getElementById('btn').addEventListener('click', function(){
+                player.y += 5
+            })
             var player = this.player;
             // 根据本帧时间差计算移动距离
             var moveAmount = this.playerSpeed * (delta / 1000);
