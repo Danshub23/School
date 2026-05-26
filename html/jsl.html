@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript 常用事件监听速查表</title>
+    <style>
+        :root {
+            --bg: #f8f9fa;
+            --card-bg: #ffffff;
+            --text: #2c3e50;
+            --border: #e0e4e8;
+            --th-bg: #1a1a2e;
+            --th-text: #ffffff;
+            --accent: #3b82f6;
+            --hover-row: #f1f5f9;
+            --tag-mouse: #ec4899;
+            --tag-keyboard: #8b5cf6;
+            --tag-form: #f59e0b;
+            --tag-window: #10b981;
+            --tag-touch: #ef4444;
+            --tag-drag: #06b6d4;
+            --tag-clipboard: #6366f1;
+            --tag-media: #14b8a6;
+            --code-bg: #f1f5f9;
+            --shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.08), 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', sans-serif;
+            background: linear-gradient(135deg, #e8edf5 0%, #f0f4f8 30%, #eef2f7 60%, #f8f9fb 100%);
+            min-height: 100vh;
+            padding: 30px 20px;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        /* ========== Header ========== */
+        .header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1a1a2e;
+            letter-spacing: -0.02em;
+            margin-bottom: 6px;
+        }
+
+        .header .subtitle {
+            font-size: 0.95rem;
+            color: #64748b;
+            letter-spacing: 0.02em;
+        }
+
+        .header .badge-row {
+            margin-top: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.03em;
+            color: #fff;
+        }
+        .badge-mouse {
+            background: var(--tag-mouse);
+        }
+        .badge-keyboard {
+            background: var(--tag-keyboard);
+        }
+        .badge-form {
+            background: var(--tag-form);
+            color: #1a1a2e;
+        }
+        .badge-window {
+            background: var(--tag-window);
+        }
+        .badge-touch {
+            background: var(--tag-touch);
+        }
+        .badge-drag {
+            background: var(--tag-drag);
+            color: #1a1a2e;
+        }
+        .badge-clipboard {
+            background: var(--tag-clipboard);
+        }
+        .badge-media {
+            background: var(--tag-media);
+        }
+
+        /* ========== Table Wrapper ========== */
+        .table-wrapper {
+            background: var(--card-bg);
+            border-radius: 16px;
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .table-scroll {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 1000px;
+            font-size: 0.9rem;
+        }
+
+        thead th {
+            background: var(--th-bg);
+            color: var(--th-text);
+            padding: 14px 16px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            white-space: nowrap;
+            position: sticky;
+            top: 0;
+            z-index: 2;
+        }
+
+        thead th:first-child {
+            border-radius: 0;
+            padding-left: 20px;
+        }
+        thead th:last-child {
+            border-radius: 0;
+            padding-right: 20px;
+        }
+
+        tbody td {
+            padding: 13px 16px;
+            border-bottom: 1px solid #f1f3f5;
+            vertical-align: top;
+            transition: background 0.15s ease;
+        }
+
+        tbody td:first-child {
+            padding-left: 20px;
+        }
+        tbody td:last-child {
+            padding-right: 20px;
+        }
+
+        tbody tr {
+            transition: background 0.15s ease;
+        }
+
+        tbody tr:hover {
+            background: var(--hover-row);
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* 分类色条 */
+        .category-strip {
+            display: inline-block;
+            width: 4px;
+            height: 18px;
+            border-radius: 2px;
+            margin-right: 8px;
+            vertical-align: middle;
+            position: relative;
+            top: -1px;
+            flex-shrink: 0;
+        }
+        .strip-mouse {
+            background: var(--tag-mouse);
+        }
+        .strip-keyboard {
+            background: var(--tag-keyboard);
+        }
+        .strip-form {
+            background: var(--tag-form);
+        }
+        .strip-window {
+            background: var(--tag-window);
+        }
+        .strip-touch {
+            background: var(--tag-touch);
+        }
+        .strip-drag {
+            background: var(--tag-drag);
+        }
+        .strip-clipboard {
+            background: var(--tag-clipboard);
+        }
+        .strip-media {
+            background: var(--tag-media);
+        }
+
+        /* 事件名称 */
+        .event-name {
+            font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', 'Consolas', 'Monaco', monospace;
+            font-weight: 600;
+            font-size: 0.88rem;
+            color: #1e293b;
+            white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        /* 事件类型标签 */
+        .tag {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 4px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.03em;
+            white-space: nowrap;
+            text-transform: uppercase;
+        }
+        .tag-mouse {
+            background: #fce7f3;
+            color: #be185d;
+        }
+        .tag-keyboard {
+            background: #ede9fe;
+            color: #6d28d9;
+        }
+        .tag-form {
+            background: #fef3c7;
+            color: #b45309;
+        }
+        .tag-window {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        .tag-touch {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+        .tag-drag {
+            background: #cffafe;
+            color: #0e7490;
+        }
+        .tag-clipboard {
+            background: #e0e7ff;
+            color: #4338ca;
+        }
+        .tag-media {
+            background: #ccfbf1;
+            color: #0f766e;
+        }
+
+        /* 代码示例 */
+        .code-inline {
+            font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', 'Consolas', 'Monaco', monospace;
+            background: var(--code-bg);
+            padding: 2px 7px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            color: #334155;
+            white-space: nowrap;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* 说明文字 */
+        .desc {
+            color: #475569;
+            font-size: 0.84rem;
+            line-height: 1.5;
+        }
+
+        /* 冒泡列 */
+        .bubble-yes {
+            color: #16a34a;
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+        .bubble-no {
+            color: #dc2626;
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            body {
+                padding: 16px 8px;
+            }
+            .header h1 {
+                font-size: 1.4rem;
+            }
+            table {
+                font-size: 0.78rem;
+                min-width: 850px;
+            }
+            thead th,
+            tbody td {
+                padding: 10px 8px;
+            }
+            thead th:first-child,
+            tbody td:first-child {
+                padding-left: 12px;
+            }
+            thead th:last-child,
+            tbody td:last-child {
+                padding-right: 12px;
+            }
+            .badge {
+                font-size: 0.7rem;
+                padding: 3px 8px;
+            }
+        }
+
+        /* 打印优化 */
+        @media print {
+            body {
+                background: #fff;
+                padding: 0;
+            }
+            .table-wrapper {
+                box-shadow: none;
+                border: 1px solid #ccc;
+                border-radius: 0;
+            }
+            thead th {
+                background: #1a1a2e !important;
+                color: #fff !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .tag,
+            .badge,
+            .category-strip {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- ==================== Header ==================== -->
+        <div class="header">
+            <h1>📋 JavaScript 常用事件监听速查表</h1>
+            <p class="subtitle">涵盖鼠标、键盘、表单、窗口、触摸、拖拽、剪贴板及媒体事件</p>
+            <div class="badge-row">
+                <span class="badge badge-mouse">🖱 鼠标</span>
+                <span class="badge badge-keyboard">⌨ 键盘</span>
+                <span class="badge badge-form">📝 表单</span>
+                <span class="badge badge-window">🪟 窗口</span>
+                <span class="badge badge-touch">👆 触摸</span>
+                <span class="badge badge-drag">↕ 拖拽</span>
+                <span class="badge badge-clipboard">📋 剪贴板</span>
+                <span class="badge badge-media">🎬 媒体</span>
+            </div>
+        </div>
+
+        <!-- ==================== Table ==================== -->
+        <div class="table-wrapper">
+            <div class="table-scroll">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>事件名称</th>
+                            <th>分类</th>
+                            <th>触发时机</th>
+                            <th>适用元素</th>
+                            <th>冒泡</th>
+                            <th>代码示例</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- ===== 鼠标事件 ===== -->
+                        <tr>
+                            <td><span class="event-name"><span class="category-strip strip-mouse"></span>click</span></td>
+                            <td><span class="tag tag-mouse">鼠标</span></td>
+                            <td class="desc">鼠标单击（按下并释放）</td>
+                            <td class="desc">几乎所有元素</td>
+                            <td><span class="bubble-yes">✔ 是</span></td>
+                            <td><span class="code-inline">element.addEventListener('click', fn)</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="event-name"><span class="category-strip strip-mouse"></span>dblclick</span></td>
+                            <td><span class="tag tag-mouse">鼠标</span></td>
+                            <td class="desc">鼠标双击</td>
+                            <td class="desc">几乎所有元素</td>
+                            <td><span class="bubble-yes">✔ 是</span></td>
+                            <td><span class="code-inline">element.addEventListener('dblclick', fn)</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="event-name"><span class="category-strip strip-mouse"></span>mousedown</span></td>
+                            <td><span class="tag tag-mouse">鼠标</span></td>
+                            <td class="desc">鼠标按键按下（未释放）</td>
+                            <td class="desc">几乎所有元素</td>
+                            <td><span class="bubble-yes">✔ 是</span></td>
+                            <td><span class="code-inline">element.addEventListener('mousedown', fn)</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="event-name"><span class="category-strip strip-mouse"></span>mouseup</span></td>
+                            <td><span class="tag tag-mouse">鼠标</span></td>
+                            <td class="desc">鼠标按键释放</td>
+                            <td class="desc">几乎所有元素</td>
+                            <td><span class="bubble-yes">✔ 是</span></td>
+                            <td><span class="code-inline">element.addEventListener('mouseup', fn)</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="event-name"><span class="category-strip strip-mouse"></span>mousemove</span></td>
+                            <td><span class="tag tag-mouse">鼠标</span></td>
+                            <td class="desc">鼠标在元素内移动（高频触发）</td>
+                            <td class="desc">几乎所有元素</td>
+                            <td><span class="bubble-yes">✔ 是</span></td>
+                            <td><span class="code-inline">element.addEventListener('mousemove', fn)</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="event-name"><span class="category-strip strip-mouse"></span>mouseenter</span></td>
+                            <td><span class="tag tag-mouse">鼠标</span></td>
+                            <td class="desc">鼠标进入元素（不冒泡）</td>
+                            <td class="desc">几乎所有元素</td>
+                            <td><span class="bubble-no">✘ 否</span></td>
+                            <td><span class="code-inline">element.addEventListener('mouseenter', fn)</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="event-name"><span class="category-strip strip-mouse"></span>mouseleave</span></td>
+                            <td><span class="tag tag-mouse">鼠标</span></td>
+                            <td class="desc">鼠标离开元素（不冒泡）</td>
+                            <td class="desc">几乎所有元素</td>
+                            <td><span class="bubble-no">✘ 否</span></td>
+                            <td><span class="code-inline">element.addEventListener('mouseleave', fn)</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="event-name"><span class="category-strip strip-mouse"></span>mouseover</span></td>
+                            <td><span class="tag tag-mouse">鼠标</span></td>
+                            <td class="desc">鼠标进入元素（会冒泡）</td>
+                            <td class="desc">几乎所有元素</td>
+                            <td><span class="bubble-yes">✔ 是</span></td>
+                            <td><span class="code-inline">element.addEventListener('mouseover', fn)</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="event-name"><span class="category-strip strip-mouse"></span>mouseout</span></td>
+                            <td><span class="tag tag-mouse">鼠标</span></td>
+                            <td class="desc">鼠标离开元素（会冒泡）</td>
+                            <td class="desc">几乎所有元素</td>
+                            <td><span class="bubble-yes">✔ 是</span></td>
+                            <td><span class="code-inline">element.addEventListener('mouseout', fn)</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="event-name"><span class="category-strip strip-mouse"></span>contextmenu</span></td>
+                            <td><span class="tag tag-mouse">鼠标</span></td>
+                            <td class="desc">右键菜单触发</td>
+                            <td class="desc">几乎所有元素</td>
+                            <td><span class="bubble-yes">✔ 是</span></td>
+                            <td><span class="code-inline">element.addEventListener('contextmenu', fn)</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="event-name"><span class="category-strip strip-mouse"></span>wheel</span></td>
+                            <td><span class="tag tag-mouse">鼠标</span></td>
+                            <td class="desc">鼠标滚轮滚动</td>
+                            <td class="desc">几乎所有元素</td>
+                            <td><span class="bubble-yes">✔ 是</span></td>
+                            <td><span class="code-inline">element.addEventListener('wheel', fn)</span></td>
+                        </tr>
+
+                        <!-- ===== 键盘事件 ===== -->
+                        <tr>
+                            <td><span class="event-name"><span class="category-strip strip-keyboard"></span>keydown</span></td>
+                            <td><span class="tag tag-keyboard">键盘</span></td>
+                            <td class="desc">键盘按键按下（按住会重复触发）</td>
+                            <td class="desc">可聚焦元素、document</td>
+                            <td><span class="bubble-yes">✔ 是</span></td>
+                            <td><span class="code-inline">document.addEventListener('keydown', fn)</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="event-name"><span class="category-strip strip-keyboard"></span>keyup</span></td>
+                            <td><span class="tag tag-keyboard">键盘</span></td>
+                            <td class="desc">键盘按键释放</td>
+                            <td class="desc">可聚焦元素、document</td>
+                            <td><span class="bubble-yes">✔ 是</span></td>
+                            <td><span class="code-inline">document.addEventListener('keyup', fn)</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="event-name"><span class="category-strip strip-keyboard"></span>keypress</span></td>
+                            <td><span class="tag tag-keyboard">键盘</span></td>
+                            <td class="desc">字符键按下（已废弃，不推荐）</td>
+                            <td class="desc">可聚焦元素、document</td>
+                            <td><span class="bubble-yes">✔ 是</span></td>
+                            <td><span class="code-inline">document.addEventListener('keypress', fn)</span></td>
+                        </tr>
+
+                        <!-- ===== 表单事件 ===== -->
+                        <tr>
+                            <td><span class="event-name"><span class="category-strip strip-form"></span>submit</span></td>
+                            <td><span class="tag tag-form">表单</span></td>
+                            <td class="desc">表单提交时触发</td>
+                            <td class="desc">&lt;form&gt;</td>
+                            <td><span class="bubble-yes">✔ 是</span></td>
+                            <td><span class="code-inline">form.addEventListener('submit', fn)</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="event-name"><span class="category-strip strip-form"></span>reset</span></td>
+                            <td><span class="tag tag-form">表单</span></td>
+                            <td class="desc">表单重置时触发</td>
+                            <td class="desc">&lt;form&gt;</td>
+                            <td><span class="bubble-yes">✔ 是</span></td>
+                            <td><span class="code-inline">form.addEventListener('reset', fn)</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="event-name"><span class="category-strip strip-form"></span>input</span></td>
+                            <td><span class="tag tag-form">表单</span></td>
+                            <td class="desc">输入框值发生变化（实时触发）</td>
+                            <td class="desc">&lt;input&gt;、&lt;textarea&gt;、&lt;select&gt;</td>
+                            <td><span class="bubble-yes">✔ 是</span></td>
+                            <td><span class="code-inline">input.addEventListener('input', fn)</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="event-name"><span class="category-strip strip-form"></span>change</span></td>
+                            <td><span class="tag tag-form">表单</span></td>
+                            <td class="desc">值改变且失去焦点时触发</td>
+                            <td class="desc">&lt;input&gt;、&lt;textarea&gt;、&lt;select&gt;</td>
+                            <td><span class="bubble-yes">✔ 是</span></td>
+                            <td><span class="code-inline">input.addEventListener('change', fn)</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="event-name"><span class="category-strip strip-form"></span>focus</span></td>
+                            <td><span class="tag tag-form">表单</span></td>
+                            <td class="desc">元素获得焦点（不冒泡）</td>
+                            <td class="desc">可聚焦元素</td>
+                            <td><span class="bubble-no">✘ 否</span></td>
+                            <td><span class="code-inline">input.addEventListener('focus', fn)</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="event-name"><span class="category-strip strip-form"></span>blur</span></td>
+                            <td><span class="tag tag-form">表单</span></td>
+                            <td class="desc">元素失去焦点（不冒泡）</td>
+                            <td class="desc">可聚焦元素</td>
+                            <td><span class="bubble-no">✘ 否</span></td>
+                            <td><span class="code-inline">input.addEventListener('blur', fn)</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="event-name"><span class="category-strip strip-form"></span>focusin</span></td>
+                            <td><span class="tag tag-form">表单</span></td>
+                            <td class="desc">元素获得焦点（会冒泡）</td>
+                            <td class="desc">可聚焦元素</td>
+                            <td><span class="bubble-yes">✔ 是</span></td>
+                            <td><span class="code-inline">input.addEventListener('focusin', fn)</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="event-name"><span class="category-strip strip-form"></span>focusout</span></td>
+                            <td><span class="tag tag-form">表单</span></td>
+                            <td class="desc">元素失去焦点（会冒泡）</td>
+                            <td class="desc">可聚焦元素</td>
+                            <td><span class="bubble-yes">✔ 是</span></td>
+                            <td><span class="code-inline">input.addEventListener('focusout', fn)</span></td>
+                        </tr>
+
+                        <!-- ===== 窗口 / 文档事件 ===== -->
+                        <tr>
+                            <td><span class="event-name"><span class="category-strip strip-window"></span>DOMContentLoaded</span></td>
+                            <td><span class="tag tag-window">窗口</span></td>
+                            <td class="desc">DOM 树构建完成（不等资源加载）</td>
+                            <td class="desc">document</td>
+                            <td><span class="bubble-no">✘ 否</span></td>
+                            <td><span class="code-inline">document.addEventListener('DOMContentLoaded', fn)</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="event-name"><span class="category-strip strip-window"></span>load</span></td>
+                            <td><span class="tag tag-window">窗口</span></td>
+                            <td class="desc">页面所有资源加载完成</td>
+                            <td class="desc">window、&lt;img&gt;、&lt;iframe&gt;</td>
+                            <td><span class="bubble-no">✘ 否</span></td>
+                            <td><span class="code-inline">window.addEventListener('load', fn)</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="event-name"><span class="category-strip strip-window"></span>beforeunload</span></td>
+                            <td><span class="tag tag-window">窗口</span></td>
+                            <td class="desc">页面即将卸载（可提示用户）</td>
+                            <td class="desc">window</td>
+                            <td><span class="bubble-no">✘ 否</span></td>
+                            <td><span class="code-inline">window.addEventListener('beforeunload', fn)</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="event-name"><span class="category-strip strip-window"></span>resize</span></td>
+                            <td><span class="tag tag-window">窗口</span></td>
+                            <td class="desc">窗口尺寸变化（高频触发）</td>
+                            <td class="desc">window</td>
+                            <td><span class="bubble-no">✘ 否</span></td>
+                            <td><span class="code-inline">window.addEventListener('resize', fn)</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="event-name"><span class="category-strip strip-window"></span>scroll</span></td>
+                            <td><span class="tag tag-window">窗口</span></td>
+                            <td class="desc">元素或页面滚动（高频触发）</td>
+                            <td class="desc">window、可滚动元素</td>
+                            <td><span class="bubble-no">✘ 否</span></td>
+                            <td><span class="code-inline">window.addEventListener('scroll', fn)</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="event-name"><span class="category-strip strip-window"></span>hashchange</span></td>
+                            <td><span class="tag tag-window">窗口</span></td>
+                            <td class="desc">URL 的 hash 部分变化</td>
+                            <td class="desc">window</td>
+                            <td><span class="bubble-no">✘ 否</span></td>
+                            <td><span class="code-inline">window.addEventListener('hashchange', fn)</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="event-name"><span class="category-strip strip-window"></span>popstate</span></td>
+                            <td><span class="tag tag-window">窗口</span></td>
+                            <td class="desc">浏览器历史记录变化（前进/后退）</td>
+                            <td class="desc">window</td>
+                            <td><span class="bubble-no">✘ 否</span></td>
+                            <td><span class="code-inline">window.addEventListener('popstate', fn)</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="event-name"><span class="category-strip strip-window"></span>error</span></td>
+                            <td><span class="tag tag-window">窗口</span></td>
+                            <td class="desc">资源加载失败或 JS 运行时错误</td>
+                            <td class="desc">window、&lt;img&gt;、&lt;script&gt;</td>
+                            <td><span class="bubble-no">✘ 否</span></td>
+                            <td><span class="code-inline">window.addEventListener('error', fn)</span></td>
+                        </tr>
+
+                        <!-- ===== 触摸事件 ===== -->
+                        <tr>
+                            <td><span class="event-name"><span class="category-strip strip-touch"></span>touchstart</span></td>
+                            <td><span class="tag tag-touch">触摸</span></td>
+                            <td class="desc">手指触摸屏幕</td>
+                            <td class="desc">几乎所有元素</td>
+                            <td><span class="bubble-yes">✔ 是</span></td>
+                            <td><span class="code-inline">element.addEventListener('touchstart', fn)</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="event-name"><span class="category-strip strip-touch"></span>touchmove</span></td>
+                            <td><span class="tag tag-touch">触摸</span></td>
+                            <td class="desc">手指在屏幕上滑动（高频触发）</td>
+                            <td class="desc">几乎所有元素</td>
+                            <td><span class="bubble-yes">✔ 是</span></td>
+                            <td><span class="code-inline">element.addEventListener('touchmove', fn)</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="event-name"><span class="category-strip strip-touch"></span>touchend</span></td>
+                            <td><span class="tag tag-touch">触摸</span></td>
+                            <td class="desc">手指离开屏幕</td>
+                            <td class="desc">几乎所有元素</td>
+                            <td><span class="bubble-yes">✔ 是</span></td>
+                            <td><span class="code-inline">element.addEventListener('touchend', fn)</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="event-name"><span class="category-strip strip-touch"></span>touchcancel</span></td>
+                            <td><span class="tag tag-touch">触摸</span></td>
+                            <td class="desc">触摸被中断（如弹窗、切换应用）</td>
+                            <td class="desc">几乎所有元素</td>
+                            <td><span class="bubble-yes">✔ 是</span></td>
+                            <td><span class="code-inline">element.addEventListener('touchcancel', fn)</span></td>
+                        </tr>
+
+                        <!-- ===== 拖拽事件 ===== -->
+                        <tr>
+                            <td><span class="event-name"><span class="category-strip strip-drag"></span>dragstart</span></td>
+                            <td><span class="tag tag-drag">拖拽</span></td>
+                            <td class="desc">开始拖拽元素</td>
+                            <td class="desc">draggable 元素</td>
+                            <td><span class="bubble-yes">✔ 是</span></td>
+                            <td><span class="code-inline">element.addEventListener('dragstart', fn)</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="event-name"><span class="category-strip strip-drag"></span>drag</span></td>
+                            <td><span class="tag tag-drag">拖拽</span></td>
+                            <td class="desc">拖拽过程中持续触发</td>
+                            <td class="desc">draggable 元素</td>
+                            <td><span class="bubble-yes">✔ 是</span></td>
+                            <td><span class="code-inline">element.addEventListener('drag', fn)</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="event-name"><span class="category-strip strip-drag"></span>dragend</span></td>
+                            <td><span class="tag tag-drag">拖拽</span></td>
+                            <td class="desc">拖拽结束</td>
+                            <td class="desc">draggable 元素</td>
+                            <td><span class="bubble-yes">✔ 是</span></td>
+                            <td><span class="code-inline">element.addEventListener('dragend', fn)</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="event-name"><span class="category-strip strip-drag"></span>dragover</span></td>
+                            <td><span class="tag tag-drag">拖拽</span></td>
+                            <td class="desc">拖拽元素悬停在目标上（需 preventDefault）</td>
+                            <td class="desc">放置目标元素</td>
+                            <td><span class="bubble-yes">✔ 是</span></td>
+                            <td><span class="code-inline">dropZone.addEventListener('dragover', fn)</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="event-name"><span class="category-strip strip-drag"></span>drop</span></td>
+                            <td><span class="tag tag-drag">拖拽</span></td>
+                            <td class="desc">拖拽元素在目标上释放</td>
+                            <td class="desc">放置目标元素</td>
+                            <td><span class="bubble-yes">✔ 是</span></td>
+                            <td><span class="code-inline">dropZone.addEventListener('drop', fn)</span></td>
+                        </tr>
+
+                        <!-- ===== 剪贴板事件 ===== -->
+                        <tr>
+                            <td><span class="event-name"><span class="category-strip strip-clipboard"></span>copy</span></td>
+                            <td><span class="tag tag-clipboard">剪贴板</span></td>
+                            <td class="desc">用户复制内容时触发</td>
+                            <td class="desc">几乎所有元素</td>
+                            <td><span class="bubble-yes">✔ 是</span></td>
+                            <td><span class="code-inline">document.addEventListener('copy', fn)</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="event-name"><span class="category-strip strip-clipboard"></span>cut</span></td>
+                            <td><span class="tag tag-clipboard">剪贴板</span></td>
+                            <td class="desc">用户剪切内容时触发</td>
+                            <td class="desc">几乎所有元素</td>
+                            <td><span class="bubble-yes">✔ 是</span></td>
+                            <td><span class="code-inline">document.addEventListener('cut', fn)</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="event-name"><span class="category-strip strip-clipboard"></span>paste</span></td>
+                            <td><span class="tag tag-clipboard">剪贴板</span></td>
+                            <td class="desc">用户粘贴内容时触发</td>
+                            <td class="desc">几乎所有元素</td>
+                            <td><span class="bubble-yes">✔ 是</span></td>
+                            <td><span class="code-inline">document.addEventListener('paste', fn)</span></td>
+                        </tr>
+
+                        <!-- ===== 媒体事件 ===== -->
+                        <tr>
+                            <td><span class="event-name"><span class="category-strip strip-media"></span>play</span></td>
+                            <td><span class="tag tag-media">媒体</span></td>
+                            <td class="desc">媒体开始播放</td>
+                            <td class="desc">&lt;audio&gt;、&lt;video&gt;</td>
+                            <td><span class="bubble-no">✘ 否</span></td>
+                            <td><span class="code-inline">video.addEventListener('play', fn)</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="event-name"><span class="category-strip strip-media"></span>pause</span></td>
+                            <td><span class="tag tag-media">媒体</span></td>
+                            <td class="desc">媒体暂停</td>
+                            <td class="desc">&lt;audio&gt;、&lt;video&gt;</td>
+                            <td><span class="bubble-no">✘ 否</span></td>
+                            <td><span class="code-inline">video.addEventListener('pause', fn)</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="event-name"><span class="category-strip strip-media"></span>ended</span></td>
+                            <td><span class="tag tag-media">媒体</span></td>
+                            <td class="desc">媒体播放完毕</td>
+                            <td class="desc">&lt;audio&gt;、&lt;video&gt;</td>
+                            <td><span class="bubble-no">✘ 否</span></td>
+                            <td><span class="code-inline">video.addEventListener('ended', fn)</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="event-name"><span class="category-strip strip-media"></span>timeupdate</span></td>
+                            <td><span class="tag tag-media">媒体</span></td>
+                            <td class="desc">播放进度更新（高频触发）</td>
+                            <td class="desc">&lt;audio&gt;、&lt;video&gt;</td>
+                            <td><span class="bubble-no">✘ 否</span></td>
+                            <td><span class="code-inline">video.addEventListener('timeupdate', fn)</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="event-name"><span class="category-strip strip-media"></span>loadeddata</span></td>
+                            <td><span class="tag tag-media">媒体</span></td>
+                            <td class="desc">媒体首帧加载完成</td>
+                            <td class="desc">&lt;audio&gt;、&lt;video&gt;</td>
+                            <td><span class="bubble-no">✘ 否</span></td>
+                            <td><span class="code-inline">video.addEventListener('loadeddata', fn)</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ==================== Footer Note ==================== -->
+        <p style="text-align:center; margin-top:20px; color:#94a3b8; font-size:0.82rem;">
+            💡 提示：使用 <code style="background:#e2e8f0; padding:2px 6px; border-radius:3px;">removeEventListener</code> 可移除监听器；
+            对于高频事件（scroll / resize / mousemove / touchmove），建议使用 <strong>节流 (throttle)</strong> 或 <strong>防抖 (debounce)</strong> 优化性能。
+        </p>
+    </div>
+
+</body>
+</html>
