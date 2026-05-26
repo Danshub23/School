@@ -23,5 +23,10 @@ function create ()
 
 function update ()
 {
-    // 更新游戏逻辑
+    var sprite = this.children.getByName('logoName');
+    sprite.x += 1;
+    if (sprite.x > 1000){
+        sprite.x = 0
+    }
+    
 }
