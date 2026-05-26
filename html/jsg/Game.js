@@ -13,12 +13,12 @@ var game = new Phaser.Game(config);
 
 function preload ()
 {
-    // 加载资源
+    this.load.image('logo', 'assets/logo.png');
 }
 
 function create ()
 {
-    // 创建游戏对象
+    this.add.sprite(400, 300, 'logo').setName('logoName');
 }
 
 function update ()
