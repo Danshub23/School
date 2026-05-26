@@ -3,17 +3,30 @@
 <head>
     <style>
         canvas { border: 1px solid black; }
+        .controls {
+            margin-top: 10px;
+            text-align: center;
+        }
+        button {
+            font-size: 20px;
+            margin: 0 10px;
+            padding: 5px 15px;
+        }
     </style>
-    <title>成语</title>
+    <title>方块移动</title>
 </head>
 <body>
-    <button id="btn0">上</button>
-    <button id="btn1">下</button>
+    <div class="controls">
+        <button id="btnUp">上</button>
+        <button id="btnDown">下</button>
+        <button id="btnLeft">左</button>
+        <button id="btnRight">右</button>
+    </div>
+
     <script src="https://unpkg.com/phaser@3.9.0/dist/phaser.min.js"></script>
     <script>
-        document.getElementById('btn0').addEventListener('click', function(){
-                player.y += 5
-        var config = {
+        // 游戏配置
+        const config = {
             type: Phaser.AUTO,
             width: 800,
             height: 600,
@@ -24,45 +37,71 @@
             }
         };
 
-        var game = new Phaser.Game(config);
+        const game = new Phaser.Game(config);
+
+        // 用于存储方块对象的全局引用（以便按钮回调访问）
+        let playerRect = null;
+        const moveStep = 5;   // 每次点击移动5像素
+        const gameW = 800, gameH = 600;
+        const pw = 50, ph = 50;
 
         function preload() {
             // 无需加载资源
         }
 
         function create() {
-            // 红色方块，大小 50x50，初始位置 (400,300)
-            this.player = this.add.rectangle(400, 300, 50, 50, 0xff0000);
+            // 创建红色方块，位置 (400,300)，大小 50x50
+            this.player = this.add.rectangle(400, 300, pw, ph, 0xff0000);
             this.player.setOrigin(0, 0);
+            playerRect = this.player;   // 保存到全局供按钮回调使用
 
-            // 速度：300 像素/秒（相当于原 60帧×5像素 的手感）
-            this.playerSpeed = 300;
-
-            // 绑定方向键
-            /*this.keys = this.input.keyboard.addKeys({
-                up: Phaser.Input.Keyboard.KeyCodes.UP,
-                down: Phaser.Input.Keyboard.KeyCodes.DOWN,
-                left: Phaser.Input.Keyboard.KeyCodes.LEFT,
-                right: Phaser.Input.Keyboard.KeyCodes.RIGHT
-            });*/
-
-            // 设置白色背景（与原来 Canvas 默认一致）
+            // 设置白色背景
             this.cameras.main.setBackgroundColor('#ffffff');
         }
 
-        function update(time, delta) {
-            
-            })
-            var player = this.player;
-            // 根据本帧时间差计算移动距离
-            var moveAmount = this.playerSpeed * (delta / 1000);
+        // 边界限制函数
+        function applyBoundary(rect) {
+            if (rect.x < 0) rect.x = 0;
+            if (rect.x + pw > gameW) rect.x = gameW - pw;
+            if (rect.y < 0) rect.y = 0;
+            if (rect.y + ph > gameH) rect.y = gameH - ph;
+        }
 
-            // 边界限制 (800x600 的游戏区域)
-            var gameW = 800, gameH = 600, pw = 50, ph = 50;
-            if (player.x < 0) player.x = 0;
-            if (player.x + pw > gameW) player.x = gameW - pw;
-            if (player.y < 0) player.y = 0;
-            if (player.y + ph > gameH) player.y = gameH - ph;
+        // 按钮点击回调
+        function moveUp() {
+            if (playerRect) {
+                playerRect.y -= moveStep;
+                applyBoundary(playerRect);
+            }
+        }
+        function moveDown() {
+            if (playerRect) {
+                playerRect.y += moveStep;
+                applyBoundary(playerRect);
+            }
+        }
+        function moveLeft() {
+            if (playerRect) {
+                playerRect.x -= moveStep;
+                applyBoundary(playerRect);
+            }
+        }
+        function moveRight() {
+            if (playerRect) {
+                playerRect.x += moveStep;
+                applyBoundary(playerRect);
+            }
+        }
+
+        // 绑定按钮事件（必须在 DOM 加载完成后，但脚本在 body 底部，所以可以）
+        document.getElementById('btnUp').addEventListener('click', moveUp);
+        document.getElementById('btnDown').addEventListener('click', moveDown);
+        document.getElementById('btnLeft').addEventListener('click', moveLeft);
+        document.getElementById('btnRight').addEventListener('click', moveRight);
+
+        function update(time, delta) {
+            // 如果需要键盘控制，可以在此添加，但根据要求本次不使用键盘
+            // 此函数空置也可以，但 Phaser 需要 update 存在
         }
     </script>
 </body>
