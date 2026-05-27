@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Document</title>
+  </head>
+  <body>
+    <script src="phaser.min.js"></script>
+    <script>
+      var config = {
+        type: Phaser.AUTO,
+        width: 900,
+        height: 550,
+        scene: {
+          //autoCenter: Phaser.Scale.CENTER_BOTH,
+          preload: preload,
+          create: create,
+          update: update,
+        },
+      }
+
+      var game = new Phaser.Game(config)
+
+      function preload() {
+        this.load.image("sky", "img/.png")
+      }
+
+      function create() {
+        this.player = this.add.sprite(400,300,'sky')
+      }
+
+      function update() {
+        this.player.x += 1
+      }
+    </script>
+  </body>
+</html>
