@@ -45,10 +45,12 @@
       function update() {
         const pointer = this.input.activePointer;
         const bounds = this.player.getBounds();
-        //&& bounds.contains(pointer.x, pointer.y)
+        let ting = false;
+        //
         this.r.x = 200;
         this.r.y = 450;
-        if (pointer.isDown) {
+        if (pointer.isDown && bounds.contains(pointer.x, pointer.y) && ting == false) {
+          ting = ture
          let An = Phaser.Math.Angle.Between(this.r.x, this.r.y, pointer.x, pointer.y);
 
           if (Phaser.Math.Distance.Between(this.r.x, this.r.y, pointer.x, pointer.y) > 100) {
