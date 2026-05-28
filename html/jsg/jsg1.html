@@ -49,8 +49,13 @@
         const bounds = this.player.getBounds();
         //&& bounds.contains(pointer.x, pointer.y)
         if (pointer.isDown) {
-          
+          this.r.x = pointer.x;
+          this.r.y = pointer.y;
       }
+        else {
+          this.r.x = 200;
+          this.r.y = 450;
+        }
       }
     </script>
   </body>
