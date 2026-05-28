@@ -40,10 +40,11 @@
         this.player.x += this.player_speed;})
         this.rect_l.on('pointerover', () => {
         this.player.x -= this.player_speed;})
+        this.r = this.add.rectangle(200, 450, 40, 40, 0xff0000)
+        this.r.setInteractive();
       }
 
       function update() {
-        
       }
     </script>
   </body>
