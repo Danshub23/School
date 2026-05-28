@@ -51,6 +51,9 @@
         if (pointer.isDown) {
           this.r.x = pointer.x;
           this.r.y = pointer.y;
+          if (Phaser.Math.Distance.Between(this.r.x, this.r.y, pointer.x, pointer.y) > 100){
+            this.player.y += 5
+          }
       }
         else {
           this.r.x = 200;
