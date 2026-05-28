@@ -11,6 +11,7 @@
         type: Phaser.AUTO,
         width: 900,
         height: 550,
+        backgroundColor: "0x00F2FF",
         scene: {
           //autoCenter: Phaser.Scale.CENTER_BOTH,
           preload: preload,
@@ -22,45 +23,53 @@
       var game = new Phaser.Game(config);
 
       function preload() {
-        this.load.image("sky", "img/ball.jpeg");
+        this.load.image("ball", "img/ball.jpeg");
       }
 
       function create() {
-        this.player = this.add.sprite(400, 300, "sky");
-        this.player_speed = 8;
-        this.rect_r = this.add.rectangle(800, 275, 80, 80, 0xff0000);
-        this.rect_r.setInteractive();
-        this.rect_l = this.add.rectangle(100, 275, 80, 80, 0xff0000);
-        this.rect_l.setInteractive();
-        this.rect_r.on("pointerover", () => {
-          this.player.x += this.player_speed;
-        });
-        this.rect_l.on("pointerover", () => {
-          this.player.x -= this.player_speed;
-        });
-        this.r = this.add.rectangle(200, 450, 40, 40, 0xff0000);
+        this.player = this.add.sprite(400, 300, "ball");
+        this.player_speed = 0.1;
+        this.base = this.add.circle(150, 400, 75, 0x000000);
+        this.r = this.add.circle(this.base.x, this.base.y, 40, 0xa6a6a6);
         this.r.setInteractive();
+        this.ting2 = false;
       }
 
       function update() {
         const pointer = this.input.activePointer;
-        const bounds = this.player.getBounds();
-        let ting = false;
-        //
-        this.r.x = 200;
-        this.r.y = 450;
-        if (pointer.isDown && bounds.contains(pointer.x, pointer.y) && ting == false) {
-          ting = ture
-         let An = Phaser.Math.Angle.Between(this.r.x, this.r.y, pointer.x, pointer.y);
+        const bounds = this.r.getBounds();
 
-          if (Phaser.Math.Distance.Between(this.r.x, this.r.y, pointer.x, pointer.y) > 100) {
-            this.player.y += 5;
+        //
+        //   if (Phaser.Math.Distance.Between(this.r.x, this.r.y, pointer.x, pointer.y) > 100) {
+        //     this.player.y += 5;
+        //   }
+        //
+        // } else {
+        //   this.r.x = 200;
+        //   this.r.y = 450;
+
+        if (this.ting2 == false && bounds.contains(pointer.x, pointer.y) && pointer.isDown) {
+          this.ting2 = true;
+        } else if (!pointer.isDown) {
+          this.ting2 = false;
+        }
+        if (this.ting2) {
+          this.r.rotation = Phaser.Math.Angle.Between(this.r.x, this.r.y, pointer.x, pointer.y);
+          this.Angle = Phaser.Math.Angle.Between(this.base.x, this.base.y, pointer.x, pointer.y);
+          this.Distance = Phaser.Math.Distance.Between(this.base.x, this.base.y, pointer.x, pointer.y);
+          if (this.Distance <= 75) {
+            this.r.x = this.base.x + Math.cos(this.Angle) * this.Distance;
+            this.r.y = this.base.y + Math.sin(this.Angle) * this.Distance;
+          } else {
+            this.r.x = this.base.x + Math.cos(this.Angle) * 75;
+            this.r.y = this.base.y + Math.sin(this.Angle) * 75;
           }
-          this.r.x += Math.cos(An) * 75;
-          this.r.y += Math.sin(An) * 75;
+          this.player.x += Math.cos(this.Angle) * this.Distance * this.player_speed;
+          this.player.y += Math.sin(this.Angle) * this.Distance * this.player_speed;
         } else {
-          this.r.x = 200;
-          this.r.y = 450;
+          this.r.x = 150;
+          this.r.y = 400;
+          this.r.rotation = 0;
         }
       }
     </script>
