@@ -45,6 +45,12 @@
       }
 
       function update() {
+        const pointer = this.input.activePointer;
+        const bounds = this.player.getBounds();
+        //&& bounds.contains(pointer.x, pointer.y)
+        if (pointer.isDown) {
+          
+      }
       }
     </script>
   </body>
