@@ -12,13 +12,15 @@
         width: 900,
         height: 550,
         backgroundColor: "0x00F2FF",
+        scale: {
+        mode: Phaser.Scale.FIT,      // FIT 模式
+        autoCenter: Phaser.Scale.CENTER_BOTH  // 自动居中
+    },
         scene: {
           //autoCenter: Phaser.Scale.CENTER_BOTH,
           preload: preload,
           create: create,
           update: update,
-          mode: Phaser.Scale.FIT,      
-          autoCenter: Phaser.Scale.CENTER_BOTH
         },
       };
 
