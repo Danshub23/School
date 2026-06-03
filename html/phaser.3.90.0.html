@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Scratch积木 → Phaser 3.90.0 代码映射（独立复制按钮列）</title>
+</head>
+<body>
+    <h1>Scratch 积木 → Phaser 3.90.0 代码转换表</h1>
+    <p><strong>角色对象：</strong> this.player （假设为 Phaser 物理精灵或普通精灵）</p>
+
+    <!-- 表格1：动作 (Motion) -->
+    <h2>📐 动作 (Motion)</h2>
+    <table border="1" cellpadding="8" cellspacing="0">
+        <thead>
+            <tr><th>Scratch 积木</th><th>Phaser 3.90.0 代码 (this.player)</th><th>复制代码</th></tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>将 x 坐标设为 ( )</td>
+                <td><code>this.player.x = 数值;</code></td>
+                <td class="copy-btn-cell"></td>
+            </tr>
+            <tr>
+                <td>将 y 坐标设为 ( )</td>
+                <td><code>this.player.y = 数值;</code></td>
+                <td class="copy-btn-cell"></td>
+            </tr>
+            <tr>
+                <td>面向 ( ) 方向</td>
+                <td><code>this.player.angle = 方向数值 - 90;   // Scratch: 0°上,90°右 → Phaser: 0°右,正值顺时针</code></td>
+                <td class="copy-btn-cell"></td>
+            </tr>
+            <tr>
+                <td>移动 ( ) 步</td>
+                <td><pre>let rad = this.player.rotation;
+this.player.x += Math.cos(rad) * 步数;
+this.player.y += Math.sin(rad) * 步数;</pre></td>
+                <td class="copy-btn-cell"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- 表格2：外观 (Looks) -->
+    <h2>🎨 外观 (Looks)</h2>
+    <table border="1" cellpadding="8" cellspacing="0">
+        <thead><tr><th>Scratch 积木</th><th>Phaser 3.90.0 代码 (this.player)</th><th>复制代码</th></tr></thead>
+        <tbody>
+            <tr>
+                <td>将大小设为 ( ) %</td>
+                <td><code>this.player.setScale(数值 / 100);</code></td>
+                <td class="copy-btn-cell"></td>
+            </tr>
+            <tr>
+                <td>显示</td>
+                <td><code>this.player.setVisible(true);</code></td>
+                <td class="copy-btn-cell"></td>
+            </tr>
+            <tr>
+                <td>隐藏</td>
+                <td><code>this.player.setVisible(false);</code></td>
+                <td class="copy-btn-cell"></td>
+            </tr>
+            <tr>
+                <td>换成 (造型名称) 造型</td>
+                <td><code>this.player.setTexture("造型名称");   // 需预加载对应纹理</code></td>
+                <td class="copy-btn-cell"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- 表格3：感知 (Sensing) -->
+    <h2>👆 感知 (Sensing)</h2>
+    <table border="1" cellpadding="8" cellspacing="0">
+        <thead><tr><th>Scratch 积木</th><th>Phaser 3.90.0 代码</th><th>复制代码</th></tr></thead>
+        <tbody>
+            <tr>
+                <td>鼠标的 X 坐标</td>
+                <td><code>let mouseX = this.input.activePointer.x;</code></td>
+                <td class="copy-btn-cell"></td>
+            </tr>
+            <tr>
+                <td>鼠标的 Y 坐标</td>
+                <td><code>let mouseY = this.input.activePointer.y;</code></td>
+                <td class="copy-btn-cell"></td>
+            </tr>
+            <tr>
+                <td>鼠标是否按下？ (左键)</td>
+                <td><code>let mouseIsDown = this.input.activePointer.isDown;</code></td>
+                <td class="copy-btn-cell"></td>
+            </tr>
+            <tr>
+                <td>是否碰到？ (角色与鼠标指针)</td>
+                <td><pre>let distance = Phaser.Math.Distance.Between(
+    this.player.x, this.player.y,
+    this.input.activePointer.x, this.input.activePointer.y
+);
+let isHitMouse = (distance < this.player.width / 2);   // 圆形碰撞近似</pre></td>
+                <td class="copy-btn-cell"></td>
+            </tr>
+            <tr>
+                <td>是否碰到？ (两个精灵)</td>
+                <td><code>let isHit = this.physics.overlap(this.player, 其他精灵);   // 需开启 Arcade Physics</code></td>
+                <td class="copy-btn-cell"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- 表格4：数学计算 (距离与角度) -->
+    <h2>📏 数学计算 (Math)</h2>
+    <table border="1" cellpadding="8" cellspacing="0">
+        <thead><tr><th>Scratch 风格操作</th><th>Phaser 3.90.0 代码</th><th>复制代码</th></tr></thead>
+        <tbody>
+            <tr>
+                <td>计算两点之间的距离</td>
+                <td><code>let dist = Phaser.Math.Distance.Between(x1, y1, x2, y2);</code></td>
+                <td class="copy-btn-cell"></td>
+            </tr>
+            <tr>
+                <td>计算两点之间的弧度角 (0 rad 指向右)</td>
+                <td><code>let angleRad = Phaser.Math.Angle.Between(x1, y1, x2, y2);</code></td>
+                <td class="copy-btn-cell"></td>
+            </tr>
+            <tr>
+                <td>弧度转角度 (0° 指向右)</td>
+                <td><code>let angleDeg = Phaser.Math.RadToDeg(angleRad);</code></td>
+                <td class="copy-btn-cell"></td>
+            </tr>
+            <tr>
+                <td>转为 Scratch 方向 (0° 向上, 90° 向右)</td>
+                <td><code>let scratchDir = (90 - angleDeg + 360) % 360;</code></td>
+                <td class="copy-btn-cell"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <hr>
+    <h2>📚 综合应用示例</h2>
+    <p>以下示例假设已正确创建 Phaser 游戏场景，并在其中定义 <code>this.player</code> 为一个精灵（Sprite）且已启用物理系统（如需碰撞）。</p>
+
+    <h3>示例1：让角色面向鼠标并前进10步</h3>
+    <pre><code>// 获取鼠标坐标
+let mouseX = this.input.activePointer.x;
+let mouseY = this.input.activePointer.y;
+
+// 计算角色到鼠标的角度（弧度）
+let angleRad = Phaser.Math.Angle.Between(this.player.x, this.player.y, mouseX, mouseY);
+
+// 设置角色方向（Phaser 弧度制，也可用 .angle 角度制）
+this.player.rotation = angleRad;
+
+// 前进10步
+let steps = 10;
+this.player.x += Math.cos(angleRad) * steps;
+this.player.y += Math.sin(angleRad) * steps;</code></pre>
+
+    <h3>示例2：控制角色跟随鼠标移动（每帧更新）</h3>
+    <pre><code>// 在 update() 循环中执行
+let speed = 5;
+let mouseX = this.input.activePointer.x;
+let mouseY = this.input.activePointer.y;
+
+let angle = Phaser.Math.Angle.Between(this.player.x, this.player.y, mouseX, mouseY);
+this.player.x += Math.cos(angle) * speed;
+this.player.y += Math.sin(angle) * speed;</code></pre>
+
+    <h3>示例3：鼠标按下时隐藏角色，松开时显示</h3>
+    <pre><code>if (this.input.activePointer.isDown) {
+    this.player.setVisible(false);
+} else {
+    this.player.setVisible(true);
+}</code></pre>
+
+    <h3>示例4：检测角色是否碰到鼠标指针（圆形近似），并改变大小</h3>
+    <pre><code>let mouseX = this.input.activePointer.x;
+let mouseY = this.input.activePointer.y;
+let distance = Phaser.Math.Distance.Between(this.player.x, this.player.y, mouseX, mouseY);
+
+if (distance < this.player.width / 2) {
+    this.player.setScale(1.5);   // 放大到150%
+} else {
+    this.player.setScale(1.0);   // 恢复原大小
+}</code></pre>
+
+    <h3>示例5：获取角色到舞台中心的Scratch风格方向角</h3>
+    <pre><code>let centerX = this.cameras.main.width / 2;
+let centerY = this.cameras.main.height / 2;
+let angleRad = Phaser.Math.Angle.Between(this.player.x, this.player.y, centerX, centerY);
+let angleDeg = Phaser.Math.RadToDeg(angleRad);
+let scratchDirection = (90 - angleDeg + 360) % 360;
+console.log(`角色指向舞台中心的方向(Scratch格式): ${scratchDirection}°`);</code></pre>
+
+    <p style="color: gray; margin-top: 2em;">注：以上代码适用于 Phaser 3.90.0，使用前请确保已正确初始化游戏、加载资源并创建了 this.player 精灵。部分碰撞检测需要开启物理引擎。</p>
+
+    <script>
+        (function() {
+            // 为每个带有 copy-btn-cell 类的单元格添加复制按钮
+            const copyCells = document.querySelectorAll('.copy-btn-cell');
+            copyCells.forEach((cell, index) => {
+                // 获取当前行（tr）中的第二个 td（代码单元格）
+                const row = cell.parentNode;
+                const codeTd = row.cells[1]; // 第二列是代码列
+                if (!codeTd) return;
+
+                // 获取代码文本：优先取 <pre> 内的文本，否则取 <code>
+                let codeElem = codeTd.querySelector('pre');
+                if (!codeElem) codeElem = codeTd.querySelector('code');
+                if (!codeElem) return;
+
+                const codeText = codeElem.innerText;
+
+                // 创建复制按钮
+                const btn = document.createElement('button');
+                btn.textContent = '📋 复制';
+                btn.style.cursor = 'pointer';
+                btn.style.padding = '2px 8px';
+                btn.style.fontSize = '12px';
+
+                btn.addEventListener('click', async (e) => {
+                    e.stopPropagation();
+                    try {
+                        await navigator.clipboard.writeText(codeText);
+                        const originalText = btn.textContent;
+                        btn.textContent = '✅ 已复制';
+                        setTimeout(() => {
+                            btn.textContent = originalText;
+                        }, 1500);
+                    } catch (err) {
+                        alert('复制失败，请手动复制');
+                    }
+                });
+
+                cell.appendChild(btn);
+            });
+        })();
+    </script>
+</body>
+</html>
