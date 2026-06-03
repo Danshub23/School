@@ -8,12 +8,16 @@
 </head>
 
 <body id="b1">
- 
+  <button onclick="run">run</button>
+  <p id="p1"></p>
   <script>
     function ch() {
       if (document.referrer !== 'https://danshub23.github.io/School/less/Chinese/Chinese.html'){
         var body = document.getElementById("b1");
         body.style.display = "none";
+        window.location.replace('https://www.tkpss.edu.hk');
+      }
+      function run() {
         window.location.replace('https://www.tkpss.edu.hk');
       }
 
