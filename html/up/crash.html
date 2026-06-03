@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Phaser3.90.0 碰撞检测</title>
+</head>
+<body>
+    <h1>Phaser3.90.0 碰撞检测</h1>
+    <p><strong>说明：</strong> 以下所有代码均基于 Phaser 3.90.0 的 Arcade Physics 系统，角色对象以 <code>this.player</code> 为例。</p>
+
+    <table border="1" cellpadding="8" cellspacing="0">
+        <thead>
+            <tr><th style="width: 200px;">操作 / 概念</th><th style="width: 500px;">Phaser 3.90.0 详细实现与代码</th><th style="width: 80px;">复制代码</th></tr>
+        </thead>
+        <tbody>
+            <!-- 1. 开启物理系统 -->
+            <tr>
+                <td><strong>1. 开启物理引擎</strong><br>（Arcade Physics）</td>
+                <td>
+                    <pre>// 游戏配置中启用物理系统
+const config = {
+    type: Phaser.AUTO,
+    width: 800,
+    height: 600,
+    physics: {
+        default: 'arcade',
+        arcade: {
+            gravity: { x: 0, y: 0 },   // 无重力
+            debug: false               // 设为 true 可显示碰撞箱轮廓
+        }
+    },
+    scene: { preload, create, update }
+};
+
+// 创建带物理体的精灵（动态物体）
+this.player = this.physics.add.sprite(x, y, '纹理');
+this.enemy  = this.physics.add.sprite(x2, y2, '纹理');
+
+// 创建静态物体（如墙壁、地面）
+this.wall = this.physics.add.staticSprite(400, 200, 'wall');</pre>
+                </td>
+                <td class="copy-btn-cell"></td>
+            </tr>
+
+            <!-- 2. 碰撞箱形状与大小 -->
+            <tr>
+                <td><strong>2. 设定碰撞箱</strong><br>（矩形/圆形，偏移，大小）</td>
+                <td>
+                    <pre>// ---- 矩形碰撞箱 ----
+// 默认碰撞箱为纹理尺寸，可自定义矩形
+this.player.body.setSize(宽度, 高度, 是否居中);
+this.player.body.setOffset(偏移X, 偏移Y);
+// 示例：宽40，高50，不居中，偏移(10,15)
+this.player.body.setSize(40, 50, false);
+this.player.body.setOffset(10, 15);
+
+// ---- 圆形碰撞箱 ----
+// 适合圆形角色，参数：半径, 偏移X, 偏移Y
+this.player.body.setCircle(半径, 偏移X, 偏移Y);
+// 示例：半径30，中心偏移(-5,-5)
+this.player.body.setCircle(30, -5, -5);
+
+// ---- 调试查看碰撞箱 ----
+// 方法1：在 config 中开启 physics.arcade.debug = true
+// 方法2：动态添加调试图形
+this.physics.world.createDebugGraphic();</pre>
+                </td>
+                <td class="copy-btn-cell"></td>
+            </tr>
+
+            <!-- 3. 两个角色碰撞检测 -->
+            <tr>
+                <td><strong>3. 检测两个角色碰撞</strong><br>（玩家 vs 敌人）</td>
+                <td>
+                    <pre>// 在 create() 中注册碰撞回调（会产生物理推开效果）
+this.physics.add.collider(this.player, this.enemy, onCollide, null, this);
+
+function onCollide(player, enemy) {
+    console.log('碰撞发生');
+    player.setTint(0xff0000);   // 变红色
+}
+
+// 仅检测重叠（不产生物理推开）
+this.physics.add.overlap(this.player, this.enemy, onOverlap, null, this);
+
+function onOverlap(player, enemy) {
+    console.log('重叠（无物理反馈）');
+}
+
+// 实时判断当前是否重叠（相当于 Scratch 的“碰到？”布尔积木）
+let isTouching = this.physics.overlap(this.player, this.enemy);  // 返回 true/false</pre>
+                </td>
+                <td class="copy-btn-cell"></td>
+            </tr>
+
+            <!-- 4. 鼠标与角色碰撞 -->
+            <tr>
+                <td><strong>4. 检测鼠标是否碰到角色</strong><br>（两种常用方法）</td>
+                <td>
+                    <pre>// ---------- 方法一：几何计算（简单，无需额外物理体） ----------
+let mouseX = this.input.activePointer.x;
+let mouseY = this.input.activePointer.y;
+let distance = Phaser.Math.Distance.Between(
+    this.player.x, this.player.y, mouseX, mouseY
+);
+// 假设碰撞箱近似为圆形，半径为精灵宽的一半
+let radius = this.player.width / 2;
+let isHit = (distance < radius);
+
+// ---------- 方法二：不可见的鼠标跟随物理体（精确，复用物理系统） ----------
+// 在 create() 中创建传感器
+this.cursorSensor = this.physics.add.sprite(0, 0, null);
+this.cursorSensor.setVisible(false);
+this.cursorSensor.body.setSize(1, 1);
+this.physics.add.overlap(this.player, this.cursorSensor, () => {
+    console.log('鼠标碰到角色');
+});
+// 在 update() 中每帧更新传感器位置
+this.cursorSensor.setPosition(this.input.activePointer.x, this.input.activePointer.y);</pre>
+                </td>
+                <td class="copy-btn-cell"></td>
+            </tr>
+
+            <!-- 5. 检测碰撞到哪条边（上/下/左/右） -->
+            <tr>
+                <td><strong>5. 检测碰撞到哪条边</strong><br>（上、下、左、右）</td>
+                <td>
+                    <pre>// ---------- 方法一：在碰撞回调中根据位置差判断方向 ----------
+function onCollide(player, enemy) {
+    let dx = player.x - enemy.x;
+    let dy = player.y - enemy.y;
+    let absDx = Math.abs(dx);
+    let absDy = Math.abs(dy);
+    if (absDx > absDy) {
+        if (dx > 0) console.log('玩家从左边撞到敌人');   // 玩家在右，敌人在左 → 碰撞右边
+        else console.log('玩家从右边撞到敌人');
+    } else {
+        if (dy > 0) console.log('玩家从上方撞到敌人');
+        else console.log('玩家从下方撞到敌人');
+    }
+}
+
+// ---------- 方法二：利用 body.touching 属性（适用于静态物体和世界边界） ----------
+// 在 update() 中检查
+if (this.player.body.touching.left)  console.log('碰撞到左边');
+if (this.player.body.touching.right) console.log('碰撞到右边');
+if (this.player.body.touching.up)    console.log('碰撞到上边');
+if (this.player.body.touching.down)  console.log('碰撞到下边');
+
+// 对于世界边界，可以使用 body.blocked
+if (this.player.body.blocked.left)   console.log('撞到左边界');
+if (this.player.body.blocked.right)  console.log('撞到右边界');
+if (this.player.body.blocked.up)     console.log('撞到上边界');
+if (this.player.body.blocked.down)   console.log('撞到下边界');</pre>
+                </td>
+                <td class="copy-btn-cell"></td>
+            </tr>
+
+            <!-- 6. 完整示例：角色与墙壁碰撞并显示碰撞方向 -->
+            <tr>
+                <td><strong>6. 完整示例</strong><br>角色与墙壁碰撞并显示方向</td>
+                <td>
+                    <pre>// 在 create() 中创建墙壁（静态物体）
+this.wall = this.physics.add.staticSprite(400, 200, 'wall');
+this.wall.body.setSize(100, 100);
+
+// 创建玩家，并开启世界边界碰撞
+this.player = this.physics.add.sprite(300, 300, 'player');
+this.player.setCollideWorldBounds(true);
+
+// 注册玩家与墙壁的碰撞
+this.physics.add.collider(this.player, this.wall, (p, w) => {
+    // 利用 touching 属性判断方向（仅对静态物体有效）
+    if (p.body.touching.left)  console.log('碰撞到墙壁左侧');
+    if (p.body.touching.right) console.log('碰撞到墙壁右侧');
+    if (p.body.touching.up)    console.log('碰撞到墙壁上侧');
+    if (p.body.touching.down)  console.log('碰撞到墙壁下侧');
+});
+
+// 在 update() 中检测世界边界方向
+if (this.player.body.blocked.left)  console.log('撞到左边界');
+if (this.player.body.blocked.right) console.log('撞到右边界');
+if (this.player.body.blocked.up)    console.log('撞到上边界');
+if (this.player.body.blocked.down)  console.log('撞到下边界');</pre>
+                </td>
+                <td class="copy-btn-cell"></td>
+            </tr>
+
+            <!-- 7. 注意事项 -->
+            <tr>
+                <td><strong>7. 注意事项</strong><br>常见问题与提示</td>
+                <td>
+                    <pre>// 1. 必须使用 this.physics.add.sprite() 创建精灵，而不是 this.add.sprite()
+// 2. 静态物体用 this.physics.add.staticSprite()
+// 3. 检测方向时，body.touching 和 body.blocked 只对静态物体和世界边界可靠
+// 4. 动态物体之间的碰撞方向，最好通过计算位置差手动判断
+// 5. 圆形碰撞箱时，dx/dy 的比值需要根据半径调整阈值
+// 6. 开启 debug 模式可以直观查看碰撞箱形状：physics.arcade.debug = true</pre>
+                </td>
+                <td class="copy-btn-cell"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p style="color: gray; margin-top: 2em;">提示：点击每行最右侧的“复制”按钮，即可复制对应代码块中的全部代码。</p>
+
+    <script>
+        (function() {
+            // 为每个带有 copy-btn-cell 类的单元格添加复制按钮
+            const copyCells = document.querySelectorAll('.copy-btn-cell');
+            copyCells.forEach((cell) => {
+                // 获取当前行（tr）
+                const row = cell.parentNode;
+                // 获取第二列（代码列）
+                const codeTd = row.cells[1];
+                if (!codeTd) return;
+
+                // 获取代码文本（优先取 <pre> 内的文本）
+                let codeElem = codeTd.querySelector('pre');
+                if (!codeElem) return;
+
+                const codeText = codeElem.innerText;
+
+                // 创建复制按钮
+                const btn = document.createElement('button');
+                btn.textContent = '📋 复制';
+                btn.style.cursor = 'pointer';
+                btn.style.padding = '2px 8px';
+                btn.style.fontSize = '12px';
+
+                btn.addEventListener('click', async (e) => {
+                    e.stopPropagation();
+                    try {
+                        await navigator.clipboard.writeText(codeText);
+                        const originalText = btn.textContent;
+                        btn.textContent = '✅ 已复制';
+                        setTimeout(() => {
+                            btn.textContent = originalText;
+                        }, 1500);
+                    } catch (err) {
+                        alert('复制失败，请手动复制');
+                    }
+                });
+
+                cell.appendChild(btn);
+            });
+        })();
+    </script>
+</body>
+</html>
