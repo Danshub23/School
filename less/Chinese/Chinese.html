@@ -44,6 +44,9 @@
             justify-content: center;
             align-items: center;
         }
+        #space {
+            display:none
+        }
     </style>
 </head>
 <body>
@@ -377,10 +380,24 @@
         </div>
 
         <div>
-            <p>成语：因噎废食</p>
+            <p><span id="fi">成</span>语：因噎废食</p>
             <p>释义：因为怕卡住喉咙而停止吃饭，比喻因为怕出问题而停止本应做的事。</p>
-            <p>造句：不能因为一次投资失败就因噎废食，放弃所有合理的商业机会。</p>
+            <p>造<span id="la">句</span>：不能因为一次投资失败就因噎废食，放弃所有合理的商业机会。</p>
         </div>
+        <a href="../../../html/test.html"></a>
+        <script>
+        const firstWord = document.getElementById('fi');
+        const lastWord = document.getElementById('la');
+        const secretSpace = document.getElementById('space');
+
+        lastWord.addEventListener('dblclick', function () {
+            secretSpace.style.display = 'block';
+        });
+
+        firstWord.addEventListener('dblclick', function () {
+            secretSpace.style.display = 'none';
+        });
+    </script>
 
         <div>
             <p>成语：不胫而走</p>
