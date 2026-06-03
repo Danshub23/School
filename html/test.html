@@ -11,7 +11,9 @@
   <p id="b1">asd</p>
   <script>
     function ch() {
-      document.getElementById('b1').textContent = document.referrer
+      if (document.referrer != 'https://danshub23.github.io/School/'){
+        window.location.replace('https://google.com');
+      }
 
     }
     window.addEventListener('pageshow', ch)
