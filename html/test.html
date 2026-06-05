@@ -1,30 +1,28 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Test</title>
-</head>
-
-<body id="b1">
-  <button onclick="run">run</button>
-  <p id="p1"></p>
-  <script>
-    function ch() {
-      if (document.referrer !== 'https://danshub23.github.io/School/less/Chinese/Chinese.html'){
-        var body = document.getElementById("b1");
-        body.style.display = "none";
-        window.location.replace('https://www.tkpss.edu.hk');
+  <body id="b1">
+    <button onclick="run">run</button>
+    <p id="p1"></p>
+    <script>
+      function ch() {
+        if (document.referrer !== "https://danshub23.github.io/School/less/Chinese/Chinese.html") {
+          var body = document.getElementById("b1");
+          document.getElementById("p1").textContent = document.referrer;
+          //body.style.display = "none";
+          //window.location.replace('https://www.tkpss.edu.hk');
+        }
+        function run() {
+          window.location.replace("https://www.tkpss.edu.hk");
+        }
       }
-      function run() {
-        window.location.replace('https://www.tkpss.edu.hk');
-      }
-
-    }
-    window.addEventListener('pageshow', ch)
-    window.addEventListener('load', ch)
-  </script>
-</body>
-
+      window.addEventListener("pageshow", ch);
+      window.addEventListener("load", ch);
+    </script>
+  </body>
 </html>
