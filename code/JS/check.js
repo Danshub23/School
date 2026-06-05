@@ -7,6 +7,10 @@ function check(link) {
 function run() {
         window.location.replace("https://www.tkpss.edu.hk");
       }
-window.addEventListener("pageshow", check);
-      window.addEventListener("load", check);
+window.addEventListener("pageshow", function(){
+        check("https://danshub23.github.io/School/code/test.html")
+});
+      window.addEventListener("load", function(){
+        check("https://danshub23.github.io/School/code/test.html")
+});
       document.getElementById("butt1").addEventListener("click", run);
