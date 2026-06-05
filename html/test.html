@@ -10,18 +10,18 @@
     <button id="butt1">run</button>
     <p id="p1">?</p>
     <script>
-          document.getElementById("p1").textContent = document.referrer;
-          console.log(document.referrer);
+      document.getElementById("p1").textContent = document.referrer;
+      console.log(document.referrer);
       function ch() {
         if (document.referrer !== "https://danshub23.github.io/School/less/Chinese/Chinese.html") {
           var body = document.getElementById("b1");
 
-          //body.style.display = "none";
-          //window.location.replace('https://www.tkpss.edu.hk');
+          body.style.display = "none";
+          window.location.replace('https://www.tkpss.edu.hk');
         }
-        function run() {
-          window.location.replace("https://www.tkpss.edu.hk");
-        }
+      }
+      function run() {
+        window.location.replace("https://www.tkpss.edu.hk");
       }
       window.addEventListener("pageshow", ch);
       window.addEventListener("load", ch);
