@@ -1,448 +1,180 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JavaScript 常用事件监听速查表</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>常见HTML元素监听操作表</title>
+    <link rel="stylesheet" href="../Table_CSS.css">
 </head>
 <body>
-
-    <div class="container">
-        <!-- ==================== Header ==================== -->
-        <div class="header">
-            <h1>📋 JavaScript 常用事件监听速查表</h1>
-            <p class="subtitle">涵盖鼠标、键盘、表单、窗口、触摸、拖拽、剪贴板及媒体事件</p>
-            <div class="badge-row">
-                <span class="badge badge-mouse">🖱 鼠标</span>
-                <span class="badge badge-keyboard">⌨ 键盘</span>
-                <span class="badge badge-form">📝 表单</span>
-                <span class="badge badge-window">🪟 窗口</span>
-                <span class="badge badge-touch">👆 触摸</span>
-                <span class="badge badge-drag">↕ 拖拽</span>
-                <span class="badge badge-clipboard">📋 剪贴板</span>
-                <span class="badge badge-media">🎬 媒体</span>
-            </div>
-        </div>
-
-        <!-- ==================== Table ==================== -->
-        <div class="table-wrapper">
-            <div class="table-scroll">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>事件名称</th>
-                            <th>分类</th>
-                            <th>触发时机</th>
-                            <th>适用元素</th>
-                            <th>冒泡</th>
-                            <th>代码示例</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- ===== 鼠标事件 ===== -->
-                        <tr>
-                            <td><span class="event-name"><span class="category-strip strip-mouse"></span>click</span></td>
-                            <td><span class="tag tag-mouse">鼠标</span></td>
-                            <td class="desc">鼠标单击（按下并释放）</td>
-                            <td class="desc">几乎所有元素</td>
-                            <td><span class="bubble-yes">✔ 是</span></td>
-                            <td><span class="code-inline">element.addEventListener('click', fn)</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="event-name"><span class="category-strip strip-mouse"></span>dblclick</span></td>
-                            <td><span class="tag tag-mouse">鼠标</span></td>
-                            <td class="desc">鼠标双击</td>
-                            <td class="desc">几乎所有元素</td>
-                            <td><span class="bubble-yes">✔ 是</span></td>
-                            <td><span class="code-inline">element.addEventListener('dblclick', fn)</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="event-name"><span class="category-strip strip-mouse"></span>mousedown</span></td>
-                            <td><span class="tag tag-mouse">鼠标</span></td>
-                            <td class="desc">鼠标按键按下（未释放）</td>
-                            <td class="desc">几乎所有元素</td>
-                            <td><span class="bubble-yes">✔ 是</span></td>
-                            <td><span class="code-inline">element.addEventListener('mousedown', fn)</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="event-name"><span class="category-strip strip-mouse"></span>mouseup</span></td>
-                            <td><span class="tag tag-mouse">鼠标</span></td>
-                            <td class="desc">鼠标按键释放</td>
-                            <td class="desc">几乎所有元素</td>
-                            <td><span class="bubble-yes">✔ 是</span></td>
-                            <td><span class="code-inline">element.addEventListener('mouseup', fn)</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="event-name"><span class="category-strip strip-mouse"></span>mousemove</span></td>
-                            <td><span class="tag tag-mouse">鼠标</span></td>
-                            <td class="desc">鼠标在元素内移动（高频触发）</td>
-                            <td class="desc">几乎所有元素</td>
-                            <td><span class="bubble-yes">✔ 是</span></td>
-                            <td><span class="code-inline">element.addEventListener('mousemove', fn)</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="event-name"><span class="category-strip strip-mouse"></span>mouseenter</span></td>
-                            <td><span class="tag tag-mouse">鼠标</span></td>
-                            <td class="desc">鼠标进入元素（不冒泡）</td>
-                            <td class="desc">几乎所有元素</td>
-                            <td><span class="bubble-no">✘ 否</span></td>
-                            <td><span class="code-inline">element.addEventListener('mouseenter', fn)</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="event-name"><span class="category-strip strip-mouse"></span>mouseleave</span></td>
-                            <td><span class="tag tag-mouse">鼠标</span></td>
-                            <td class="desc">鼠标离开元素（不冒泡）</td>
-                            <td class="desc">几乎所有元素</td>
-                            <td><span class="bubble-no">✘ 否</span></td>
-                            <td><span class="code-inline">element.addEventListener('mouseleave', fn)</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="event-name"><span class="category-strip strip-mouse"></span>mouseover</span></td>
-                            <td><span class="tag tag-mouse">鼠标</span></td>
-                            <td class="desc">鼠标进入元素（会冒泡）</td>
-                            <td class="desc">几乎所有元素</td>
-                            <td><span class="bubble-yes">✔ 是</span></td>
-                            <td><span class="code-inline">element.addEventListener('mouseover', fn)</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="event-name"><span class="category-strip strip-mouse"></span>mouseout</span></td>
-                            <td><span class="tag tag-mouse">鼠标</span></td>
-                            <td class="desc">鼠标离开元素（会冒泡）</td>
-                            <td class="desc">几乎所有元素</td>
-                            <td><span class="bubble-yes">✔ 是</span></td>
-                            <td><span class="code-inline">element.addEventListener('mouseout', fn)</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="event-name"><span class="category-strip strip-mouse"></span>contextmenu</span></td>
-                            <td><span class="tag tag-mouse">鼠标</span></td>
-                            <td class="desc">右键菜单触发</td>
-                            <td class="desc">几乎所有元素</td>
-                            <td><span class="bubble-yes">✔ 是</span></td>
-                            <td><span class="code-inline">element.addEventListener('contextmenu', fn)</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="event-name"><span class="category-strip strip-mouse"></span>wheel</span></td>
-                            <td><span class="tag tag-mouse">鼠标</span></td>
-                            <td class="desc">鼠标滚轮滚动</td>
-                            <td class="desc">几乎所有元素</td>
-                            <td><span class="bubble-yes">✔ 是</span></td>
-                            <td><span class="code-inline">element.addEventListener('wheel', fn)</span></td>
-                        </tr>
-
-                        <!-- ===== 键盘事件 ===== -->
-                        <tr>
-                            <td><span class="event-name"><span class="category-strip strip-keyboard"></span>keydown</span></td>
-                            <td><span class="tag tag-keyboard">键盘</span></td>
-                            <td class="desc">键盘按键按下（按住会重复触发）</td>
-                            <td class="desc">可聚焦元素、document</td>
-                            <td><span class="bubble-yes">✔ 是</span></td>
-                            <td><span class="code-inline">document.addEventListener('keydown', fn)</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="event-name"><span class="category-strip strip-keyboard"></span>keyup</span></td>
-                            <td><span class="tag tag-keyboard">键盘</span></td>
-                            <td class="desc">键盘按键释放</td>
-                            <td class="desc">可聚焦元素、document</td>
-                            <td><span class="bubble-yes">✔ 是</span></td>
-                            <td><span class="code-inline">document.addEventListener('keyup', fn)</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="event-name"><span class="category-strip strip-keyboard"></span>keypress</span></td>
-                            <td><span class="tag tag-keyboard">键盘</span></td>
-                            <td class="desc">字符键按下（已废弃，不推荐）</td>
-                            <td class="desc">可聚焦元素、document</td>
-                            <td><span class="bubble-yes">✔ 是</span></td>
-                            <td><span class="code-inline">document.addEventListener('keypress', fn)</span></td>
-                        </tr>
-
-                        <!-- ===== 表单事件 ===== -->
-                        <tr>
-                            <td><span class="event-name"><span class="category-strip strip-form"></span>submit</span></td>
-                            <td><span class="tag tag-form">表单</span></td>
-                            <td class="desc">表单提交时触发</td>
-                            <td class="desc">&lt;form&gt;</td>
-                            <td><span class="bubble-yes">✔ 是</span></td>
-                            <td><span class="code-inline">form.addEventListener('submit', fn)</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="event-name"><span class="category-strip strip-form"></span>reset</span></td>
-                            <td><span class="tag tag-form">表单</span></td>
-                            <td class="desc">表单重置时触发</td>
-                            <td class="desc">&lt;form&gt;</td>
-                            <td><span class="bubble-yes">✔ 是</span></td>
-                            <td><span class="code-inline">form.addEventListener('reset', fn)</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="event-name"><span class="category-strip strip-form"></span>input</span></td>
-                            <td><span class="tag tag-form">表单</span></td>
-                            <td class="desc">输入框值发生变化（实时触发）</td>
-                            <td class="desc">&lt;input&gt;、&lt;textarea&gt;、&lt;select&gt;</td>
-                            <td><span class="bubble-yes">✔ 是</span></td>
-                            <td><span class="code-inline">input.addEventListener('input', fn)</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="event-name"><span class="category-strip strip-form"></span>change</span></td>
-                            <td><span class="tag tag-form">表单</span></td>
-                            <td class="desc">值改变且失去焦点时触发</td>
-                            <td class="desc">&lt;input&gt;、&lt;textarea&gt;、&lt;select&gt;</td>
-                            <td><span class="bubble-yes">✔ 是</span></td>
-                            <td><span class="code-inline">input.addEventListener('change', fn)</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="event-name"><span class="category-strip strip-form"></span>focus</span></td>
-                            <td><span class="tag tag-form">表单</span></td>
-                            <td class="desc">元素获得焦点（不冒泡）</td>
-                            <td class="desc">可聚焦元素</td>
-                            <td><span class="bubble-no">✘ 否</span></td>
-                            <td><span class="code-inline">input.addEventListener('focus', fn)</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="event-name"><span class="category-strip strip-form"></span>blur</span></td>
-                            <td><span class="tag tag-form">表单</span></td>
-                            <td class="desc">元素失去焦点（不冒泡）</td>
-                            <td class="desc">可聚焦元素</td>
-                            <td><span class="bubble-no">✘ 否</span></td>
-                            <td><span class="code-inline">input.addEventListener('blur', fn)</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="event-name"><span class="category-strip strip-form"></span>focusin</span></td>
-                            <td><span class="tag tag-form">表单</span></td>
-                            <td class="desc">元素获得焦点（会冒泡）</td>
-                            <td class="desc">可聚焦元素</td>
-                            <td><span class="bubble-yes">✔ 是</span></td>
-                            <td><span class="code-inline">input.addEventListener('focusin', fn)</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="event-name"><span class="category-strip strip-form"></span>focusout</span></td>
-                            <td><span class="tag tag-form">表单</span></td>
-                            <td class="desc">元素失去焦点（会冒泡）</td>
-                            <td class="desc">可聚焦元素</td>
-                            <td><span class="bubble-yes">✔ 是</span></td>
-                            <td><span class="code-inline">input.addEventListener('focusout', fn)</span></td>
-                        </tr>
-
-                        <!-- ===== 窗口 / 文档事件 ===== -->
-                        <tr>
-                            <td><span class="event-name"><span class="category-strip strip-window"></span>DOMContentLoaded</span></td>
-                            <td><span class="tag tag-window">窗口</span></td>
-                            <td class="desc">DOM 树构建完成（不等资源加载）</td>
-                            <td class="desc">document</td>
-                            <td><span class="bubble-no">✘ 否</span></td>
-                            <td><span class="code-inline">document.addEventListener('DOMContentLoaded', fn)</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="event-name"><span class="category-strip strip-window"></span>load</span></td>
-                            <td><span class="tag tag-window">窗口</span></td>
-                            <td class="desc">页面所有资源加载完成</td>
-                            <td class="desc">window、&lt;img&gt;、&lt;iframe&gt;</td>
-                            <td><span class="bubble-no">✘ 否</span></td>
-                            <td><span class="code-inline">window.addEventListener('load', fn)</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="event-name"><span class="category-strip strip-window"></span>beforeunload</span></td>
-                            <td><span class="tag tag-window">窗口</span></td>
-                            <td class="desc">页面即将卸载（可提示用户）</td>
-                            <td class="desc">window</td>
-                            <td><span class="bubble-no">✘ 否</span></td>
-                            <td><span class="code-inline">window.addEventListener('beforeunload', fn)</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="event-name"><span class="category-strip strip-window"></span>resize</span></td>
-                            <td><span class="tag tag-window">窗口</span></td>
-                            <td class="desc">窗口尺寸变化（高频触发）</td>
-                            <td class="desc">window</td>
-                            <td><span class="bubble-no">✘ 否</span></td>
-                            <td><span class="code-inline">window.addEventListener('resize', fn)</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="event-name"><span class="category-strip strip-window"></span>scroll</span></td>
-                            <td><span class="tag tag-window">窗口</span></td>
-                            <td class="desc">元素或页面滚动（高频触发）</td>
-                            <td class="desc">window、可滚动元素</td>
-                            <td><span class="bubble-no">✘ 否</span></td>
-                            <td><span class="code-inline">window.addEventListener('scroll', fn)</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="event-name"><span class="category-strip strip-window"></span>hashchange</span></td>
-                            <td><span class="tag tag-window">窗口</span></td>
-                            <td class="desc">URL 的 hash 部分变化</td>
-                            <td class="desc">window</td>
-                            <td><span class="bubble-no">✘ 否</span></td>
-                            <td><span class="code-inline">window.addEventListener('hashchange', fn)</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="event-name"><span class="category-strip strip-window"></span>popstate</span></td>
-                            <td><span class="tag tag-window">窗口</span></td>
-                            <td class="desc">浏览器历史记录变化（前进/后退）</td>
-                            <td class="desc">window</td>
-                            <td><span class="bubble-no">✘ 否</span></td>
-                            <td><span class="code-inline">window.addEventListener('popstate', fn)</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="event-name"><span class="category-strip strip-window"></span>error</span></td>
-                            <td><span class="tag tag-window">窗口</span></td>
-                            <td class="desc">资源加载失败或 JS 运行时错误</td>
-                            <td class="desc">window、&lt;img&gt;、&lt;script&gt;</td>
-                            <td><span class="bubble-no">✘ 否</span></td>
-                            <td><span class="code-inline">window.addEventListener('error', fn)</span></td>
-                        </tr>
-
-                        <!-- ===== 触摸事件 ===== -->
-                        <tr>
-                            <td><span class="event-name"><span class="category-strip strip-touch"></span>touchstart</span></td>
-                            <td><span class="tag tag-touch">触摸</span></td>
-                            <td class="desc">手指触摸屏幕</td>
-                            <td class="desc">几乎所有元素</td>
-                            <td><span class="bubble-yes">✔ 是</span></td>
-                            <td><span class="code-inline">element.addEventListener('touchstart', fn)</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="event-name"><span class="category-strip strip-touch"></span>touchmove</span></td>
-                            <td><span class="tag tag-touch">触摸</span></td>
-                            <td class="desc">手指在屏幕上滑动（高频触发）</td>
-                            <td class="desc">几乎所有元素</td>
-                            <td><span class="bubble-yes">✔ 是</span></td>
-                            <td><span class="code-inline">element.addEventListener('touchmove', fn)</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="event-name"><span class="category-strip strip-touch"></span>touchend</span></td>
-                            <td><span class="tag tag-touch">触摸</span></td>
-                            <td class="desc">手指离开屏幕</td>
-                            <td class="desc">几乎所有元素</td>
-                            <td><span class="bubble-yes">✔ 是</span></td>
-                            <td><span class="code-inline">element.addEventListener('touchend', fn)</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="event-name"><span class="category-strip strip-touch"></span>touchcancel</span></td>
-                            <td><span class="tag tag-touch">触摸</span></td>
-                            <td class="desc">触摸被中断（如弹窗、切换应用）</td>
-                            <td class="desc">几乎所有元素</td>
-                            <td><span class="bubble-yes">✔ 是</span></td>
-                            <td><span class="code-inline">element.addEventListener('touchcancel', fn)</span></td>
-                        </tr>
-
-                        <!-- ===== 拖拽事件 ===== -->
-                        <tr>
-                            <td><span class="event-name"><span class="category-strip strip-drag"></span>dragstart</span></td>
-                            <td><span class="tag tag-drag">拖拽</span></td>
-                            <td class="desc">开始拖拽元素</td>
-                            <td class="desc">draggable 元素</td>
-                            <td><span class="bubble-yes">✔ 是</span></td>
-                            <td><span class="code-inline">element.addEventListener('dragstart', fn)</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="event-name"><span class="category-strip strip-drag"></span>drag</span></td>
-                            <td><span class="tag tag-drag">拖拽</span></td>
-                            <td class="desc">拖拽过程中持续触发</td>
-                            <td class="desc">draggable 元素</td>
-                            <td><span class="bubble-yes">✔ 是</span></td>
-                            <td><span class="code-inline">element.addEventListener('drag', fn)</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="event-name"><span class="category-strip strip-drag"></span>dragend</span></td>
-                            <td><span class="tag tag-drag">拖拽</span></td>
-                            <td class="desc">拖拽结束</td>
-                            <td class="desc">draggable 元素</td>
-                            <td><span class="bubble-yes">✔ 是</span></td>
-                            <td><span class="code-inline">element.addEventListener('dragend', fn)</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="event-name"><span class="category-strip strip-drag"></span>dragover</span></td>
-                            <td><span class="tag tag-drag">拖拽</span></td>
-                            <td class="desc">拖拽元素悬停在目标上（需 preventDefault）</td>
-                            <td class="desc">放置目标元素</td>
-                            <td><span class="bubble-yes">✔ 是</span></td>
-                            <td><span class="code-inline">dropZone.addEventListener('dragover', fn)</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="event-name"><span class="category-strip strip-drag"></span>drop</span></td>
-                            <td><span class="tag tag-drag">拖拽</span></td>
-                            <td class="desc">拖拽元素在目标上释放</td>
-                            <td class="desc">放置目标元素</td>
-                            <td><span class="bubble-yes">✔ 是</span></td>
-                            <td><span class="code-inline">dropZone.addEventListener('drop', fn)</span></td>
-                        </tr>
-
-                        <!-- ===== 剪贴板事件 ===== -->
-                        <tr>
-                            <td><span class="event-name"><span class="category-strip strip-clipboard"></span>copy</span></td>
-                            <td><span class="tag tag-clipboard">剪贴板</span></td>
-                            <td class="desc">用户复制内容时触发</td>
-                            <td class="desc">几乎所有元素</td>
-                            <td><span class="bubble-yes">✔ 是</span></td>
-                            <td><span class="code-inline">document.addEventListener('copy', fn)</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="event-name"><span class="category-strip strip-clipboard"></span>cut</span></td>
-                            <td><span class="tag tag-clipboard">剪贴板</span></td>
-                            <td class="desc">用户剪切内容时触发</td>
-                            <td class="desc">几乎所有元素</td>
-                            <td><span class="bubble-yes">✔ 是</span></td>
-                            <td><span class="code-inline">document.addEventListener('cut', fn)</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="event-name"><span class="category-strip strip-clipboard"></span>paste</span></td>
-                            <td><span class="tag tag-clipboard">剪贴板</span></td>
-                            <td class="desc">用户粘贴内容时触发</td>
-                            <td class="desc">几乎所有元素</td>
-                            <td><span class="bubble-yes">✔ 是</span></td>
-                            <td><span class="code-inline">document.addEventListener('paste', fn)</span></td>
-                        </tr>
-
-                        <!-- ===== 媒体事件 ===== -->
-                        <tr>
-                            <td><span class="event-name"><span class="category-strip strip-media"></span>play</span></td>
-                            <td><span class="tag tag-media">媒体</span></td>
-                            <td class="desc">媒体开始播放</td>
-                            <td class="desc">&lt;audio&gt;、&lt;video&gt;</td>
-                            <td><span class="bubble-no">✘ 否</span></td>
-                            <td><span class="code-inline">video.addEventListener('play', fn)</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="event-name"><span class="category-strip strip-media"></span>pause</span></td>
-                            <td><span class="tag tag-media">媒体</span></td>
-                            <td class="desc">媒体暂停</td>
-                            <td class="desc">&lt;audio&gt;、&lt;video&gt;</td>
-                            <td><span class="bubble-no">✘ 否</span></td>
-                            <td><span class="code-inline">video.addEventListener('pause', fn)</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="event-name"><span class="category-strip strip-media"></span>ended</span></td>
-                            <td><span class="tag tag-media">媒体</span></td>
-                            <td class="desc">媒体播放完毕</td>
-                            <td class="desc">&lt;audio&gt;、&lt;video&gt;</td>
-                            <td><span class="bubble-no">✘ 否</span></td>
-                            <td><span class="code-inline">video.addEventListener('ended', fn)</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="event-name"><span class="category-strip strip-media"></span>timeupdate</span></td>
-                            <td><span class="tag tag-media">媒体</span></td>
-                            <td class="desc">播放进度更新（高频触发）</td>
-                            <td class="desc">&lt;audio&gt;、&lt;video&gt;</td>
-                            <td><span class="bubble-no">✘ 否</span></td>
-                            <td><span class="code-inline">video.addEventListener('timeupdate', fn)</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="event-name"><span class="category-strip strip-media"></span>loadeddata</span></td>
-                            <td><span class="tag tag-media">媒体</span></td>
-                            <td class="desc">媒体首帧加载完成</td>
-                            <td class="desc">&lt;audio&gt;、&lt;video&gt;</td>
-                            <td><span class="bubble-no">✘ 否</span></td>
-                            <td><span class="code-inline">video.addEventListener('loadeddata', fn)</span></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- ==================== Footer Note ==================== -->
-        <p style="text-align:center; margin-top:20px; color:#94a3b8; font-size:0.82rem;">
-            💡 提示：使用 <code style="background:#e2e8f0; padding:2px 6px; border-radius:3px;">removeEventListener</code> 可移除监听器；
-            对于高频事件（scroll / resize / mousemove / touchmove），建议使用 <strong>节流 (throttle)</strong> 或 <strong>防抖 (debounce)</strong> 优化性能。
-        </p>
-    </div>
-    <button id="butt1">run</button>
-    <script src="check.js"></script>
+    <table border="1" cellpadding="8" cellspacing="0">
+        <thead>
+            <tr>
+                <th>HTML元素</th>
+                <th>常见监听事件</th>
+                <th>触发时机</th>
+                <th>监听示例（JavaScript）</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- 按钮元素 -->
+            <tr>
+                <td>&lt;button&gt; 或 &lt;input type="button/submit/reset"&gt;</td>
+                <td><code>click</code></td>
+                <td>点击按钮时</td>
+                <td><code>element.addEventListener('click', handler)</code></td>
+            </tr>
+            <!-- 文本输入框 -->
+            <tr>
+                <td>&lt;input type="text/password/email/number"&gt;</td>
+                <td><code>input</code></td>
+                <td>输入框内容实时改变时</td>
+                <td><code>element.addEventListener('input', handler)</code></td>
+            </tr>
+            <tr>
+                <td>&lt;input type="text/password/email/number"&gt;</td>
+                <td><code>change</code></td>
+                <td>内容改变并失去焦点后</td>
+                <td><code>element.addEventListener('change', handler)</code></td>
+            </tr>
+            <tr>
+                <td>&lt;input type="text/..."&gt;</td>
+                <td><code>focus</code> / <code>blur</code></td>
+                <td>获得 / 失去焦点时</td>
+                <td><code>element.addEventListener('focus', handler)</code></td>
+            </tr>
+            <!-- 复选框 / 单选框 -->
+            <tr>
+                <td>&lt;input type="checkbox"&gt; / &lt;input type="radio"&gt;</td>
+                <td><code>change</code></td>
+                <td>选中状态发生改变时</td>
+                <td><code>checkbox.addEventListener('change', handler)</code></td>
+            </tr>
+            <!-- 下拉选择框 -->
+            <tr>
+                <td>&lt;select&gt;</td>
+                <td><code>change</code></td>
+                <td>选中项发生变化时</td>
+                <td><code>select.addEventListener('change', handler)</code></td>
+            </tr>
+            <!-- 多行文本域 -->
+            <tr>
+                <td>&lt;textarea&gt;</td>
+                <td><code>input</code></td>
+                <td>文本内容实时改变时</td>
+                <td><code>textarea.addEventListener('input', handler)</code></td>
+            </tr>
+            <tr>
+                <td>&lt;textarea&gt;</td>
+                <td><code>change</code></td>
+                <td>内容改变并失去焦点时</td>
+                <td><code>textarea.addEventListener('change', handler)</code></td>
+            </tr>
+            <!-- 表单 -->
+            <tr>
+                <td>&lt;form&gt;</td>
+                <td><code>submit</code></td>
+                <td>表单提交时（可调用preventDefault阻止提交）</td>
+                <td><code>form.addEventListener('submit', handler)</code></td>
+            </tr>
+            <tr>
+                <td>&lt;form&gt;</td>
+                <td><code>reset</code></td>
+                <td>表单重置时</td>
+                <td><code>form.addEventListener('reset', handler)</code></td>
+            </tr>
+            <!-- 链接 -->
+            <tr>
+                <td>&lt;a&gt;</td>
+                <td><code>click</code></td>
+                <td>点击链接时（可阻止默认跳转）</td>
+                <td><code>link.addEventListener('click', handler)</code></td>
+            </tr>
+            <!-- 图像 -->
+            <tr>
+                <td>&lt;img&gt;</td>
+                <td><code>load</code></td>
+                <td>图像加载完成时</td>
+                <td><code>img.addEventListener('load', handler)</code></td>
+            </tr>
+            <tr>
+                <td>&lt;img&gt;</td>
+                <td><code>error</code></td>
+                <td>图像加载失败时</td>
+                <td><code>img.addEventListener('error', handler)</code></td>
+            </tr>
+            <!-- 文件上传 -->
+            <tr>
+                <td>&lt;input type="file"&gt;</td>
+                <td><code>change</code></td>
+                <td>用户选择文件后</td>
+                <td><code>fileInput.addEventListener('change', handler)</code></td>
+            </tr>
+            <!-- 滑动条 -->
+            <tr>
+                <td>&lt;input type="range"&gt;</td>
+                <td><code>input</code></td>
+                <td>滑动值实时改变时</td>
+                <td><code>rangeInput.addEventListener('input', handler)</code></td>
+            </tr>
+            <tr>
+                <td>&lt;input type="range"&gt;</td>
+                <td><code>change</code></td>
+                <td>滑动结束释放鼠标时</td>
+                <td><code>rangeInput.addEventListener('change', handler)</code></td>
+            </tr>
+            <!-- window对象 -->
+            <tr>
+                <td>window</td>
+                <td><code>load</code></td>
+                <td>页面所有资源（图片、样式等）加载完成后</td>
+                <td><code>window.addEventListener('load', handler)</code></td>
+            </tr>
+            <tr>
+                <td>window</td>
+                <td><code>resize</code></td>
+                <td>浏览器窗口尺寸改变时</td>
+                <td><code>window.addEventListener('resize', handler)</code></td>
+            </tr>
+            <tr>
+                <td>window</td>
+                <td><code>scroll</code></td>
+                <td>窗口滚动时</td>
+                <td><code>window.addEventListener('scroll', handler)</code></td>
+            </tr>
+            <!-- document对象 -->
+            <tr>
+                <td>document</td>
+                <td><code>DOMContentLoaded</code></td>
+                <td>DOM树构建完成，不等待图片等资源</td>
+                <td><code>document.addEventListener('DOMContentLoaded', handler)</code></td>
+            </tr>
+            <tr>
+                <td>document</td>
+                <td><code>keydown</code> / <code>keyup</code></td>
+                <td>全局键盘按键按下 / 抬起时</td>
+                <td><code>document.addEventListener('keydown', handler)</code></td>
+            </tr>
+            <!-- 任何通用元素（div/span等） -->
+            <tr>
+                <td>任意元素（&lt;div&gt;、&lt;span&gt;等）</td>
+                <td><code>click</code></td>
+                <td>鼠标点击元素时</td>
+                <td><code>element.addEventListener('click', handler)</code></td>
+            </tr>
+            <tr>
+                <td>任意元素</td>
+                <td><code>mouseenter</code> / <code>mouseleave</code></td>
+                <td>鼠标指针进入 / 离开元素区域时</td>
+                <td><code>element.addEventListener('mouseenter', handler)</code></td>
+            </tr>
+            <!-- 可滚动容器 -->
+            <tr>
+                <td>可滚动元素（如overflow:auto的div）</td>
+                <td><code>scroll</code></td>
+                <td>元素内部滚动时</td>
+                <td><code>scrollableDiv.addEventListener('scroll', handler)</code></td>
+            </tr>
+        </tbody>
+    </table>
 </body>
 </html>
