@@ -1,528 +1,549 @@
-<table border="1" cellpadding="6" cellspacing="0"
-    style="border-collapse:collapse; width:100%; font-family: Arial, sans-serif; font-size: 14px;">
-    <thead style="background-color:#f2f2f2;">
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Element方法</title>
+    <link rel="stylesheet" href="../Table_CSS.css">
+  </head>
+  <body>
+    <table
+      border="1"
+      cellpadding="6"
+      cellspacing="0"
+      style="border-collapse: collapse; width: 100%; font-family: Arial, sans-serif; font-size: 14px"
+    >
+      <thead style="background-color: #f2f2f2">
         <tr>
-            <th style="width:15%;">分类</th>
-            <th style="width:18%;">方法 / 属性</th>
-            <th style="width:27%;">说明</th>
-            <th style="width:40%;">示例代码</th>
+          <th style="width: 15%">分类</th>
+          <th style="width: 18%">方法 / 属性</th>
+          <th style="width: 27%">说明</th>
+          <th style="width: 40%">示例代码</th>
         </tr>
-    </thead>
-    <tbody>
+      </thead>
+      <tbody>
         <!-- ========== 获取元素 ========== -->
         <tr>
-            <td rowspan="6"><b>获取元素</b></td>
-            <td><code>getElementById</code></td>
-            <td>通过 ID 获取元素</td>
-            <td>
-                <pre style="margin:0;"><code>document.getElementById('id')</code></pre>
-            </td>
+          <td rowspan="6"><b>获取元素</b></td>
+          <td><code>getElementById</code></td>
+          <td>通过 ID 获取元素</td>
+          <td>
+            <pre style="margin: 0"><code>document.getElementById('id')</code></pre>
+          </td>
         </tr>
         <tr>
-            <td><code>querySelector</code></td>
-            <td>通过 CSS 选择器获取第一个匹配元素</td>
-            <td>
-                <pre
-                    style="margin:0;"><code>document.querySelector('.class')<br>document.querySelector('#id')</code></pre>
-            </td>
+          <td><code>querySelector</code></td>
+          <td>通过 CSS 选择器获取第一个匹配元素</td>
+          <td>
+            <pre style="margin: 0"><code>document.querySelector('.class')<br>document.querySelector('#id')</code></pre>
+          </td>
         </tr>
         <tr>
-            <td><code>querySelectorAll</code></td>
-            <td>通过 CSS 选择器获取所有匹配元素（静态 NodeList）</td>
-            <td>
-                <pre style="margin:0;"><code>document.querySelectorAll('.class')</code></pre>
-            </td>
+          <td><code>querySelectorAll</code></td>
+          <td>通过 CSS 选择器获取所有匹配元素（静态 NodeList）</td>
+          <td>
+            <pre style="margin: 0"><code>document.querySelectorAll('.class')</code></pre>
+          </td>
         </tr>
         <tr>
-            <td><code>getElementsByClassName</code></td>
-            <td>通过类名获取元素（动态集合）</td>
-            <td>
-                <pre style="margin:0;"><code>document.getElementsByClassName('class')</code></pre>
-            </td>
+          <td><code>getElementsByClassName</code></td>
+          <td>通过类名获取元素（动态集合）</td>
+          <td>
+            <pre style="margin: 0"><code>document.getElementsByClassName('class')</code></pre>
+          </td>
         </tr>
         <tr>
-            <td><code>getElementsByTagName</code></td>
-            <td>通过标签名获取元素（动态集合）</td>
-            <td>
-                <pre style="margin:0;"><code>document.getElementsByTagName('div')</code></pre>
-            </td>
+          <td><code>getElementsByTagName</code></td>
+          <td>通过标签名获取元素（动态集合）</td>
+          <td>
+            <pre style="margin: 0"><code>document.getElementsByTagName('div')</code></pre>
+          </td>
         </tr>
         <tr>
-            <td><code>getElementsByName</code></td>
-            <td>通过 name 属性获取元素（动态集合）</td>
-            <td>
-                <pre style="margin:0;"><code>document.getElementsByName('username')</code></pre>
-            </td>
+          <td><code>getElementsByName</code></td>
+          <td>通过 name 属性获取元素（动态集合）</td>
+          <td>
+            <pre style="margin: 0"><code>document.getElementsByName('username')</code></pre>
+          </td>
         </tr>
 
         <!-- ========== 创建和添加元素 ========== -->
         <tr>
-            <td rowspan="8"><b>创建和添加元素</b></td>
-            <td><code>createElement</code></td>
-            <td>创建新元素</td>
-            <td>
-                <pre style="margin:0;"><code>const div = document.createElement('div')</code></pre>
-            </td>
+          <td rowspan="8"><b>创建和添加元素</b></td>
+          <td><code>createElement</code></td>
+          <td>创建新元素</td>
+          <td>
+            <pre style="margin: 0"><code>const div = document.createElement('div')</code></pre>
+          </td>
         </tr>
         <tr>
-            <td><code>createTextNode</code></td>
-            <td>创建文本节点</td>
-            <td>
-                <pre style="margin:0;"><code>const text = document.createTextNode('内容')</code></pre>
-            </td>
+          <td><code>createTextNode</code></td>
+          <td>创建文本节点</td>
+          <td>
+            <pre style="margin: 0"><code>const text = document.createTextNode('内容')</code></pre>
+          </td>
         </tr>
         <tr>
-            <td><code>appendChild</code></td>
-            <td>向父元素末尾添加子节点</td>
-            <td>
-                <pre style="margin:0;"><code>parent.appendChild(child)</code></pre>
-            </td>
+          <td><code>appendChild</code></td>
+          <td>向父元素末尾添加子节点</td>
+          <td>
+            <pre style="margin: 0"><code>parent.appendChild(child)</code></pre>
+          </td>
         </tr>
         <tr>
-            <td><code>insertBefore</code></td>
-            <td>在指定子节点之前插入新节点</td>
-            <td>
-                <pre style="margin:0;"><code>parent.insertBefore(newNode, referenceNode)</code></pre>
-            </td>
+          <td><code>insertBefore</code></td>
+          <td>在指定子节点之前插入新节点</td>
+          <td>
+            <pre style="margin: 0"><code>parent.insertBefore(newNode, referenceNode)</code></pre>
+          </td>
         </tr>
         <tr>
-            <td><code>append</code></td>
-            <td>在元素末尾追加多个节点或文本</td>
-            <td>
-                <pre style="margin:0;"><code>element.append(node1, '文本', node2)</code></pre>
-            </td>
+          <td><code>append</code></td>
+          <td>在元素末尾追加多个节点或文本</td>
+          <td>
+            <pre style="margin: 0"><code>element.append(node1, '文本', node2)</code></pre>
+          </td>
         </tr>
         <tr>
-            <td><code>prepend</code></td>
-            <td>在元素开头插入多个节点或文本</td>
-            <td>
-                <pre style="margin:0;"><code>element.prepend(node)</code></pre>
-            </td>
+          <td><code>prepend</code></td>
+          <td>在元素开头插入多个节点或文本</td>
+          <td>
+            <pre style="margin: 0"><code>element.prepend(node)</code></pre>
+          </td>
         </tr>
         <tr>
-            <td><code>innerHTML</code></td>
-            <td>通过 HTML 字符串设置内容</td>
-            <td>
-                <pre style="margin:0;"><code>element.innerHTML = '&lt;span&gt;文本&lt;/span&gt;'</code></pre>
-            </td>
+          <td><code>innerHTML</code></td>
+          <td>通过 HTML 字符串设置内容</td>
+          <td>
+            <pre style="margin: 0"><code>element.innerHTML = '&lt;span&gt;文本&lt;/span&gt;'</code></pre>
+          </td>
         </tr>
         <tr>
-            <td><code>insertAdjacentHTML</code></td>
-            <td>在指定位置插入 HTML 字符串</td>
-            <td>
-                <pre
-                    style="margin:0;"><code>element.insertAdjacentHTML('beforeend', '&lt;span&gt;文本&lt;/span&gt;')<br>// 位置: beforebegin, afterbegin, beforeend, afterend</code></pre>
-            </td>
+          <td><code>insertAdjacentHTML</code></td>
+          <td>在指定位置插入 HTML 字符串</td>
+          <td>
+            <pre
+              style="margin: 0"
+            ><code>element.insertAdjacentHTML('beforeend', '&lt;span&gt;文本&lt;/span&gt;')<br>// 位置: beforebegin, afterbegin, beforeend, afterend</code></pre>
+          </td>
         </tr>
 
         <!-- ========== 删除和替换 ========== -->
         <tr>
-            <td rowspan="4"><b>删除和替换</b></td>
-            <td><code>remove</code></td>
-            <td>直接删除元素自身</td>
-            <td>
-                <pre style="margin:0;"><code>element.remove()</code></pre>
-            </td>
+          <td rowspan="4"><b>删除和替换</b></td>
+          <td><code>remove</code></td>
+          <td>直接删除元素自身</td>
+          <td>
+            <pre style="margin: 0"><code>element.remove()</code></pre>
+          </td>
         </tr>
         <tr>
-            <td><code>removeChild</code></td>
-            <td>通过父元素删除子元素</td>
-            <td>
-                <pre style="margin:0;"><code>parent.removeChild(child)</code></pre>
-            </td>
+          <td><code>removeChild</code></td>
+          <td>通过父元素删除子元素</td>
+          <td>
+            <pre style="margin: 0"><code>parent.removeChild(child)</code></pre>
+          </td>
         </tr>
         <tr>
-            <td><code>replaceChild</code></td>
-            <td>替换子元素（父元素调用）</td>
-            <td>
-                <pre style="margin:0;"><code>parent.replaceChild(newChild, oldChild)</code></pre>
-            </td>
+          <td><code>replaceChild</code></td>
+          <td>替换子元素（父元素调用）</td>
+          <td>
+            <pre style="margin: 0"><code>parent.replaceChild(newChild, oldChild)</code></pre>
+          </td>
         </tr>
         <tr>
-            <td><code>replaceWith</code></td>
-            <td>用新节点替换当前元素</td>
-            <td>
-                <pre style="margin:0;"><code>element.replaceWith(newElement)</code></pre>
-            </td>
+          <td><code>replaceWith</code></td>
+          <td>用新节点替换当前元素</td>
+          <td>
+            <pre style="margin: 0"><code>element.replaceWith(newElement)</code></pre>
+          </td>
         </tr>
 
         <!-- ========== 属性和内容操作 ========== -->
         <tr>
-            <td rowspan="13"><b>属性和内容操作</b></td>
-            <td><code>id / className</code> <br>(直接属性)</td>
-            <td>直接设置标准属性</td>
-            <td>
-                <pre style="margin:0;"><code>element.id = 'myId'<br>element.className = 'box'</code></pre>
-            </td>
+          <td rowspan="13"><b>属性和内容操作</b></td>
+          <td><code>id / className</code> <br />(直接属性)</td>
+          <td>直接设置标准属性</td>
+          <td>
+            <pre style="margin: 0"><code>element.id = 'myId'<br>element.className = 'box'</code></pre>
+          </td>
         </tr>
         <tr>
-            <td><code>getAttribute</code></td>
-            <td>读取指定属性值</td>
-            <td>
-                <pre style="margin:0;"><code>element.getAttribute('href')</code></pre>
-            </td>
+          <td><code>getAttribute</code></td>
+          <td>读取指定属性值</td>
+          <td>
+            <pre style="margin: 0"><code>element.getAttribute('href')</code></pre>
+          </td>
         </tr>
         <tr>
-            <td><code>setAttribute</code></td>
-            <td>设置属性值</td>
-            <td>
-                <pre style="margin:0;"><code>element.setAttribute('data-id', '123')</code></pre>
-            </td>
+          <td><code>setAttribute</code></td>
+          <td>设置属性值</td>
+          <td>
+            <pre style="margin: 0"><code>element.setAttribute('data-id', '123')</code></pre>
+          </td>
         </tr>
         <tr>
-            <td><code>removeAttribute</code></td>
-            <td>移除属性</td>
-            <td>
-                <pre style="margin:0;"><code>element.removeAttribute('title')</code></pre>
-            </td>
+          <td><code>removeAttribute</code></td>
+          <td>移除属性</td>
+          <td>
+            <pre style="margin: 0"><code>element.removeAttribute('title')</code></pre>
+          </td>
         </tr>
         <tr>
-            <td><code>hasAttribute</code></td>
-            <td>判断是否拥有某属性</td>
-            <td>
-                <pre style="margin:0;"><code>element.hasAttribute('disabled')</code></pre>
-            </td>
+          <td><code>hasAttribute</code></td>
+          <td>判断是否拥有某属性</td>
+          <td>
+            <pre style="margin: 0"><code>element.hasAttribute('disabled')</code></pre>
+          </td>
         </tr>
         <tr>
-            <td><code>toggleAttribute</code></td>
-            <td>切换属性的存在状态</td>
-            <td>
-                <pre style="margin:0;"><code>element.toggleAttribute('hidden')</code></pre>
-            </td>
+          <td><code>toggleAttribute</code></td>
+          <td>切换属性的存在状态</td>
+          <td>
+            <pre style="margin: 0"><code>element.toggleAttribute('hidden')</code></pre>
+          </td>
         </tr>
         <tr>
-            <td><code>classList.add</code></td>
-            <td>添加类名</td>
-            <td>
-                <pre style="margin:0;"><code>element.classList.add('active')</code></pre>
-            </td>
+          <td><code>classList.add</code></td>
+          <td>添加类名</td>
+          <td>
+            <pre style="margin: 0"><code>element.classList.add('active')</code></pre>
+          </td>
         </tr>
         <tr>
-            <td><code>classList.remove</code></td>
-            <td>移除类名</td>
-            <td>
-                <pre style="margin:0;"><code>element.classList.remove('old')</code></pre>
-            </td>
+          <td><code>classList.remove</code></td>
+          <td>移除类名</td>
+          <td>
+            <pre style="margin: 0"><code>element.classList.remove('old')</code></pre>
+          </td>
         </tr>
         <tr>
-            <td><code>classList.toggle</code></td>
-            <td>切换类名（有则删，无则加）</td>
-            <td>
-                <pre style="margin:0;"><code>element.classList.toggle('dark')</code></pre>
-            </td>
+          <td><code>classList.toggle</code></td>
+          <td>切换类名（有则删，无则加）</td>
+          <td>
+            <pre style="margin: 0"><code>element.classList.toggle('dark')</code></pre>
+          </td>
         </tr>
         <tr>
-            <td><code>classList.contains</code></td>
-            <td>判断是否包含指定类名</td>
-            <td>
-                <pre style="margin:0;"><code>element.classList.contains('active')</code></pre>
-            </td>
+          <td><code>classList.contains</code></td>
+          <td>判断是否包含指定类名</td>
+          <td>
+            <pre style="margin: 0"><code>element.classList.contains('active')</code></pre>
+          </td>
         </tr>
         <tr>
-            <td><code>textContent</code></td>
-            <td>读取或设置纯文本内容</td>
-            <td>
-                <pre style="margin:0;"><code>element.textContent = '纯文本'</code></pre>
-            </td>
+          <td><code>textContent</code></td>
+          <td>读取或设置纯文本内容</td>
+          <td>
+            <pre style="margin: 0"><code>element.textContent = '纯文本'</code></pre>
+          </td>
         </tr>
         <tr>
-            <td><code>innerHTML</code></td>
-            <td>读取或设置 HTML 内容</td>
-            <td>
-                <pre style="margin:0;"><code>element.innerHTML = '&lt;b&gt;HTML内容&lt;/b&gt;'</code></pre>
-            </td>
+          <td><code>innerHTML</code></td>
+          <td>读取或设置 HTML 内容</td>
+          <td>
+            <pre style="margin: 0"><code>element.innerHTML = '&lt;b&gt;HTML内容&lt;/b&gt;'</code></pre>
+          </td>
         </tr>
         <tr>
-            <td><code>outerHTML</code></td>
-            <td>读取或替换包含自身的 HTML</td>
-            <td>
-                <pre style="margin:0;"><code>console.log(element.outerHTML)</code></pre>
-            </td>
+          <td><code>outerHTML</code></td>
+          <td>读取或替换包含自身的 HTML</td>
+          <td>
+            <pre style="margin: 0"><code>console.log(element.outerHTML)</code></pre>
+          </td>
         </tr>
 
         <!-- ========== 样式操作 ========== -->
         <tr>
-            <td rowspan="4"><b>样式操作</b></td>
-            <td><code>style.属性</code></td>
-            <td>设置内联样式</td>
-            <td>
-                <pre
-                    style="margin:0;"><code>element.style.color = 'red'<br>element.style.backgroundColor = '#fff'</code></pre>
-            </td>
+          <td rowspan="4"><b>样式操作</b></td>
+          <td><code>style.属性</code></td>
+          <td>设置内联样式</td>
+          <td>
+            <pre style="margin: 0"><code>element.style.color = 'red'<br>element.style.backgroundColor = '#fff'</code></pre>
+          </td>
         </tr>
         <tr>
-            <td><code>style.cssText</code></td>
-            <td>一次设置多个内联样式</td>
-            <td>
-                <pre style="margin:0;"><code>element.style.cssText = 'color: red; font-size: 16px;'</code></pre>
-            </td>
+          <td><code>style.cssText</code></td>
+          <td>一次设置多个内联样式</td>
+          <td>
+            <pre style="margin: 0"><code>element.style.cssText = 'color: red; font-size: 16px;'</code></pre>
+          </td>
         </tr>
         <tr>
-            <td><code>getComputedStyle</code></td>
-            <td>获取元素最终计算样式</td>
-            <td>
-                <pre style="margin:0;"><code>getComputedStyle(element).color</code></pre>
-            </td>
+          <td><code>getComputedStyle</code></td>
+          <td>获取元素最终计算样式</td>
+          <td>
+            <pre style="margin: 0"><code>getComputedStyle(element).color</code></pre>
+          </td>
         </tr>
         <tr>
-            <td><code>getComputedStyle(...).getPropertyValue</code></td>
-            <td>获取特定 CSS 属性值</td>
-            <td>
-                <pre style="margin:0;"><code>getComputedStyle(element).getPropertyValue('font-size')</code></pre>
-            </td>
+          <td><code>getComputedStyle(...).getPropertyValue</code></td>
+          <td>获取特定 CSS 属性值</td>
+          <td>
+            <pre style="margin: 0"><code>getComputedStyle(element).getPropertyValue('font-size')</code></pre>
+          </td>
         </tr>
 
         <!-- ========== 遍历节点 ========== -->
         <tr>
-            <td rowspan="12"><b>遍历节点</b></td>
-            <td><code>parentNode</code></td>
-            <td>父节点（所有节点）</td>
-            <td rowspan="6" style="vertical-align:middle; background:#fafafa;">
-                <em>← 这些属性所有节点类型（含文本、注释）</em>
-                <pre
-                    style="margin:0;"><code>element.parentNode<br>element.childNodes<br>element.firstChild<br>element.lastChild<br>element.nextSibling<br>element.previousSibling</code></pre>
-            </td>
+          <td rowspan="12"><b>遍历节点</b></td>
+          <td><code>parentNode</code></td>
+          <td>父节点（所有节点）</td>
+          <td rowspan="6" style="vertical-align: middle; background: #fafafa">
+            <em>← 这些属性所有节点类型（含文本、注释）</em>
+            <pre
+              style="margin: 0"
+            ><code>element.parentNode<br>element.childNodes<br>element.firstChild<br>element.lastChild<br>element.nextSibling<br>element.previousSibling</code></pre>
+          </td>
         </tr>
         <tr>
-            <td><code>childNodes</code></td>
-            <td>所有子节点</td>
+          <td><code>childNodes</code></td>
+          <td>所有子节点</td>
         </tr>
         <tr>
-            <td><code>firstChild</code></td>
-            <td>第一个子节点</td>
+          <td><code>firstChild</code></td>
+          <td>第一个子节点</td>
         </tr>
         <tr>
-            <td><code>lastChild</code></td>
-            <td>最后一个子节点</td>
+          <td><code>lastChild</code></td>
+          <td>最后一个子节点</td>
         </tr>
         <tr>
-            <td><code>nextSibling</code></td>
-            <td>下一个兄弟节点</td>
+          <td><code>nextSibling</code></td>
+          <td>下一个兄弟节点</td>
         </tr>
         <tr>
-            <td><code>previousSibling</code></td>
-            <td>上一个兄弟节点</td>
+          <td><code>previousSibling</code></td>
+          <td>上一个兄弟节点</td>
         </tr>
         <tr>
-            <td><code>parentElement</code></td>
-            <td>父元素（仅元素节点）</td>
-            <td rowspan="6" style="vertical-align:middle; background:#fafafa;">
-                <em>← 这些属性仅元素节点</em>
-                <pre
-                    style="margin:0;"><code>element.parentElement<br>element.children<br>element.firstElementChild<br>element.lastElementChild<br>element.nextElementSibling<br>element.previousElementSibling</code></pre>
-            </td>
+          <td><code>parentElement</code></td>
+          <td>父元素（仅元素节点）</td>
+          <td rowspan="6" style="vertical-align: middle; background: #fafafa">
+            <em>← 这些属性仅元素节点</em>
+            <pre
+              style="margin: 0"
+            ><code>element.parentElement<br>element.children<br>element.firstElementChild<br>element.lastElementChild<br>element.nextElementSibling<br>element.previousElementSibling</code></pre>
+          </td>
         </tr>
         <tr>
-            <td><code>children</code></td>
-            <td>所有子元素</td>
+          <td><code>children</code></td>
+          <td>所有子元素</td>
         </tr>
         <tr>
-            <td><code>firstElementChild</code></td>
-            <td>第一个子元素</td>
+          <td><code>firstElementChild</code></td>
+          <td>第一个子元素</td>
         </tr>
         <tr>
-            <td><code>lastElementChild</code></td>
-            <td>最后一个子元素</td>
+          <td><code>lastElementChild</code></td>
+          <td>最后一个子元素</td>
         </tr>
         <tr>
-            <td><code>nextElementSibling</code></td>
-            <td>下一个兄弟元素</td>
+          <td><code>nextElementSibling</code></td>
+          <td>下一个兄弟元素</td>
         </tr>
         <tr>
-            <td><code>previousElementSibling</code></td>
-            <td>上一个兄弟元素</td>
+          <td><code>previousElementSibling</code></td>
+          <td>上一个兄弟元素</td>
         </tr>
 
         <!-- ========== 事件处理 ========== -->
         <tr>
-            <td rowspan="4"><b>事件处理</b></td>
-            <td><code>addEventListener</code></td>
-            <td>绑定事件监听</td>
-            <td>
-                <pre
-                    style="margin:0;"><code>element.addEventListener('click', handler)<br>// 一次性事件<br>element.addEventListener('click', handler, { once: true })</code></pre>
-            </td>
+          <td rowspan="4"><b>事件处理</b></td>
+          <td><code>addEventListener</code></td>
+          <td>绑定事件监听</td>
+          <td>
+            <pre
+              style="margin: 0"
+            ><code>element.addEventListener('click', handler)<br>// 一次性事件<br>element.addEventListener('click', handler, { once: true })</code></pre>
+          </td>
         </tr>
         <tr>
-            <td><code>removeEventListener</code></td>
-            <td>移除事件监听</td>
-            <td>
-                <pre style="margin:0;"><code>element.removeEventListener('click', handler)</code></pre>
-            </td>
+          <td><code>removeEventListener</code></td>
+          <td>移除事件监听</td>
+          <td>
+            <pre style="margin: 0"><code>element.removeEventListener('click', handler)</code></pre>
+          </td>
         </tr>
         <tr>
-            <td><b>事件委托</b>（技术）</td>
-            <td>在父元素上监听子元素事件</td>
-            <td>
-                <pre
-                    style="margin:0;"><code>parent.addEventListener('click', (e) => {<br>  if (e.target.matches('.child')) {<br>    // 处理子元素点击<br>  }<br>})</code></pre>
-            </td>
+          <td><b>事件委托</b>（技术）</td>
+          <td>在父元素上监听子元素事件</td>
+          <td>
+            <pre
+              style="margin: 0"
+            ><code>parent.addEventListener('click', (e) => {<br>  if (e.target.matches('.child')) {<br>    // 处理子元素点击<br>  }<br>})</code></pre>
+          </td>
         </tr>
         <tr>
-            <td><code>dispatchEvent</code></td>
-            <td>手动触发事件</td>
-            <td>
-                <pre style="margin:0;"><code>element.dispatchEvent(new Event('click'))</code></pre>
-            </td>
+          <td><code>dispatchEvent</code></td>
+          <td>手动触发事件</td>
+          <td>
+            <pre style="margin: 0"><code>element.dispatchEvent(new Event('click'))</code></pre>
+          </td>
         </tr>
 
         <!-- ========== 元素位置和尺寸 ========== -->
         <tr>
-            <td rowspan="6"><b>元素位置和尺寸</b></td>
-            <td><code>getBoundingClientRect</code></td>
-            <td>获取相对视口的位置及尺寸</td>
-            <td>
-                <pre
-                    style="margin:0;"><code>const rect = element.getBoundingClientRect()<br>// rect.top, rect.left, rect.right, rect.bottom, rect.width, rect.height</code></pre>
-            </td>
+          <td rowspan="6"><b>元素位置和尺寸</b></td>
+          <td><code>getBoundingClientRect</code></td>
+          <td>获取相对视口的位置及尺寸</td>
+          <td>
+            <pre
+              style="margin: 0"
+            ><code>const rect = element.getBoundingClientRect()<br>// rect.top, rect.left, rect.right, rect.bottom, rect.width, rect.height</code></pre>
+          </td>
         </tr>
         <tr>
-            <td><code>scrollTop / scrollLeft</code></td>
-            <td>已滚动的像素数</td>
-            <td>
-                <pre style="margin:0;"><code>element.scrollTop<br>element.scrollLeft</code></pre>
-            </td>
+          <td><code>scrollTop / scrollLeft</code></td>
+          <td>已滚动的像素数</td>
+          <td>
+            <pre style="margin: 0"><code>element.scrollTop<br>element.scrollLeft</code></pre>
+          </td>
         </tr>
         <tr>
-            <td><code>scrollIntoView</code></td>
-            <td>滚动元素到可视区域</td>
-            <td>
-                <pre
-                    style="margin:0;"><code>element.scrollIntoView({ behavior: 'smooth', block: 'center' })</code></pre>
-            </td>
+          <td><code>scrollIntoView</code></td>
+          <td>滚动元素到可视区域</td>
+          <td>
+            <pre style="margin: 0"><code>element.scrollIntoView({ behavior: 'smooth', block: 'center' })</code></pre>
+          </td>
         </tr>
         <tr>
-            <td><code>offsetTop / offsetLeft /<br>offsetWidth / offsetHeight / offsetParent</code></td>
-            <td>相对定位父元素的偏移与尺寸（含边框）</td>
-            <td>
-                <pre
-                    style="margin:0;"><code>element.offsetTop<br>element.offsetLeft<br>element.offsetWidth<br>element.offsetHeight<br>element.offsetParent</code></pre>
-            </td>
+          <td>
+            <code>offsetTop / offsetLeft /<br />offsetWidth / offsetHeight / offsetParent</code>
+          </td>
+          <td>相对定位父元素的偏移与尺寸（含边框）</td>
+          <td>
+            <pre
+              style="margin: 0"
+            ><code>element.offsetTop<br>element.offsetLeft<br>element.offsetWidth<br>element.offsetHeight<br>element.offsetParent</code></pre>
+          </td>
         </tr>
         <tr>
-            <td><code>clientWidth / clientHeight</code></td>
-            <td>内容+内边距区域尺寸（不含边框）</td>
-            <td>
-                <pre style="margin:0;"><code>element.clientWidth<br>element.clientHeight</code></pre>
-            </td>
+          <td><code>clientWidth / clientHeight</code></td>
+          <td>内容+内边距区域尺寸（不含边框）</td>
+          <td>
+            <pre style="margin: 0"><code>element.clientWidth<br>element.clientHeight</code></pre>
+          </td>
         </tr>
         <tr>
-            <td><code>scrollWidth / scrollHeight</code></td>
-            <td>可滚动内容的总宽度/高度</td>
-            <td>
-                <pre style="margin:0;"><code>element.scrollWidth<br>element.scrollHeight</code></pre>
-            </td>
+          <td><code>scrollWidth / scrollHeight</code></td>
+          <td>可滚动内容的总宽度/高度</td>
+          <td>
+            <pre style="margin: 0"><code>element.scrollWidth<br>element.scrollHeight</code></pre>
+          </td>
         </tr>
 
         <!-- ========== 表单操作 ========== -->
         <tr>
-            <td rowspan="8"><b>表单操作</b></td>
-            <td><code>value</code></td>
-            <td>读取或设置输入值</td>
-            <td>
-                <pre style="margin:0;"><code>input.value = '新值'</code></pre>
-            </td>
+          <td rowspan="8"><b>表单操作</b></td>
+          <td><code>value</code></td>
+          <td>读取或设置输入值</td>
+          <td>
+            <pre style="margin: 0"><code>input.value = '新值'</code></pre>
+          </td>
         </tr>
         <tr>
-            <td><code>checked</code></td>
-            <td>复选框/单选框选中状态</td>
-            <td>
-                <pre style="margin:0;"><code>checkbox.checked = true</code></pre>
-            </td>
+          <td><code>checked</code></td>
+          <td>复选框/单选框选中状态</td>
+          <td>
+            <pre style="margin: 0"><code>checkbox.checked = true</code></pre>
+          </td>
         </tr>
         <tr>
-            <td><code>form.reset()</code></td>
-            <td>重置表单</td>
-            <td>
-                <pre style="margin:0;"><code>form.reset()</code></pre>
-            </td>
+          <td><code>form.reset()</code></td>
+          <td>重置表单</td>
+          <td>
+            <pre style="margin: 0"><code>form.reset()</code></pre>
+          </td>
         </tr>
         <tr>
-            <td><code>form.submit()</code></td>
-            <td>手动提交表单</td>
-            <td>
-                <pre style="margin:0;"><code>form.submit()</code></pre>
-            </td>
+          <td><code>form.submit()</code></td>
+          <td>手动提交表单</td>
+          <td>
+            <pre style="margin: 0"><code>form.submit()</code></pre>
+          </td>
         </tr>
         <tr>
-            <td><code>focus()</code></td>
-            <td>使元素获得焦点</td>
-            <td>
-                <pre style="margin:0;"><code>input.focus()</code></pre>
-            </td>
+          <td><code>focus()</code></td>
+          <td>使元素获得焦点</td>
+          <td>
+            <pre style="margin: 0"><code>input.focus()</code></pre>
+          </td>
         </tr>
         <tr>
-            <td><code>blur()</code></td>
-            <td>使元素失去焦点</td>
-            <td>
-                <pre style="margin:0;"><code>input.blur()</code></pre>
-            </td>
+          <td><code>blur()</code></td>
+          <td>使元素失去焦点</td>
+          <td>
+            <pre style="margin: 0"><code>input.blur()</code></pre>
+          </td>
         </tr>
         <tr>
-            <td><code>select()</code></td>
-            <td>选中输入框内容</td>
-            <td>
-                <pre style="margin:0;"><code>input.select()</code></pre>
-            </td>
+          <td><code>select()</code></td>
+          <td>选中输入框内容</td>
+          <td>
+            <pre style="margin: 0"><code>input.select()</code></pre>
+          </td>
         </tr>
         <tr>
-            <td><code>new FormData(form)</code></td>
-            <td>创建表单数据对象</td>
-            <td>
-                <pre style="margin:0;"><code>const data = new FormData(form)</code></pre>
-            </td>
+          <td><code>new FormData(form)</code></td>
+          <td>创建表单数据对象</td>
+          <td>
+            <pre style="margin: 0"><code>const data = new FormData(form)</code></pre>
+          </td>
         </tr>
 
         <!-- ========== 实用方法 ========== -->
         <tr>
-            <td rowspan="7"><b>实用方法</b></td>
-            <td><code>contains</code></td>
-            <td>判断是否包含某节点</td>
-            <td>
-                <pre style="margin:0;"><code>parent.contains(child)</code></pre>
-            </td>
+          <td rowspan="7"><b>实用方法</b></td>
+          <td><code>contains</code></td>
+          <td>判断是否包含某节点</td>
+          <td>
+            <pre style="margin: 0"><code>parent.contains(child)</code></pre>
+          </td>
         </tr>
         <tr>
-            <td><code>matches</code></td>
-            <td>判断元素是否匹配选择器</td>
-            <td>
-                <pre style="margin:0;"><code>element.matches('.selector')</code></pre>
-            </td>
+          <td><code>matches</code></td>
+          <td>判断元素是否匹配选择器</td>
+          <td>
+            <pre style="margin: 0"><code>element.matches('.selector')</code></pre>
+          </td>
         </tr>
         <tr>
-            <td><code>closest</code></td>
-            <td>沿 DOM 树向上查找最近的匹配祖先</td>
-            <td>
-                <pre style="margin:0;"><code>element.closest('.parent')</code></pre>
-            </td>
+          <td><code>closest</code></td>
+          <td>沿 DOM 树向上查找最近的匹配祖先</td>
+          <td>
+            <pre style="margin: 0"><code>element.closest('.parent')</code></pre>
+          </td>
         </tr>
         <tr>
-            <td><code>cloneNode</code></td>
-            <td>克隆节点（true为深拷贝）</td>
-            <td>
-                <pre style="margin:0;"><code>element.cloneNode(true)</code></pre>
-            </td>
+          <td><code>cloneNode</code></td>
+          <td>克隆节点（true为深拷贝）</td>
+          <td>
+            <pre style="margin: 0"><code>element.cloneNode(true)</code></pre>
+          </td>
         </tr>
         <tr>
-            <td><code>dataset</code></td>
-            <td>读取/写入 data-* 属性</td>
-            <td>
-                <pre style="margin:0;"><code>element.dataset.userId  // 对应 data-user-id</code></pre>
-            </td>
+          <td><code>dataset</code></td>
+          <td>读取/写入 data-* 属性</td>
+          <td>
+            <pre style="margin: 0"><code>element.dataset.userId  // 对应 data-user-id</code></pre>
+          </td>
         </tr>
         <tr>
-            <td><code>requestFullscreen</code></td>
-            <td>请求全屏显示</td>
-            <td>
-                <pre style="margin:0;"><code>element.requestFullscreen()</code></pre>
-            </td>
+          <td><code>requestFullscreen</code></td>
+          <td>请求全屏显示</td>
+          <td>
+            <pre style="margin: 0"><code>element.requestFullscreen()</code></pre>
+          </td>
         </tr>
         <tr>
-            <td><code>exitFullscreen</code></td>
-            <td>退出全屏</td>
-            <td>
-                <pre style="margin:0;"><code>document.exitFullscreen()</code></pre>
-            </td>
+          <td><code>exitFullscreen</code></td>
+          <td>退出全屏</td>
+          <td>
+            <pre style="margin: 0"><code>document.exitFullscreen()</code></pre>
+          </td>
         </tr>
-    </tbody>
-</table>
+      </tbody>
+    </table>
+  </body>
+</html>
