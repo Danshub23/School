@@ -1,11 +1,11 @@
 function check(link) {
         if (document.referrer !== link) {
           document.body.style.display = "none";
-          window.location.replace('https://www.tkpss.edu.hk');
+          window.location.replace('https://danshub23.github.io/School/code/test.html');
         }
       }
 function run() {
-        window.location.replace("https://www.tkpss.edu.hk");
+        window.location.replace("https://danshub23.github.io/School/code/test.html");
       }
 window.addEventListener("pageshow", function(){
         check("https://danshub23.github.io/School/code/test.html")
