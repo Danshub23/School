@@ -33,6 +33,13 @@ function checkAABB(a, b) {
     const bBottom = b.y + b.height / 2;
     return aLeft < bRight && aRight > bLeft && aTop < bBottom && aBottom > bTop;
 }
+function reflect(incidentAngle, normalAngle) {
+    let reflection = 2 * normalAngle - incidentAngle;
+    const PI = Math.PI;
+    const TWO_PI = 2 * PI;
+    reflection = ((reflection + PI) % TWO_PI + TWO_PI) % TWO_PI - PI;
+    return reflection;
+}
       var game = new Phaser.Game(config);
 
       function preload() {
@@ -51,12 +58,11 @@ function checkAABB(a, b) {
         this.bottom_line = this.add.rectangle(500, 550, 500, 10, this.line_color);
       }
       function update() {
-        let rad = this.player.de;
-        this.player.x += Math.cos(rad) * 2;
-        this.player.y += Math.sin(rad) * 2;
+        this.player.de;
+        this.player.x += Math.cos(this.player.de) * 2;
+        this.player.y += Math.sin(this.player.de) * 2;
         if (checkAABB(this.player,this.bottom_line)){
-          this.player.x = 500
-          this.player.y = 300
+          this.player.de = reflact(this.player.de,bottom_line)
         }
       }
     </script>
