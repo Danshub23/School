@@ -27,6 +27,17 @@
 
       function preload() {
         //this.load.image("", "");
+    function checkAABB(a, b) {
+    const aLeft   = a.x - a.width / 2;
+    const aRight  = a.x + a.width / 2;
+    const aTop    = a.y - a.height / 2;
+    const aBottom = a.y + a.height / 2;
+    const bLeft   = b.x - b.width / 2;
+    const bRight  = b.x + b.width / 2;
+    const bTop    = b.y - b.height / 2;
+    const bBottom = b.y + b.height / 2;
+    return aLeft < bRight && aRight > bLeft && aTop < bBottom && aBottom > bTop;
+}
       }
 
       function create() {
@@ -43,10 +54,11 @@
         let rad = this.player.de;
         this.player.x += Math.cos(rad) * 2;
         this.player.y += Math.sin(rad) * 2;
-        if (this.player.x >920){
-          this.player.x = -20
+        if (checkAABB(this.player,this.bottom){
+          this.player.x = 500
+          this.player.y = 300
         }
-        }
+      }
     </script>
   </body>
 </html>
