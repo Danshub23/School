@@ -54,8 +54,10 @@ function reflect(incidentAngle, normalAngle) {
         this.player.de = 1.5
         this.left_line = this.add.rectangle(250, 300, 10, 500, this.line_color);
         this.right_line = this.add.rectangle(750, 300, 10, 500, this.line_color);
-        this.top_line = this.add.rectangle(500, 50, 500, 10, this.line_color);
-        this.bottom_line = this.add.rectangle(500, 550, 500, 10, this.line_color);
+        this.top_line = this.add.rectangle(500, 50, 10, 500, this.line_color);
+        this.top_line.angle = 90;
+        this.bottom_line = this.add.rectangle(500, 550, 10, 500, this.line_color);
+        this.bottom_line.angle = 90;
       }
       function update() {
         this.player.de;
