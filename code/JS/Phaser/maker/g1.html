@@ -62,7 +62,7 @@ function reflect(incidentAngle, normalAngle) {
         this.player.x += Math.cos(this.player.de) * 2;
         this.player.y += Math.sin(this.player.de) * 2;
         if (checkAABB(this.player,this.bottom_line)){
-          this.player.de = reflact(this.player.de,bottom_line.rotation)
+          this.player.de = reflect(this.player.de,this.bottom_line.rotation)
         }
       }
     </script>
