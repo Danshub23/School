@@ -9,8 +9,8 @@
     <script>
       var config = {
         type: Phaser.AUTO,
-        width: 900,
-        height: 550,
+        width: 1000,
+        height: 600,
         backgroundColor: "0x00F2FF",
         scale: {
         autoCenter: Phaser.Scale.CENTER_BOTH  // 自动居中
@@ -31,9 +31,12 @@
 
       function create() {
         //this.player = this.add.sprite(400, 300, "ball");
-        this.player = this.add.rectangle(450, 275, 20, 20, 0xff0000);
+        this.player = this.add.rectangle(500, 300, 20, 20, 0xff0000);
+        this.left_line = this.add.rectangle(250, 300, 10, 250, 0xff0000);
+        this.right_line = this.add.rectangle(750, 300, 10, 250, 0xff0000);
+        this.top_line = this.add.rectangle(500, 50, 10, 250, 0xff0000);
+        this.bottom_line = this.add.rectangle(500, 550, 10, 250, 0xff0000);
       }
-
       function update() {
         this.player.x += 1
         if (this.player.x >920){
