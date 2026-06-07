@@ -22,12 +22,7 @@
           update: update,
         },
       };
-
-      var game = new Phaser.Game(config);
-
-      function preload() {
-        //this.load.image("", "");
-    function checkAABB(a, b) {
+function checkAABB(a, b) {
     const aLeft   = a.x - a.width / 2;
     const aRight  = a.x + a.width / 2;
     const aTop    = a.y - a.height / 2;
@@ -38,6 +33,11 @@
     const bBottom = b.y + b.height / 2;
     return aLeft < bRight && aRight > bLeft && aTop < bBottom && aBottom > bTop;
 }
+      var game = new Phaser.Game(config);
+
+      function preload() {
+        //this.load.image("", "");
+    
       }
 
       function create() {
@@ -54,7 +54,7 @@
         let rad = this.player.de;
         this.player.x += Math.cos(rad) * 2;
         this.player.y += Math.sin(rad) * 2;
-        if (checkAABB(this.player,this.bottom){
+        if (checkAABB(this.player,this.bottom_line)){
           this.player.x = 500
           this.player.y = 300
         }
