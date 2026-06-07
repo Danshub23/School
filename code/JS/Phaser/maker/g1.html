@@ -51,7 +51,7 @@ function reflect(incidentAngle, normalAngle) {
         this.line_color = 0x000000
         //this.player = this.add.sprite(400, 300, "ball");
         this.player = this.add.rectangle(500, 300, 20, 20, 0xff0000);
-        this.player.de = 1.5
+        this.player.Angl = 60
         this.left_line = this.add.rectangle(250, 300, 10, 500, this.line_color);
         this.right_line = this.add.rectangle(750, 300, 10, 500, this.line_color);
         this.top_line = this.add.rectangle(500, 50, 10, 500, this.line_color);
@@ -60,11 +60,11 @@ function reflect(incidentAngle, normalAngle) {
         this.bottom_line.angle = 90;
       }
       function update() {
-        this.player.de;
-        this.player.x += Math.cos(this.player.de) * 2;
-        this.player.y += Math.sin(this.player.de) * 2;
+        this.player.Angl;
+        this.player.x += Math.cos(this.player.Angl) * 2;
+        this.player.y += Math.sin(this.player.Angl) * 2;
         if (checkAABB(this.player,this.bottom_line)){
-          this.player.de = reflect(this.player.de,this.bottom_line.rotation)
+          this.player.de = reflect(this.player.Angl,this.bottom_line.rotation)
         }
       }
     </script>
