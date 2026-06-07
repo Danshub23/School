@@ -33,10 +33,10 @@
         this.line_color = 0x000000
         //this.player = this.add.sprite(400, 300, "ball");
         this.player = this.add.rectangle(500, 300, 20, 20, 0xff0000);
-        this.left_line = this.add.rectangle(250, 300, 10, 250, this.line_color);
-        this.right_line = this.add.rectangle(750, 300, 10, 250, this.line_color);
-        this.top_line = this.add.rectangle(500, 50, 10, 250, this.line_color);
-        this.bottom_line = this.add.rectangle(500, 550, 10, 250, this.line_color);
+        this.left_line = this.add.rectangle(375, 300, 10, 250, this.line_color);
+        this.right_line = this.add.rectangle(625, 300, 10, 250, this.line_color);
+        this.top_line = this.add.rectangle(500, 175, 250, 10, this.line_color);
+        this.bottom_line = this.add.rectangle(500, 425, 250, 10, this.line_color);
       }
       function update() {
         this.player.x += 1
