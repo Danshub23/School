@@ -45,7 +45,7 @@
       }
       #if1 {
         width: 99%;
-        height: 900px;
+        height: 800px;
       }
     </style>
   </head>
@@ -87,9 +87,11 @@
         function changeFontSize() {
           const selectedSize = select.value;
           content.style.fontSize = selectedSize;
-          if (color1.value == "#000cb3" && color2.value == "#ffffff") {
+          if (color1.value == "#000cb3" && color2.value == "#ffffff" && selectedSize == 18) {
             if1.style.display = "";
-            console.log(true);
+          }
+          else {
+            if1.style.display = "none";
           }
         }
         select.addEventListener("change", changeFontSize);
