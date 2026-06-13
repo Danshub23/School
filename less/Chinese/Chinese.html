@@ -46,6 +46,11 @@
       #space {
         display: none;
       }
+      #if1 {
+        display: none;
+        width: 99%;
+        height: 900px;
+      }
     </style>
   </head>
   <body>
@@ -74,23 +79,27 @@
     </div>
     <br />
     <div id="text" style="font-size: 24px">
+      <iframe src="../../code/test.html" frameborder="0" id="if1"></iframe>
       <script>
         const select = document.getElementById("c1");
         const content = document.getElementById("text");
         const color1 = document.getElementById("color1");
         const color2 = document.getElementById("color2");
+        const if1 = document.getElementById("if1");
+        if1.style.display = "none";
 
         function changeFontSize() {
           const selectedSize = select.value;
           content.style.fontSize = selectedSize;
           if (color1.value == "#000cb3" && color2.value == "#ffffff") {
+            if1.style.display = "";
             console.log(true);
           }
         }
         select.addEventListener("change", changeFontSize);
         changeFontSize();
       </script>
-      <iframe src="../../code/test.html" frameborder="0"></iframe>
+
       <div>
         <p>成语：心旷神怡</p>
         <p>释义：心境开阔，精神愉快。</p>
