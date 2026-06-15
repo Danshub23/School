@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <title>skipping</title>
+    <style>
+      div {
+        text-align: center;
+        margin: 75px 20px;
+      }
+
+      button {
+        height: 35px;
+        width: 60px;
+        margin: 5px 2%;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <span>跳绳数量：</span>
+      <span id="number">0</span>
+    </div>
+    <div>
+      <button>-1</button>
+      <button>-5</button>
+      <button>-10</button>
+      <button>-50</button>
+      <button>+1</button>
+      <button>+5</button>
+      <button>+10</button>
+      <button>+50</button>
+    </div>
+    <script>
+      if (localStorage.getItem("num") == null) {
+        localStorage.setItem("num", 0);
+      }
+      const number = document.getElementById("number");
+      number.textContent = localStorage.getItem("num");
+      function change(num) {
+        number.textContent = Number(number.textContent) + num;
+        localStorage.setItem("num", number.textContent);
+      }
+      for (let i = 0; i != 8; i++) {
+        console.log(document.getElementsByTagName("button")[i].textContent);
+        document.getElementsByTagName("button")[i].addEventListener("click", function () {
+          change(Number(document.getElementsByTagName("button")[i].textContent));
+        });
+      }
+    </script>
+  </body>
+</html>
