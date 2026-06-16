@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <title>成语</title>
+    <style>
+      div {
+        text-align: center;
+        margin: 75px 20px;
+      }
+
+      button {
+        height: 35px;
+        width: 60px;
+        margin: 5px 2%;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      
+    </div>
+    <div>
+      <button>存储</button>
+    </div>
+    <script>
+      if (localStorage.getItem(cod") == null) {
+        localStorage.setItem("cod", "");
+      }
+      function change(num) {
+        number.textContent = Number(number.textContent) + num;
+        localStorage.setItem("num", number.textContent);
+      }
+
+      document.getElementsByTagName("button")[0].addEventListener("click", function () {
+      change(Number(document.getElementsByTagName("button")[i].textContent));
+        });
+      
+    </script>
+  </body>
+</html>
