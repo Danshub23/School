@@ -19,13 +19,13 @@
   </head>
   <body>
     <div>
-      <textarea row="4" id="text"></textarea>
+      <textarea rows="4" id="text"></textarea>
     </div>
     <div>
       <button>存储</button>
     </div>
     <script>
-      text = document.getElementsByID("text")
+      text = document.getElementById("text")
       if (localStorage.getItem("cod") == null) {
         localStorage.setItem("cod", "");
       }
