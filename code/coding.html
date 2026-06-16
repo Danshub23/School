@@ -19,24 +19,24 @@
   </head>
   <body>
     <div>
-      
+      <textarea row="4" id="text"></textarea>
     </div>
     <div>
       <button>存储</button>
     </div>
     <script>
+      text = document.getElementsByID("text")
       if (localStorage.getItem(cod") == null) {
         localStorage.setItem("cod", "");
       }
-      function change(num) {
-        number.textContent = Number(number.textContent) + num;
-        localStorage.setItem("num", number.textContent);
+      else {
+        text.textContext = localStorage.getItem(cod")
+      }
+      function change() {
+        localStorage.setItem("cod", text.textContent);
       }
 
-      document.getElementsByTagName("button")[0].addEventListener("click", function () {
-      change(Number(document.getElementsByTagName("button")[i].textContent));
-        });
-      
+      document.getElementsByTagName("button")[0].addEventListener("click", change)
     </script>
   </body>
 </html>
