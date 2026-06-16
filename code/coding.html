@@ -36,13 +36,13 @@
       if (localStorage.getItem("row") === null) {
         localStorage.setItem("row", 4);
       }
-      text.rows = 4
+      text.rows = localStorage.getItem("row")
       function change() {
         localStorage.setItem("cod", text.value);
         localStorage.setItem("row", text.rows);
       }
       function addline() {
-        text.rows += 1
+        text.rows = Number(text.rows) + 1
         localStorage.setItem("row", text.rows);
       }
 
