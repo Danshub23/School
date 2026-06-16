@@ -36,14 +36,14 @@
       if (localStorage.getItem("row") === null) {
         localStorage.setItem("row", 4);
       }
-      text.rows = localStorage.getItem("row")
+      text.rows = Number(localStorage.getItem("row"))
       function change() {
         localStorage.setItem("cod", text.value);
-        localStorage.setItem("row", text.rows);
+        localStorage.setItem("row", String(text.rows));
       }
       function addline() {
         text.rows = Number(text.rows) + 1
-        localStorage.setItem("row", text.rows);
+        localStorage.setItem("row", String(text.rows));
       }
 
       document.getElementsByTagName("button")[0].addEventListener("click", change)
