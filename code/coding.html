@@ -26,14 +26,14 @@
     </div>
     <script>
       text = document.getElementsByID("text")
-      if (localStorage.getItem(cod") == null) {
+      if (localStorage.getItem("cod") == null) {
         localStorage.setItem("cod", "");
       }
       else {
-        text.textContext = localStorage.getItem(cod")
+        text.value = localStorage.getItem("cod")
       }
       function change() {
-        localStorage.setItem("cod", text.textContent);
+        localStorage.setItem("cod", text.value);
       }
 
       document.getElementsByTagName("button")[0].addEventListener("click", change)
