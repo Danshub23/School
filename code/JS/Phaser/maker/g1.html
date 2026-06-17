@@ -22,24 +22,7 @@
           update: update,
         },
       };
-function checkAABB(a, b) {
-    const aLeft   = a.x - a.width / 2;
-    const aRight  = a.x + a.width / 2;
-    const aTop    = a.y - a.height / 2;
-    const aBottom = a.y + a.height / 2;
-    const bLeft   = b.x - b.width / 2;
-    const bRight  = b.x + b.width / 2;
-    const bTop    = b.y - b.height / 2;
-    const bBottom = b.y + b.height / 2;
-    return aLeft < bRight && aRight > bLeft && aTop < bBottom && aBottom > bTop;
-}
-function reflect(incidentAngle, normalAngle) {
-    let reflection = 2 * normalAngle - incidentAngle;
-    const PI = Math.PI;
-    const TWO_PI = 2 * PI;
-    reflection = ((reflection + PI) % TWO_PI + TWO_PI) % TWO_PI - PI;
-    return reflection;
-}
+
       var game = new Phaser.Game(config);
 
       function preload() {
@@ -60,11 +43,8 @@ function reflect(incidentAngle, normalAngle) {
         this.bottom_line.angle = 90;
       }
       function update() {
-        this.player.Angl;
         this.player.x += Math.cos(this.player.Angl) * 2;
         this.player.y += Math.sin(this.player.Angl) * 2;
-        if (checkAABB(this.player,this.bottom_line)){
-          this.player.de = reflect(this.player.Angl,this.bottom_line.rotation)
         }
       }
     </script>
