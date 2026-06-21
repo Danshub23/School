@@ -1,240 +1,486 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>成语</title>
-    <link rel="stylesheet" href="../../Table_CSS.css">
+    <style>
+        /* ---------- 滚动容器 — 放在 table 外部，负责横向滚动 ---------- */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            border-radius: 20px;
+            background: #ffffff;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+            margin-bottom: 2.8rem;          /* 表格间距 */
+        }
+
+        /* ---------- 表格本身 ---------- */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            font-size: 0.95rem;
+            line-height: 1.45;
+            background-color: #ffffff;
+            border-radius: 20px;
+            overflow: hidden;   /* 配合 th:first-child / th:last-child 圆角 */
+        }
+
+        /* ---------- 深色表头 ---------- */
+        thead tr {
+            background: #1f2e3a;
+        }
+
+        th {
+            text-align: left;
+            padding: 1rem 1.2rem;
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+            color: #f0f6fc;
+            background-color: #1f2e3a;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        /* 表头圆角 */
+        th:first-child {
+            border-top-left-radius: 18px;
+        }
+        th:last-child {
+            border-top-right-radius: 18px;
+        }
+
+        /* ---------- 单元格：白色带微黄底 ---------- */
+        td {
+            padding: 0.85rem 1.2rem;
+            border-bottom: 1px solid #e6edf4;
+            background-color: #fffef9;
+            color: #1e2f3c;
+            transition: background-color 0.2s ease, box-shadow 0.1s ease;
+        }
+
+        /* 最后一行无下边框 */
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* 鼠标悬停聚焦：清透蓝色高亮 */
+        tbody tr:hover td {
+            background-color: #eef5ff;
+            box-shadow: inset 0 1px 0 rgba(73, 135, 202, 0.12);
+            color: #0b2a3b;
+            cursor: default;
+        }
+
+        /* ---------- 移动端内边距缩紧 ---------- */
+        @media (max-width: 680px) {
+            th, td {
+                padding: 0.7rem 0.9rem;
+            }
+        }
+
+        /* ---------- 滚动条美化（作用于 .table-responsive） ---------- */
+        .table-responsive::-webkit-scrollbar {
+            height: 6px;
+        }
+        .table-responsive::-webkit-scrollbar-track {
+            background: #e2e8f0;
+            border-radius: 10px;
+        }
+        .table-responsive::-webkit-scrollbar-thumb {
+            background: #b9cad9;
+            border-radius: 10px;
+        }
+        .table-responsive::-webkit-scrollbar-thumb:hover {
+            background: #8fa7bd;
+        }
+
+        /* ---------- 额外补充：分类标题与前置条件 ---------- */
+        h3 {
+            margin: 2.2rem 0 0.3rem 0;
+            font-weight: 600;
+            font-size: 1.4rem;
+            color: #0f172a;
+            letter-spacing: -0.01em;
+        }
+        h3 + p {
+            margin-top: -0.1rem;
+            margin-bottom: 1.4rem;
+            font-size: 0.95rem;
+            color: #334155;
+            background: #f8fafc;
+            padding: 0.5rem 1.2rem;
+            border-left: 4px solid #94a3b8;
+            border-radius: 0 6px 6px 0;
+            display: inline-block;
+        }
+        /* 代码样式 */
+        code {
+            background: #f1f5f9;
+            padding: 0.2em 0.4em;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 0.9em;
+            color: #1e293b;
+            white-space: nowrap;
+        }
+        td code {
+            white-space: normal;
+            word-break: break-word;
+        }
+
+        /* 页脚信息 */
+        .page-footer {
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            color: #475569;
+            text-align: center;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 1.5rem;
+        }
+    </style>
 </head>
 <body>
-    <button id="butt1">run</button>
-    <script src="../check.js"></script>
-    <h1>Scratch 积木 → Phaser 3.90.0 代码转换表</h1>
-    <p><strong>角色对象：</strong> this.player （假设为 Phaser 物理精灵或普通精灵）</p>
 
-    <!-- 表格1：动作 (Motion) -->
-    <h2>📐 动作 (Motion)</h2>
-    <table border="1" cellpadding="8" cellspacing="0">
-        <thead>
-            <tr><th>Scratch 积木</th><th>Phaser 3.90.0 代码 (this.player)</th><th>复制代码</th></tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>将 x 坐标设为 ( )</td>
-                <td><code>this.player.x = 数值;</code></td>
-                <td class="copy-btn-cell"></td>
-            </tr>
-            <tr>
-                <td>将 y 坐标设为 ( )</td>
-                <td><code>this.player.y = 数值;</code></td>
-                <td class="copy-btn-cell"></td>
-            </tr>
-            <tr>
-                <td>面向 ( ) 方向</td>
-                <td><code>this.player.angle = 方向数值 - 90;   // Scratch: 0°上,90°右 → Phaser: 0°右,正值顺时针</code></td>
-                <td class="copy-btn-cell"></td>
-            </tr>
-            <tr>
-                <td>移动 ( ) 步</td>
-                <td><pre>let rad = this.player.rotation;
-this.player.x += Math.cos(rad) * 步数;
-this.player.y += Math.sin(rad) * 步数;</pre></td>
-                <td class="copy-btn-cell"></td>
-            </tr>
-        </tbody>
-    </table>
+    <!-- ============================================================ -->
+    <!-- 1. 纹理创建 (Texture Creation)                                -->
+    <!-- ============================================================ -->
+    <h3>📦 纹理创建 (Texture Creation)</h3>
+    <p><strong>前置条件：</strong>场景已创建，可在 <code>preload()</code> 或 <code>create()</code> 中执行。</p>
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr><th>方法 / 属性</th><th>描述</th><th>示例代码</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><code>this.load.image(key, url)</code></td><td>加载一张图片作为纹理</td><td><code>this.load.image('player', 'assets/player.png');</code></td></tr>
+                <tr><td><code>this.load.spritesheet(key, url, {frameWidth, frameHeight})</code></td><td>加载精灵表（多帧）</td><td><code>this.load.spritesheet('dude', 'dude.png', { frameWidth: 32, frameHeight: 48 });</code></td></tr>
+                <tr><td><code>this.textures.generate(key, generator)</code></td><td>动态生成纹理（使用画布）</td><td><code>this.textures.generate('circle', { data: [ ... ] });</code></td></tr>
+                <tr><td><code>this.textures.addCanvas(key, canvas)</code></td><td>从 Canvas 元素添加纹理</td><td><code>const canvas = document.createElement('canvas'); ... this.textures.addCanvas('myTex', canvas);</code></td></tr>
+                <tr><td><code>this.textures.exists(key)</code></td><td>检查纹理是否存在</td><td><code>if (this.textures.exists('player')) { ... }</code></td></tr>
+            </tbody>
+        </table>
+    </div>
 
-    <!-- 表格2：外观 (Looks) -->
-    <h2>🎨 外观 (Looks)</h2>
-    <table border="1" cellpadding="8" cellspacing="0">
-        <thead><tr><th>Scratch 积木</th><th>Phaser 3.90.0 代码 (this.player)</th><th>复制代码</th></tr></thead>
-        <tbody>
-            <tr>
-                <td>将大小设为 ( ) %</td>
-                <td><code>this.player.setScale(数值 / 100);</code></td>
-                <td class="copy-btn-cell"></td>
-            </tr>
-            <tr>
-                <td>显示</td>
-                <td><code>this.player.setVisible(true);</code></td>
-                <td class="copy-btn-cell"></td>
-            </tr>
-            <tr>
-                <td>隐藏</td>
-                <td><code>this.player.setVisible(false);</code></td>
-                <td class="copy-btn-cell"></td>
-            </tr>
-            <tr>
-                <td>换成 (造型名称) 造型</td>
-                <td><code>this.player.setTexture("造型名称");   // 需预加载对应纹理</code></td>
-                <td class="copy-btn-cell"></td>
-            </tr>
-        </tbody>
-    </table>
+    <!-- ============================================================ -->
+    <!-- 2. 对象创建与初始化 (Game Object Creation & Init)            -->
+    <!-- ============================================================ -->
+    <h3>🚀 对象创建与初始化</h3>
+    <p><strong>前置条件：</strong>所需纹理已加载或生成。</p>
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr><th>方法 / 属性</th><th>描述</th><th>示例代码</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><code>this.add.sprite(x, y, key[, frame])</code></td><td>创建精灵（支持动画、物理）</td><td><code>const player = this.add.sprite(400, 300, 'player');</code></td></tr>
+                <tr><td><code>this.add.image(x, y, key[, frame])</code></td><td>创建静态图像（无动画、无物理）</td><td><code>const bg = this.add.image(0, 0, 'bg');</code></td></tr>
+                <tr><td><code>this.add.container(x, y, children)</code></td><td>创建容器，组合多个对象</td><td><code>const group = this.add.container(0, 0, [sprite1, sprite2]);</code></td></tr>
+                <tr><td><code>sprite.setOrigin(x, y)</code></td><td>设置原点（默认 0.5,0.5 中心）</td><td><code>player.setOrigin(0, 0); // 左上角</code></td></tr>
+                <tr><td><code>sprite.setDepth(value)</code></td><td>设置渲染深度（数值越大越靠前）</td><td><code>player.setDepth(10);</code></td></tr>
+                <tr><td><code>sprite.setActive(bool)</code></td><td>设置激活状态（影响更新和渲染）</td><td><code>player.setActive(true);</code></td></tr>
+            </tbody>
+        </table>
+    </div>
 
-    <!-- 表格3：感知 (Sensing) -->
-    <h2>👆 感知 (Sensing)</h2>
-    <table border="1" cellpadding="8" cellspacing="0">
-        <thead><tr><th>Scratch 积木</th><th>Phaser 3.90.0 代码</th><th>复制代码</th></tr></thead>
-        <tbody>
-            <tr>
-                <td>鼠标的 X 坐标</td>
-                <td><code>let mouseX = this.input.activePointer.x;</code></td>
-                <td class="copy-btn-cell"></td>
-            </tr>
-            <tr>
-                <td>鼠标的 Y 坐标</td>
-                <td><code>let mouseY = this.input.activePointer.y;</code></td>
-                <td class="copy-btn-cell"></td>
-            </tr>
-            <tr>
-                <td>鼠标是否按下？ (左键)</td>
-                <td><code>let mouseIsDown = this.input.activePointer.isDown;</code></td>
-                <td class="copy-btn-cell"></td>
-            </tr>
-            <tr>
-                <td>是否碰到？ (角色与鼠标指针)</td>
-                <td><pre>let distance = Phaser.Math.Distance.Between(
-    this.player.x, this.player.y,
-    this.input.activePointer.x, this.input.activePointer.y
-);
-let isHitMouse = (distance < this.player.width / 2);   // 圆形碰撞近似</pre></td>
-                <td class="copy-btn-cell"></td>
-            </tr>
-            <tr>
-                <td>是否碰到？ (两个精灵)</td>
-                <td><code>let isHit = this.physics.overlap(this.player, 其他精灵);   // 需开启 Arcade Physics</code></td>
-                <td class="copy-btn-cell"></td>
-            </tr>
-        </tbody>
-    </table>
+    <!-- ============================================================ -->
+    <!-- 3. 对象池 (Object Pool)                                      -->
+    <!-- ============================================================ -->
+    <h3>🧊 对象池 (Object Pool)</h3>
+    <p><strong>前置条件：</strong>纹理已加载，物理（可选）已启用。</p>
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr><th>方法 / 属性</th><th>描述</th><th>示例代码</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><code>this.add.group(config)</code></td><td>创建普通对象池（组）</td><td><code>const pool = this.add.group({ key: 'bullet', repeat: 10, setXY: { x: 0, y: 0 } });</code></td></tr>
+                <tr><td><code>this.physics.add.group(config)</code></td><td>创建带物理体的对象池</td><td><code>const enemies = this.physics.add.group({ key: 'enemy', repeat: 5, setXY: { x: 100, y: 100 } });</code></td></tr>
+                <tr><td><code>group.create(x, y, key[, frame])</code></td><td>从池中取出或新建一个对象</td><td><code>const bullet = bullets.create(200, 300, 'bullet');</code></td></tr>
+                <tr><td><code>group.get(x, y, key[, frame])</code></td><td>获取一个已存在但未激活的对象</td><td><code>const obj = pool.get(0, 0, 'coin');</code></td></tr>
+                <tr><td><code>group.killAndHide(obj)</code></td><td>将对象标记为死亡并隐藏（回收）</td><td><code>bullets.killAndHide(bullet);</code></td></tr>
+                <tr><td><code>group.children.entries</code></td><td>获取组中所有子对象</td><td><code>const list = enemies.children.entries;</code></td></tr>
+            </tbody>
+        </table>
+    </div>
 
-    <!-- 表格4：数学计算 (距离与角度) -->
-    <h2>📏 数学计算 (Math)</h2>
-    <table border="1" cellpadding="8" cellspacing="0">
-        <thead><tr><th>Scratch 风格操作</th><th>Phaser 3.90.0 代码</th><th>复制代码</th></tr></thead>
-        <tbody>
-            <tr>
-                <td>计算两点之间的距离</td>
-                <td><code>let dist = Phaser.Math.Distance.Between(x1, y1, x2, y2);</code></td>
-                <td class="copy-btn-cell"></td>
-            </tr>
-            <tr>
-                <td>计算两点之间的弧度角 (0 rad 指向右)</td>
-                <td><code>let angleRad = Phaser.Math.Angle.Between(x1, y1, x2, y2);</code></td>
-                <td class="copy-btn-cell"></td>
-            </tr>
-            <tr>
-                <td>弧度转角度 (0° 指向右)</td>
-                <td><code>let angleDeg = Phaser.Math.RadToDeg(angleRad);</code></td>
-                <td class="copy-btn-cell"></td>
-            </tr>
-            <tr>
-                <td>转为 Scratch 方向 (0° 向上, 90° 向右)</td>
-                <td><code>let scratchDir = (90 - angleDeg + 360) % 360;</code></td>
-                <td class="copy-btn-cell"></td>
-            </tr>
-        </tbody>
-    </table>
-   <p>this.add.rectangle(x, y, w, h, 0xff0000);</p>
-    <hr>
-    <h2>📚 综合应用示例</h2>
-    <p>以下示例假设已正确创建 Phaser 游戏场景，并在其中定义 <code>this.player</code> 为一个精灵（Sprite）且已启用物理系统（如需碰撞）。</p>
+    <!-- ============================================================ -->
+    <!-- 4. 位置与移动 (Position & Movement)                          -->
+    <!-- ============================================================ -->
+    <h3>📍 位置与移动</h3>
+    <p><strong>前置条件：</strong>对象已创建。物理相关操作需启用 Arcade 物理。</p>
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr><th>方法 / 属性</th><th>描述</th><th>示例代码</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><code>sprite.x / sprite.y</code></td><td>获取或设置坐标</td><td><code>player.x = 500; player.y += 10;</code></td></tr>
+                <tr><td><code>sprite.setPosition(x, y)</code></td><td>同时设置 X 和 Y</td><td><code>player.setPosition(100, 200);</code></td></tr>
+                <tr><td><code>sprite.body.setVelocity(x, y)</code></td><td>设置物理速度 (需 body)</td><td><code>player.body.setVelocity(150, -300);</code></td></tr>
+                <tr><td><code>sprite.body.setAcceleration(x, y)</code></td><td>设置物理加速度</td><td><code>player.body.setAcceleration(200, 0);</code></td></tr>
+                <tr><td><code>sprite.body.setDrag(x, y)</code></td><td>设置阻力</td><td><code>player.body.setDrag(100, 0);</code></td></tr>
+                <tr><td><code>sprite.body.setFriction(x, y)</code></td><td>设置摩擦力</td><td><code>player.body.setFriction(0.5, 0);</code></td></tr>
+            </tbody>
+        </table>
+    </div>
 
-    <h3>示例1：让角色面向鼠标并前进10步</h3>
-    <pre><code>// 获取鼠标坐标
-let mouseX = this.input.activePointer.x;
-let mouseY = this.input.activePointer.y;
+    <!-- ============================================================ -->
+    <!-- 5. 缩放与旋转 (Scale & Rotation)                             -->
+    <!-- ============================================================ -->
+    <h3>🔄 缩放与旋转</h3>
+    <p><strong>前置条件：</strong>对象已创建。</p>
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr><th>方法 / 属性</th><th>描述</th><th>示例代码</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><code>sprite.scaleX / sprite.scaleY</code></td><td>水平/垂直缩放</td><td><code>player.scaleX = 2; player.scaleY = 0.5;</code></td></tr>
+                <tr><td><code>sprite.setScale(x[, y])</code></td><td>同时设置缩放</td><td><code>player.setScale(1.5, 1.5);</code></td></tr>
+                <tr><td><code>sprite.angle / sprite.rotation</code></td><td>旋转角度（度/弧度）</td><td><code>player.angle = 45; player.rotation = Math.PI/4;</code></td></tr>
+                <tr><td><code>sprite.setRotation(rad)</code></td><td>设置旋转弧度</td><td><code>player.setRotation(0.5);</code></td></tr>
+            </tbody>
+        </table>
+    </div>
 
-// 计算角色到鼠标的角度（弧度）
-let angleRad = Phaser.Math.Angle.Between(this.player.x, this.player.y, mouseX, mouseY);
+    <!-- ============================================================ -->
+    <!-- 6. 可见性与透明度 (Visibility & Alpha)                       -->
+    <!-- ============================================================ -->
+    <h3>👁️ 可见性与透明度</h3>
+    <p><strong>前置条件：</strong>对象已创建。</p>
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr><th>方法 / 属性</th><th>描述</th><th>示例代码</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><code>sprite.visible</code></td><td>获取/设置可见性</td><td><code>player.visible = false;</code></td></tr>
+                <tr><td><code>sprite.setVisible(bool)</code></td><td>设置可见性</td><td><code>player.setVisible(true);</code></td></tr>
+                <tr><td><code>sprite.alpha</code></td><td>获取/设置透明度 (0~1)</td><td><code>player.alpha = 0.5;</code></td></tr>
+                <tr><td><code>sprite.setAlpha(value)</code></td><td>设置透明度</td><td><code>player.setAlpha(0.8);</code></td></tr>
+            </tbody>
+        </table>
+    </div>
 
-// 设置角色方向（Phaser 弧度制，也可用 .angle 角度制）
-this.player.rotation = angleRad;
+    <!-- ============================================================ -->
+    <!-- 7. 动画 (Animation)                                          -->
+    <!-- ============================================================ -->
+    <h3>🎞️ 动画</h3>
+    <p><strong>前置条件：</strong>动画已通过 <code>this.anims.create()</code> 配置好。</p>
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr><th>方法 / 属性</th><th>描述</th><th>示例代码</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><code>sprite.anims.play(key[, ignoreIfPlaying])</code></td><td>播放动画</td><td><code>player.anims.play('walk', true);</code></td></tr>
+                <tr><td><code>sprite.anims.stop()</code></td><td>停止当前动画</td><td><code>player.anims.stop();</code></td></tr>
+                <tr><td><code>sprite.anims.pause()</code></td><td>暂停动画</td><td><code>player.anims.pause();</code></td></tr>
+                <tr><td><code>sprite.anims.resume()</code></td><td>恢复动画</td><td><code>player.anims.resume();</code></td></tr>
+                <tr><td><code>sprite.anims.isPlaying</code></td><td>检查是否正在播放</td><td><code>if (player.anims.isPlaying) { ... }</code></td></tr>
+                <tr><td><code>sprite.anims.setCurrentFrame(frame)</code></td><td>直接设置当前帧</td><td><code>player.anims.setCurrentFrame(3);</code></td></tr>
+                <tr><td><code>sprite.anims.getCurrentKey()</code></td><td>获取当前动画键名</td><td><code>const key = player.anims.getCurrentKey();</code></td></tr>
+                <tr><td><code>sprite.anims.setTimeScale(speed)</code></td><td>设置播放速度倍率</td><td><code>player.anims.setTimeScale(0.5);</code></td></tr>
+            </tbody>
+        </table>
+    </div>
 
-// 前进10步
-let steps = 10;
-this.player.x += Math.cos(angleRad) * steps;
-this.player.y += Math.sin(angleRad) * steps;</code></pre>
+    <!-- ============================================================ -->
+    <!-- 8. 物理 (Arcade Physics)                                     -->
+    <!-- ============================================================ -->
+    <h3>⚡ 物理 (Arcade)</h3>
+    <p><strong>前置条件：</strong>在游戏配置中启用 <code>physics: { default: 'arcade' }</code>。</p>
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr><th>方法 / 属性</th><th>描述</th><th>示例代码</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><code>this.physics.add.sprite(x, y, key)</code></td><td>创建带物理体的精灵</td><td><code>player = this.physics.add.sprite(400, 300, 'player');</code></td></tr>
+                <tr><td><code>sprite.body.setGravity(x, y)</code></td><td>设置重力</td><td><code>player.body.setGravity(0, 500);</code></td></tr>
+                <tr><td><code>sprite.body.setBounce(x, y)</code></td><td>设置反弹系数</td><td><code>player.body.setBounce(0.8, 0.5);</code></td></tr>
+                <tr><td><code>sprite.body.setImmovable(bool)</code></td><td>设为不可移动</td><td><code>wall.body.setImmovable(true);</code></td></tr>
+                <tr><td><code>sprite.body.setCollideWorldBounds(bool)</code></td><td>与世界边界碰撞</td><td><code>player.body.setCollideWorldBounds(true);</code></td></tr>
+                <tr><td><code>sprite.body.setMaxVelocity(x, y)</code></td><td>最大速度限制</td><td><code>player.body.setMaxVelocity(300, 600);</code></td></tr>
+            </tbody>
+        </table>
+    </div>
 
-    <h3>示例2：控制角色跟随鼠标移动（每帧更新）</h3>
-    <pre><code>// 在 update() 循环中执行
-let speed = 5;
-let mouseX = this.input.activePointer.x;
-let mouseY = this.input.activePointer.y;
+    <!-- ============================================================ -->
+    <!-- 9. 碰撞与重叠 (Collision & Overlap)                          -->
+    <!-- ============================================================ -->
+    <h3>💥 碰撞与重叠</h3>
+    <p><strong>前置条件：</strong>物理已启用，对象拥有 <code>body</code>。</p>
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr><th>方法 / 属性</th><th>描述</th><th>示例代码</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><code>this.physics.add.collider(a, b[, callback])</code></td><td>碰撞检测（有物理响应）</td><td><code>this.physics.add.collider(player, enemy, hitEnemy);</code></td></tr>
+                <tr><td><code>this.physics.add.overlap(a, b[, callback])</code></td><td>重叠检测（无物理响应）</td><td><code>this.physics.add.overlap(player, coin, collectCoin);</code></td></tr>
+                <tr><td><code>sprite.body.touching</code></td><td>获取碰撞方向（上/下/左/右）</td><td><code>if (player.body.touching.down) { canJump = true; }</code></td></tr>
+                <tr><td><code>sprite.body.onFloor()</code> / <code>onWall()</code></td><td>判断是否在地面/墙壁上</td><td><code>if (player.body.onFloor()) { ... }</code></td></tr>
+            </tbody>
+        </table>
+    </div>
 
-let angle = Phaser.Math.Angle.Between(this.player.x, this.player.y, mouseX, mouseY);
-this.player.x += Math.cos(angle) * speed;
-this.player.y += Math.sin(angle) * speed;</code></pre>
+    <!-- ============================================================ -->
+    <!-- 10. 输入事件 (Input Events)                                  -->
+    <!-- ============================================================ -->
+    <h3>🖱️ 输入事件</h3>
+    <p><strong>前置条件：</strong>对象需调用 <code>setInteractive()</code> 启用交互。</p>
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr><th>方法 / 属性</th><th>描述</th><th>示例代码</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><code>sprite.setInteractive()</code></td><td>启用交互</td><td><code>player.setInteractive();</code></td></tr>
+                <tr><td><code>sprite.on('pointerdown', fn)</code></td><td>点击/触摸按下</td><td><code>player.on('pointerdown', () => player.setTint(0xff0000));</code></td></tr>
+                <tr><td><code>sprite.on('pointerover', fn)</code></td><td>鼠标悬停</td><td><code>player.on('pointerover', () => player.setScale(1.2));</code></td></tr>
+                <tr><td><code>sprite.on('pointerout', fn)</code></td><td>鼠标离开</td><td><code>player.on('pointerout', () => player.setScale(1));</code></td></tr>
+            </tbody>
+        </table>
+    </div>
 
-    <h3>示例3：鼠标按下时隐藏角色，松开时显示</h3>
-    <pre><code>if (this.input.activePointer.isDown) {
-    this.player.setVisible(false);
-} else {
-    this.player.setVisible(true);
-}</code></pre>
+    <!-- ============================================================ -->
+    <!-- 11. 生命周期 (Lifecycle)                                     -->
+    <!-- ============================================================ -->
+    <h3>🔄 生命周期</h3>
+    <p><strong>前置条件：</strong>对象已创建。</p>
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr><th>方法 / 属性</th><th>描述</th><th>示例代码</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><code>sprite.destroy()</code></td><td>销毁对象，释放内存</td><td><code>player.destroy();</code></td></tr>
+                <tr><td><code>sprite.setActive(bool)</code></td><td>激活/停用（停止更新）</td><td><code>player.setActive(false);</code></td></tr>
+                <tr><td><code>sprite.setDirty()</code></td><td>标记为脏，强制重绘</td><td><code>player.setDirty();</code></td></tr>
+                <tr><td><code>sprite.willRender()</code></td><td>检查是否将在下一帧渲染</td><td><code>if (player.willRender()) { ... }</code></td></tr>
+            </tbody>
+        </table>
+    </div>
 
-    <h3>示例4：检测角色是否碰到鼠标指针（圆形近似），并改变大小</h3>
-    <pre><code>let mouseX = this.input.activePointer.x;
-let mouseY = this.input.activePointer.y;
-let distance = Phaser.Math.Distance.Between(this.player.x, this.player.y, mouseX, mouseY);
+    <!-- ============================================================ -->
+    <!-- 12. 纹理与帧 (Texture & Frame)                               -->
+    <!-- ============================================================ -->
+    <h3>🖼️ 纹理与帧</h3>
+    <p><strong>前置条件：</strong>对象已创建，目标纹理已存在。</p>
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr><th>方法 / 属性</th><th>描述</th><th>示例代码</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><code>sprite.setTexture(key[, frame])</code></td><td>更换纹理</td><td><code>player.setTexture('enemy', 0);</code></td></tr>
+                <tr><td><code>sprite.setFrame(frame)</code></td><td>切换到指定帧</td><td><code>player.setFrame(2);</code></td></tr>
+                <tr><td><code>sprite.texture</code></td><td>获取当前纹理对象</td><td><code>const tex = player.texture;</code></td></tr>
+                <tr><td><code>sprite.getBounds()</code></td><td>获取边界矩形</td><td><code>const rect = player.getBounds();</code></td></tr>
+            </tbody>
+        </table>
+    </div>
 
-if (distance < this.player.width / 2) {
-    this.player.setScale(1.5);   // 放大到150%
-} else {
-    this.player.setScale(1.0);   // 恢复原大小
-}</code></pre>
+    <!-- ============================================================ -->
+    <!-- 13. 容器与组 (Container & Group)                             -->
+    <!-- ============================================================ -->
+    <h3>📂 容器与组</h3>
+    <p><strong>前置条件：</strong>子对象已创建。</p>
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr><th>方法 / 属性</th><th>描述</th><th>示例代码</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><code>this.add.container(x, y, children)</code></td><td>创建容器</td><td><code>const container = this.add.container(0, 0, [sprite1, sprite2]);</code></td></tr>
+                <tr><td><code>container.add(child)</code> / <code>remove(child)</code></td><td>添加/移除子对象</td><td><code>container.add(sprite3); container.remove(sprite1);</code></td></tr>
+                <tr><td><code>container.getChildren()</code></td><td>获取所有子对象</td><td><code>const children = container.getChildren();</code></td></tr>
+                <tr><td><code>this.add.group(config)</code></td><td>创建组（详见对象池）</td><td><code>const group = this.add.group();</code></td></tr>
+            </tbody>
+        </table>
+    </div>
 
-    <h3>示例5：获取角色到舞台中心的Scratch风格方向角</h3>
-    <pre><code>let centerX = this.cameras.main.width / 2;
-let centerY = this.cameras.main.height / 2;
-let angleRad = Phaser.Math.Angle.Between(this.player.x, this.player.y, centerX, centerY);
-let angleDeg = Phaser.Math.RadToDeg(angleRad);
-let scratchDirection = (90 - angleDeg + 360) % 360;
-console.log(`角色指向舞台中心的方向(Scratch格式): ${scratchDirection}°`);</code></pre>
+    <!-- ============================================================ -->
+    <!-- 14. 深度与层级 (Depth & Layer)                               -->
+    <!-- ============================================================ -->
+    <h3>📏 深度与层级</h3>
+    <p><strong>前置条件：</strong>对象已创建。</p>
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr><th>方法 / 属性</th><th>描述</th><th>示例代码</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><code>sprite.depth</code></td><td>获取/设置深度（数值越大越靠前）</td><td><code>player.depth = 10;</code></td></tr>
+                <tr><td><code>sprite.setDepth(value)</code></td><td>设置深度</td><td><code>player.setDepth(20);</code></td></tr>
+                <tr><td><code>sprite.bringToTop()</code></td><td>将对象置顶（最高深度）</td><td><code>player.bringToTop();</code></td></tr>
+            </tbody>
+        </table>
+    </div>
 
-    <p style="color: gray; margin-top: 2em;">注：以上代码适用于 Phaser 3.90.0，使用前请确保已正确初始化游戏、加载资源并创建了 this.player 精灵。部分碰撞检测需要开启物理引擎。</p>
+    <!-- ============================================================ -->
+    <!-- 15. 大小与边界 (Size & Bounds)                               -->
+    <!-- ============================================================ -->
+    <h3>📐 大小与边界</h3>
+    <p><strong>前置条件：</strong>对象已创建。物理相关设置需 <code>body</code> 存在。</p>
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr><th>方法 / 属性</th><th>描述</th><th>示例代码</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><code>sprite.width / sprite.height</code></td><td>获取显示宽高（只读）</td><td><code>const w = player.width;</code></td></tr>
+                <tr><td><code>sprite.setDisplaySize(w, h)</code></td><td>设置显示尺寸（拉伸）</td><td><code>player.setDisplaySize(64, 64);</code></td></tr>
+                <tr><td><code>sprite.setSize(w, h)</code></td><td>设置物理碰撞体大小</td><td><code>player.setSize(30, 50);</code></td></tr>
+                <tr><td><code>sprite.setOffset(x, y)</code></td><td>设置碰撞体偏移</td><td><code>player.setOffset(5, 10);</code></td></tr>
+            </tbody>
+        </table>
+    </div>
 
-    <script>
-        (function() {
-            // 为每个带有 copy-btn-cell 类的单元格添加复制按钮
-            const copyCells = document.querySelectorAll('.copy-btn-cell');
-            copyCells.forEach((cell, index) => {
-                // 获取当前行（tr）中的第二个 td（代码单元格）
-                const row = cell.parentNode;
-                const codeTd = row.cells[1]; // 第二列是代码列
-                if (!codeTd) return;
+    <!-- ============================================================ -->
+    <!-- 16. 数据与属性 (Data & Properties)                           -->
+    <!-- ============================================================ -->
+    <h3>📊 数据与属性</h3>
+    <p><strong>前置条件：</strong>对象已创建。</p>
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr><th>方法 / 属性</th><th>描述</th><th>示例代码</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><code>sprite.setData(key, value)</code></td><td>存储自定义数据</td><td><code>player.setData('hp', 100);</code></td></tr>
+                <tr><td><code>sprite.getData(key)</code></td><td>获取自定义数据</td><td><code>const hp = player.getData('hp');</code></td></tr>
+                <tr><td><code>sprite.setData(data)</code></td><td>批量设置数据</td><td><code>player.setData({ hp: 100, mp: 50 });</code></td></tr>
+                <tr><td><code>sprite.removeData(key)</code></td><td>删除自定义数据</td><td><code>player.removeData('mp');</code></td></tr>
+            </tbody>
+        </table>
+    </div>
 
-                // 获取代码文本：优先取 <pre> 内的文本，否则取 <code>
-                let codeElem = codeTd.querySelector('pre');
-                if (!codeElem) codeElem = codeTd.querySelector('code');
-                if (!codeElem) return;
+    <!-- ============================================================ -->
+    <!-- 17. 颜色与混合 (Color & Blend)                               -->
+    <!-- ============================================================ -->
+    <h3>🎨 颜色与混合</h3>
+    <p><strong>前置条件：</strong>对象已创建（WebGL 渲染器）。</p>
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr><th>方法 / 属性</th><th>描述</th><th>示例代码</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><code>sprite.setTint(color)</code></td><td>设置色调</td><td><code>player.setTint(0xff8800);</code></td></tr>
+                <tr><td><code>sprite.setTintFill(color)</code></td><td>设置填充色调</td><td><code>player.setTintFill(0x00aaff);</code></td></tr>
+                <tr><td><code>sprite.clearTint()</code></td><td>清除色调</td><td><code>player.clearTint();</code></td></tr>
+            </tbody>
+        </table>
+    </div>
 
-                const codeText = codeElem.innerText;
+    <!-- 页脚 -->
+    <div class="page-footer">
+        <strong>总计 17 个分类</strong> · Phaser 3.90.0 角色操作速查 · 包含纹理创建、对象池及各类常用 API
+    </div>
 
-                // 创建复制按钮
-                const btn = document.createElement('button');
-                btn.textContent = '📋 复制';
-                btn.style.cursor = 'pointer';
-                btn.style.padding = '2px 8px';
-                btn.style.fontSize = '12px';
-
-                btn.addEventListener('click', async (e) => {
-                    e.stopPropagation();
-                    try {
-                        await navigator.clipboard.writeText(codeText);
-                        const originalText = btn.textContent;
-                        btn.textContent = '✅ 已复制';
-                        setTimeout(() => {
-                            btn.textContent = originalText;
-                        }, 1500);
-                    } catch (err) {
-                        alert('复制失败，请手动复制');
-                    }
-                });
-
-                cell.appendChild(btn);
-            });
-        })();
-    </script>
 </body>
 </html>
