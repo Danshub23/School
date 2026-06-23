@@ -12,7 +12,7 @@
       button {
         height: 35px;
         width: 60px;
-        margin: 5px ;
+        margin: 5px;
         text-align: center;
       }
       #text {
@@ -37,7 +37,7 @@
       else {
         text.value = localStorage.getItem("cod")
       }
-      if (localStorage.getItem("row") === null) {
+      if (localStorage.getItem("row") === null || localStorage.getItem("row") > 1) {
         localStorage.setItem("row", 4);
       }
       text.rows = Number(localStorage.getItem("row"))
@@ -51,6 +51,9 @@
       }
       function reduceline() {
         text.rows = Number(text.rows) - 1
+        if (text.rows > 1) {
+          text.rows = 1
+        }
         localStorage.setItem("row", String(text.rows));
       }
 
