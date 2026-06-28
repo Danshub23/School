@@ -476,6 +476,113 @@
             </tbody>
         </table>
     </div>
+    <code>=
+        class Scene extends Phaser.Scene {
+            constructor() {
+                super('Scene');
+                // 存放对象池的引用
+                this.pool = null;
+            }
+
+            // --------------------------------------------------------------
+            // 1. preload：预加载资源（此处用 Graphics 生成一个简单纹理供池使用）
+            // --------------------------------------------------------------
+            preload() {
+                // 为了演示，我们生成一个 16x16 的白色方块纹理，名为 'box'
+                const g = this.make.graphics({ add: false });
+                g.fillStyle(0xffffff);
+                g.fillRect(0, 0, 16, 16);
+                g.generateTexture('box', 16, 16);
+                g.destroy();
+            }
+
+            // --------------------------------------------------------------
+            // 2. create：创建对象池（核心）
+            // --------------------------------------------------------------
+            create() {
+                // ---------- 创建对象池 ----------
+                this.pool = this.add.group({
+                    // 池中对象的类型：可以是 Image、Sprite、Container 等
+                    classType: Phaser.GameObjects.Image,
+                    // 最大数量（-1 无限制）
+                    maxSize: 100,
+                    // 预先生成 30 个对象，避免运行时创建卡顿
+                    createMultiple: 30,
+                    // 默认纹理键（对应 preload 中生成的 'box'）
+                    defaultKey: 'box',
+                    // 初始状态：休眠（不活跃、不可见）
+                    active: false,
+                    visible: false
+                });
+
+                // 可选：统一设置池中对象的深度
+                this.pool.setDepth(0);
+
+                // ---------- 提供两个工具方法（挂在场景上） ----------
+                // 从池中取出对象（激活）
+                this.spawn = (x, y) => {
+                    const obj = this.pool.get(x, y);
+                    obj.setActive(true);
+                    obj.setVisible(true);
+                    // 可以在这里重置其他属性，例如 obj.setScale(1)
+                    return obj;
+                };
+
+                // 归还对象到池中（休眠）
+                this.despawn = (obj) => {
+                    obj.setActive(false);
+                    obj.setVisible(false);
+                    // 如果有物理身体，需要额外禁用
+                    // if (obj.body) obj.body.enable = false;
+                };
+
+                // ---------- （可选）演示：取出一个对象再立即归还，仅供测试 ----------
+                // 如果你想验证池是否工作，可以取消下面注释
+                // const testObj = this.spawn(400, 300);
+                // console.log('已取出对象:', testObj);
+                // this.despawn(testObj);
+                // console.log('已归还对象');
+                // 此时画面上不会有任何显示，因为对象被休眠了
+            }
+
+            // --------------------------------------------------------------
+            // 3. update：空方法（没有逻辑，仅保留骨架）
+            // --------------------------------------------------------------
+            update() {
+                // 这里什么都不做 —— 没有移动、没有碰撞、没有动画
+                // 如果你以后需要遍历活跃对象，可以这样写：
+                // this.pool.getChildren().forEach(obj => {
+                //     if (obj.active) {
+                //         // 你的更新逻辑 ...
+                //     }
+                // });
+            }
+        }
+
+        // ================================================================
+        // 游戏配置
+        // ================================================================
+        const config = {
+            type: Phaser.AUTO,
+            width: 800,
+            height: 600,
+            backgroundColor: '#2d2d2d',
+            scene: PoolScene,
+            physics: {
+                default: 'arcade',   // 保留但不使用，方便日后扩展
+                arcade: { debug: false }
+            }
+        };
+
+        // 启动游戏
+        const game = new Phaser.Game(config);
+
+        // 为了方便在浏览器控制台调试，将场景实例暴露到全局
+        // 打开 F12 控制台，输入 scene.spawn(100, 100) 即可看到白色方块出现
+        // 输入 scene.despawn(方块对象) 即可回收
+        window.scene = game.scene.getScene('PoolScene');
+        console.log('✅ 对象池已创建，可用 scene.spawn(x, y) 和 scene.despawn(obj) 测试');
+    </code>
 
     <!-- 页脚 -->
     <div class="page-footer">
